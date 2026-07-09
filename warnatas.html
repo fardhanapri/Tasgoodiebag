@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pilihan Warna Tas Spunbond - Tassouvenir</title>
+
+<!-- Favicon yang sesuai dengan logo -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" type="image/png">
+
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#f59e0b',
+            accent: '#dc2626',
+            dark: '#1f2937',
+            light: '#f9fafb'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081980.png" type="image/png">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    .color-option {
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .color-option:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .color-option.selected {
+      border: 3px solid #2563eb;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+    }
+    
+    .color-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    .sticky-header {
+      position: sticky;
+      top: 80px;
+      background: white;
+      z-index: 40;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* SVG Tas Styles */
+    .bag-color {
+      transition: fill 0.5s ease;
+    }
+    
+    .bag-handle {
+      transition: stroke 0.5s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-dark">
+
+  <!-- HEADER -->
+  <header class="fixed w-full bg-white shadow-md z-50">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center">
+      <!-- Gambar tas yang lebih sesuai -->
+      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="Tassouvenir Logo" class="h-10 w-10 mr-3">
+      <h1 class="text-2xl font-bold text-primary">Tas<span class="text-secondary">Souvenir</span></h1>
+    </div>
+      
+      <nav class="hidden md:block">
+        <ul class="flex gap-8 font-medium">
+          <li><a href="index.html" class="hover:text-primary transition">Beranda</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Produk</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Layanan</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Tentang</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Testimoni</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Kontak</a></li>
+        </ul>
+      </nav>
+      
+      <div class="flex items-center gap-4">
+        <a href="#" class="text-primary hover:text-secondary">
+          <i class="fas fa-shopping-cart text-lg"></i>
+        </a>
+        <a href="https://wa.me/6285221692902" target="_blank" class="hidden md:block bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+          <i class="fas fa-phone-alt mr-2"></i> Konsultasi
+        </a>
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-primary focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pt-2 pb-4 shadow-lg">
+      <ul class="space-y-3">
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Beranda</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Produk</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Layanan</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Tentang</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Testimoni</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Kontak</a></li>
+        <li><a href="index.html" class="block py-2 bg-primary text-white text-center rounded-lg">Konsultasi</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="pt-24 pb-16">
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-6 py-4">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2 text-sm text-gray-600">
+          <li><a href="#" class="hover:text-primary transition">Beranda</a></li>
+          <li><i class="fas fa-chevron-right text-xs"></i></li>
+          <li><a href="#" class="hover:text-primary transition">Produk</a></li>
+          <li><i class="fas fa-chevron-right text-xs"></i></li>
+          <li><a href="#" class="hover:text-primary transition">Tas Spunbond</a></li>
+          <li><i class="fas fa-chevron-right text-xs"></i></li>
+          <li class="text-primary font-medium">Pilihan Warna</li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- Product Title & Short Info -->
+    <section class="container mx-auto px-6 mb-8">
+      <div class="bg-white rounded-xl shadow-sm p-6">
+        <h1 class="text-3xl font-bold text-dark mb-2">Pilihan Warna Tas Spunbond</h1>
+        <p class="text-gray-600 mb-4">Tersedia berbagai pilihan warna menarik untuk tas spunbond custom Anda. Klik pada warna untuk melihat preview.</p>
+        <div class="flex items-center">
+          <div class="flex text-yellow-400">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <span class="ml-2 text-gray-600">4.7 (42 Ulasan)</span>
+          <span class="mx-3 text-gray-300">|</span>
+          <span class="text-green-600 font-medium"><i class="fas fa-check-circle mr-1"></i> Tersedia 18+ Warna</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Product Images Section -->
+        <div class="lg:w-1/2">
+          <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-4 flex justify-center items-center p-8">
+            <!-- Tas Spunbond SVG yang bisa diubah warnanya -->
+            <svg id="tas-svg" width="400" height="300" viewBox="0 0 400 300">
+              <!-- Tas bagian utama -->
+              <path id="bag-body" class="bag-color" fill="#FF9800" stroke="#333" stroke-width="2" d="M100,100 C80,80 80,200 100,220 L300,220 C320,200 320,80 300,100 L100,100 Z"/>
+              
+              <!-- Tali tas -->
+              <path id="bag-handle" class="bag-handle" fill="none" stroke="#333" stroke-width="4" d="M120,100 C100,70 80,50 120,30 C140,20 260,20 280,30 C320,50 300,70 280,100"/>
+              
+              <!-- Detail jahitan -->
+              <line x1="100" y1="130" x2="300" y2="130" stroke="#333" stroke-width="1" stroke-dasharray="5,3"/>
+              <line x1="100" y1="160" x2="300" y2="160" stroke="#333" stroke-width="1" stroke-dasharray="5,3"/>
+              <line x1="100" y1="190" x2="300" y2="190" stroke="#333" stroke-width="1" stroke-dasharray="5,3"/>
+              
+              <!-- Logo atau teks contoh -->
+              <text x="200" y="150" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#333">TasSouvenir.com</text>
+            </svg>
+          </div>
+          
+          <div class="grid grid-cols-4 gap-3 mb-8">
+            <div class="cursor-pointer border rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center p-2">
+              <svg width="100" height="70" viewBox="0 0 200 140">
+                <path fill="#FF9800" stroke="#333" stroke-width="1.5" d="M30,30 C20,20 20,100 30,110 L170,110 C180,100 180,20 170,30 L30,30 Z"/>
+                <path fill="none" stroke="#333" stroke-width="3" d="M40,30 C30,15 25,10 40,5 C50,2 150,2 160,5 C175,10 170,15 160,30"/>
+              </svg>
+            </div>
+            <div class="cursor-pointer border rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center p-2">
+              <svg width="100" height="70" viewBox="0 0 200 140">
+                <path fill="#FF9800" stroke="#333" stroke-width="1.5" d="M30,50 C20,40 20,100 30,110 L170,110 C180,100 180,40 170,50 L30,50 Z"/>
+                <line x1="30" y1="70" x2="170" y2="70" stroke="#333" stroke-width="1" stroke-dasharray="4,2"/>
+              </svg>
+            </div>
+            <div class="cursor-pointer border rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center p-2">
+              <svg width="100" height="70" viewBox="0 0 200 140">
+                <path fill="#FF9800" stroke="#333" stroke-width="1.5" d="M30,30 C20,20 20,100 30,110 L170,110 C180,100 180,20 170,30 L30,30 Z"/>
+                <circle cx="100" cy="70" r="20" fill="none" stroke="#333" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="cursor-pointer border rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center p-2">
+              <svg width="100" height="70" viewBox="0 0 200 140">
+                <path fill="#FF9800" stroke="#333" stroke-width="1.5" d="M30,40 C20,30 20,100 30,110 L170,110 C180,100 180,30 170,40 L30,40 Z"/>
+                <rect x="60" y="60" width="80" height="30" fill="none" stroke="#333" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Product Details -->
+          <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-dark">Detail Produk</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">Spesifikasi</h3>
+                <ul class="space-y-2 text-gray-600">
+                  <li class="flex"><span class="w-32 flex-shrink-0">Bahan</span><span class="font-medium">: Spunbond 80gr</span></li>
+                  <li class="flex"><span class="w-32 flex-shrink-0">Ukuran</span><span class="font-medium">: 30x25x10 cm</span></li>
+                  <li class="flex"><span class="w-32 flex-shrink-0">Tali</span><span class="font-medium">: Bahan sama, 60 cm</span></li>
+                  <li class="flex"><span class="w-32 flex-shrink-0">Sablon</span><span class="font-medium">: Flexi printing</span></li>
+                  <li class="flex"><span class="w-32 flex-shrink-0">Min. Order</span><span class="font-medium">: 100 pcs</span></li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="font-medium text-gray-700 mb-2">Keunggulan</h3>
+                <ul class="space-y-2 text-gray-600">
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                    <span>Kuat dan tahan lama</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                    <span>Dapat disablon dengan detail tajam</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                    <span>Ramah lingkungan</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                    <span>Harga terjangkau</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Color Selection & Order Section -->
+        <div class="lg:w-1/2">
+          <div class="sticky-header rounded-xl p-6 mb-6">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h2 class="text-2xl font-bold text-dark">Tas Spunbond Custom</h2>
+                <p class="text-gray-600">Pilih warna yang Anda inginkan</p>
+              </div>
+              <div class="text-right">
+                <p class="text-xl font-bold text-primary">Rp ***** -Rp.*****</p>
+                <p class="text-sm text-gray-500">/ pcs (tergantung kuantitas)</p>
+              </div>
+            </div>
+
+            <!-- Selected Color Indicator -->
+            <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+              <div class="flex items-center">
+                <span class="font-medium mr-2">Warna terpilih:</span>
+                <span id="selectedColorName" class="font-bold">Oranye</span>
+                <div id="selectedColorIndicator" class="w-5 h-5 rounded-full ml-2 bg-orange-500"></div>
+              </div>
+            </div>
+
+            <!-- Color Grid -->
+            <div class="mb-8">
+              <h3 class="text-lg font-semibold mb-4">Pilihan Warna Tersedia</h3>
+              <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+                <!-- Color Options -->
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center selected" data-color="Oranye" data-color-code="#FF9800">
+                  <div class="w-8 h-8 rounded-full bg-orange-500 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Oranye</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Biru" data-color-code="#2196F3">
+                  <div class="w-8 h-8 rounded-full bg-blue-500 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Biru</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Merah" data-color-code="#F44336">
+                  <div class="w-8 h-8 rounded-full bg-red-500 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Merah</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Hijau" data-color-code="#4CAF50">
+                  <div class="w-8 h-8 rounded-full bg-green-500 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Hijau</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Kuning" data-color-code="#FFEB3B">
+                  <div class="w-8 h-8 rounded-full bg-yellow-400 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Kuning</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Ungu" data-color-code="#9C27B0">
+                  <div class="w-8 h-8 rounded-full bg-purple-500 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Ungu</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Merah Muda" data-color-code="#E91E63">
+                  <div class="w-8 h-8 rounded-full bg-pink-500 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Merah Muda</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Abu-abu" data-color-code="#9E9E9E">
+                  <div class="w-8 h-8 rounded-full bg-gray-400 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Abu-abu</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Putih" data-color-code="#FFFFFF">
+                  <div class="w-8 h-8 rounded-full bg-gray-100 border border-gray-300 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Putih</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Hitam" data-color-code="#212121">
+                  <div class="w-8 h-8 rounded-full bg-gray-900 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Hitam</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Navy" data-color-code="#0D47A1">
+                  <div class="w-8 h-8 rounded-full bg-blue-900 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Navy</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Maroon" data-color-code="#B71C1C">
+                  <div class="w-8 h-8 rounded-full bg-red-900 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Maroon</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Tosca" data-color-code="#00BFA5">
+                  <div class="w-8 h-8 rounded-full bg-teal-400 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Tosca</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Cokelat" data-color-code="#5D4037">
+                  <div class="w-8 h-8 rounded-full bg-yellow-900 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Cokelat</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Cream" data-color-code="#FFF9C4">
+                  <div class="w-8 h-8 rounded-full bg-yellow-100 border border-gray-300 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Cream</p>
+                </div>
+                <div class="color-option rounded-lg p-2 bg-white shadow-sm text-center" data-color="Orange Tua" data-color-code="#E65100">
+                  <div class="w-8 h-8 rounded-full bg-orange-700 mx-auto mb-1"></div>
+                  <p class="text-xs font-medium">Orange Tua</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="#order" class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center text-center">
+                <i class="fas fa-shopping-cart mr-2"></i> Pesan Sekarang
+              </a>
+              <a href="https://wa.me/6285221692902" target="_blank" class="border border-primary text-primary hover:bg-blue-50 font-bold py-3 px-6 rounded-lg flex items-center justify-center">
+                <i class="fas fa-comments mr-2"></i> Konsultasi
+              </a>
+            </div>
+          </div>
+
+          <!-- Pricing Info -->
+          <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <h3 class="text-lg font-semibold mb-4">Info Harga</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span>*** - *** pcs</span>
+                <span class="font-bold">Rp **.000</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>*** - *** pcs</span>
+                <span class="font-bold">Rp **.000</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>**** - **** pcs</span>
+                <span class="font-bold">Rp **.000</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>> **** pcs</span>
+                <span class="font-bold">Rp **.000</span>
+              </div>
+            </div>
+            <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-100">
+              <p class="text-sm text-yellow-800"><i class="fas fa-info-circle mr-1"></i> Harga dapat berubah tergantung kerumitan desain sablon</p>
+            </div>
+          </div>
+
+          <!-- How to Order -->
+          <div class="bg-white rounded-xl shadow-sm p-6">
+            <h3 class="text-lg font-semibold mb-4">Cara Pemesanan</h3>
+            <ol class="space-y-3">
+              <li class="flex items-start">
+                <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3">1</span>
+                <span>Pilih warna tas yang diinginkan</span>
+              </li>
+              <li class="flex items-start">
+                <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3">2</span>
+                <span>Klik tombol "Pesan Sekarang"</span>
+              </li>
+              <li class="flex items-start">
+                <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3">3</span>
+                <span>Kirimkan desain sablon yang diinginkan</span>
+              </li>
+              <li class="flex items-start">
+                <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3">4</span>
+                <span>Konfirmasi jumlah pesanan dan alamat pengiriman</span>
+              </li>
+              <li class="flex items-start">
+                <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3">5</span>
+                <span>Proses produksi dan pengiriman</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Form Section -->
+    <section id="order" class="container mx-auto px-6 py-12">
+      <div class="bg-white rounded-xl shadow-sm p-8">
+        <h2 class="text-2xl font-bold text-center mb-8">Form Pemesanan Tas Spunbond</h2>
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-gray-700 mb-2" for="name">Nama Lengkap</label>
+            <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+          </div>
+          <div>
+            <label class="block text-gray-700 mb-2" for="email">Email</label>
+            <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+          </div>
+          <div>
+            <label class="block text-gray-700 mb-2" for="phone">No. Telepon/WhatsApp</label>
+            <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+          </div>
+          <div>
+            <label class="block text-gray-700 mb-2" for="company">Perusahaan/Instansi</label>
+            <input type="text" id="company" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+          </div>
+          <div>
+            <label class="block text-gray-700 mb-2" for="quantity">Jumlah Pesanan (pcs)</label>
+            <input type="number" id="quantity" min="100" step="100" value="100" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+          </div>
+          <div>
+            <label class="block text-gray-700 mb-2">Warna yang Dipilih</label>
+            <div class="flex items-center p-3 bg-gray-100 rounded-lg">
+              <span id="formColorName" class="font-medium">Oranye</span>
+              <div id="formColorIndicator" class="w-5 h-5 rounded-full ml-2 bg-orange-500"></div>
+            </div>
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-gray-700 mb-2" for="notes">Catatan (opsional)</label>
+            <textarea id="notes" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+          </div>
+          <div class="md:col-span-2 text-center">
+            <button type="submit" class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg">
+              Kirim Pesanan
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4 flex items-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/3081/3081980.png" alt="Tassouvenir Logo" class="h-8 w-8 mr-2">
+            Tas<span class="text-secondary">Souvenir</span>
+          </h3>
+          <p class="text-gray-400">Menyediakan berbagai macam tas spunbond custom untuk kebutuhan promosi dan souvenir perusahaan Anda.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Tautan Cepat</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Beranda</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Produk</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Kontak</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Kontak Kami</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-center">
+              <i class="fas fa-map-marker-alt mr-3"></i>
+              <span>Kiaracondong, Sukapura Jl.Salak Gang Jambu Rt05 Rw01 No.49</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-phone mr-3"></i>
+              <span>+62 852-2169-2902</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-envelope mr-3"></i>
+              <span>fardanapriansyah10@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+          <p class="text-gray-400 mb-4">Dapatkan penawaran dan promo terbaru dari kami</p>
+          <form class="flex">
+            <input type="email" placeholder="Email Anda" class="px-4 py-2 rounded-l-lg w-full text-gray-800 focus:outline-none">
+            <button type="submit" class="bg-primary hover:bg-blue-700 px-4 rounded-r-lg">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2023 TasSouvenir.com - All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Color selection functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const colorOptions = document.querySelectorAll('.color-option');
+      const selectedColorName = document.getElementById('selectedColorName');
+      const selectedColorIndicator = document.getElementById('selectedColorIndicator');
+      const formColorName = document.getElementById('formColorName');
+      const formColorIndicator = document.getElementById('formColorIndicator');
+      const bagBody = document.getElementById('bag-body');
+      const bagHandle = document.getElementById('bag-handle');
+      
+      colorOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove selected class from all options
+          colorOptions.forEach(opt => opt.classList.remove('selected'));
+          
+          // Add selected class to clicked option
+          this.classList.add('selected');
+          
+          // Get color data
+          const colorName = this.getAttribute('data-color');
+          const colorCode = this.getAttribute('data-color-code');
+          
+          // Update selected color indicators
+          selectedColorName.textContent = colorName;
+          formColorName.textContent = colorName;
+          
+          // Update color indicator - using inline style for dynamic colors
+          selectedColorIndicator.style.backgroundColor = colorCode;
+          formColorIndicator.style.backgroundColor = colorCode;
+          
+          // Update SVG bag color
+          bagBody.style.fill = colorCode;
+          
+          // For light colors, adjust stroke for better visibility
+          if (colorCode === '#FFFFFF' || colorCode === '#FFF9C4' || colorCode === '#FFEB3B') {
+            bagBody.style.stroke = '#666';
+            bagHandle.style.stroke = '#666';
+          } else {
+            bagBody.style.stroke = '#333';
+            bagHandle.style.stroke = '#333';
+          }
+        });
+      });
+      // Function untuk mengirim form ke WhatsApp
+  document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Mengambil nilai dari form
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const company = document.getElementById('company').value;
+    const quantity = document.getElementById('quantity').value;
+    const color = document.getElementById('formColorName').textContent;
+    const notes = document.getElementById('notes').value;
+    
+    // Membuat pesan WhatsApp
+    const message = `Halo TasSouvenir, saya ingin memesan tas spunbond dengan detail berikut:%0A%0A
+*Nama:* ${name}%0A
+*Email:* ${email}%0A
+*No. Telepon:* ${phone}%0A
+*Perusahaan/Instansi:* ${company}%0A
+*Jumlah Pesanan:* ${quantity} pcs%0A
+*Warna Tas:* ${color}%0A
+*Catatan:* ${notes || 'Tidak ada catatan'}%0A%0A
+Silakan hubungi saya untuk proses selanjutnya. Terima kasih.`;
+    
+    // Nomor WhatsApp tujuan (pastikan format dengan kode negara)
+    const phoneNumber = '6285221692902';
+    
+    // Membuka WhatsApp dengan pesan yang sudah disiapkan
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  });
+    });
+  </script>
+</body>
+</html>

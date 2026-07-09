@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Ukuran Tas - Tassouvenir</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#f59e0b',
+            accent: '#dc2626',
+            dark: '#1f2937',
+            light: '#f9fafb'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081980.png" type="image/png">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    .product-image {
+      transition: transform 0.3s ease;
+    }
+    
+    .product-image:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Styles for slider */
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem;
+    }
+    
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+    
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .slider-nav.prev {
+      left: 15px;
+    }
+    
+    .slider-nav.next {
+      right: 15px;
+    }
+    
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    
+    .slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d1d5db;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .slider-dot.active {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body class="bg-light text-dark">
+
+  <!-- HEADER -->
+  <header class="fixed w-full bg-white shadow-md z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/3081/3081980.png" alt="Tassouvenir Logo" class="h-10 w-10 mr-3">
+        <h1 class="text-2xl font-bold text-primary">Tas<span class="text-secondary">Souvenir</span></h1>
+      </div>
+      
+      <nav class="hidden md:block">
+        <ul class="flex gap-8 font-medium">
+          <li><a href="index.html" class="hover:text-primary transition">Beranda</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Produk</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Layanan</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Tentang</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Testimoni</a></li>
+          <li><a href="index.html" class="hover:text-primary transition">Kontak</a></li>
+        </ul>
+      </nav>
+      
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-primary focus:outline-none">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pt-2 pb-4 shadow-lg">
+      <ul class="space-y-3">
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Beranda</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Produk</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Layanan</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Tentang</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Testimoni</a></li>
+        <li><a href="index.html" class="block py-2 hover:text-primary transition">Kontak</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- DETAIL PRODUK SECTION -->
+  <section class="pt-32 pb-20 bg-white">
+    <div class="container mx-auto px-6">
+      <!-- Breadcrumb -->
+      <div class="mb-8">
+        <nav class="text-sm text-gray-500">
+          <a href="index.html" class="hover:text-primary">Beranda</a> > 
+          <a href="index.html#produk" class="hover:text-primary">Produk</a> > 
+          <span class="text-dark">Detail Ukuran Tas</span>
+        </nav>
+      </div>
+      
+      <div class="flex flex-col md:flex-row gap-12">
+        <!-- Gambar Produk -->
+        <div class="md:w-1/2">
+          <!-- Slider Container -->
+          <div class="slider-container rounded-xl overflow-hidden shadow-lg mb-6">
+            <div class="slider" id="main-slider">
+              <!-- Slide akan diupdate oleh JavaScript -->
+              <div class="slide">
+                <img src="https://via.placeholder.com/600x500/2563eb/ffffff?text=Tas+Spunbond+20x26cm" alt="Tas Spunbond 20x26cm" class="w-full h-auto product-image">
+                <div class="absolute bottom-4 left-4 bg-primary text-white px-3 py-1 rounded-lg text-sm font-medium">
+                  Ukuran 20x26 cm
+                </div>
+              </div>
+              <div class="slide">
+                <img src="https://via.placeholder.com/600x500/2563eb/ffffff?text=Tas+Spunbond+25x35cm" alt="Tas Spunbond 25x35cm" class="w-full h-auto product-image">
+                <div class="absolute bottom-4 left-4 bg-primary text-white px-3 py-1 rounded-lg text-sm font-medium">
+                  Ukuran 25x35 cm
+                </div>
+              </div>
+              <div class="slide">
+                <img src="https://via.placeholder.com/600x500/2563eb/ffffff?text=Tas+Spunbond+30x40cm" alt="Tas Spunbond 30x40cm" class="w-full h-auto product-image">
+                <div class="absolute bottom-4 left-4 bg-primary text-white px-3 py-1 rounded-lg text-sm font-medium">
+                  Ukuran 30x40 cm
+                </div>
+              </div>
+              <div class="slide">
+                <img src="https://via.placeholder.com/600x500/2563eb/ffffff?text=Tas+Spunbond+35x45cm" alt="Tas Spunbond 35x45cm" class="w-full h-auto product-image">
+                <div class="absolute bottom-4 left-4 bg-primary text-white px-3 py-1 rounded-lg text-sm font-medium">
+                  Ukuran 35x45 cm
+                </div>
+              </div>
+            </div>
+            
+            <!-- Navigation Buttons -->
+            <div class="slider-nav prev" onclick="moveSlide(-1)">
+              <i class="fas fa-chevron-left text-dark"></i>
+            </div>
+            <div class="slider-nav next" onclick="moveSlide(1)">
+              <i class="fas fa-chevron-right text-dark"></i>
+            </div>
+            
+            <!-- Dots Indicator -->
+            <div class="slider-dots" id="slider-dots">
+              <span class="slider-dot active" onclick="goToSlide(0)"></span>
+              <span class="slider-dot" onclick="goToSlide(1)"></span>
+              <span class="slider-dot" onclick="goToSlide(2)"></span>
+              <span class="slider-dot" onclick="goToSlide(3)"></span>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-4 gap-4" id="thumbnail-container">
+            <div class="cursor-pointer border-2 border-transparent hover:border-primary rounded-lg overflow-hidden">
+              <img src="https://via.placeholder.com/200x150/2563eb/ffffff?text=Tas+20x26" alt="Tas Spunbond 20x26" class="w-full h-24 object-cover" onclick="goToSlide(0)">
+            </div>
+            <div class="cursor-pointer border-2 border-transparent hover:border-primary rounded-lg overflow-hidden">
+              <img src="https://via.placeholder.com/200x150/2563eb/ffffff?text=Tas+25x35" alt="Tas Spunbond 25x35" class="w-full h-24 object-cover" onclick="goToSlide(1)">
+            </div>
+            <div class="cursor-pointer border-2 border-transparent hover:border-primary rounded-lg overflow-hidden">
+              <img src="https://via.placeholder.com/200x150/2563eb/ffffff?text=Tas+30x40" alt="Tas Spunbond 30x40" class="w-full h-24 object-cover" onclick="goToSlide(2)">
+            </div>
+            <div class="cursor-pointer border-2 border-transparent hover:border-primary rounded-lg overflow-hidden">
+              <img src="https://via.placeholder.com/200x150/2563eb/ffffff?text=Tas+35x45" alt="Tas Spunbond 35x45" class="w-full h-24 object-cover" onclick="goToSlide(3)">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Informasi Produk -->
+        <div class="md:w-1/2">
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">Tas Spunbond Custom</h1>
+          <div class="flex items-center mb-6">
+            <div class="text-amber-400 text-xl mr-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span class="text-gray-600">(42 Ulasan)</span>
+          </div>
+          
+          <p class="text-gray-600 mb-6">Tas spunbond dengan berbagai pilihan ukuran dan warna yang dapat disablon sesuai kebutuhan Anda. Cocok untuk souvenir perusahaan, event, seminar, atau promosi produk.</p>
+          
+          <div class="bg-gray-50 p-6 rounded-xl mb-6">
+            <!-- Pilihan Jenis Tas -->
+            <h3 class="text-xl font-bold mb-4">Pilih Jenis Tas</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div class="border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-primary transition" onclick="selectType('totebag')">
+                <div class="flex flex-col items-center text-center">
+                  <img src="totebage.png" alt="Totebag" class="w-16 h-16 mb-2">
+                  <h4 class="font-semibold">Totebag</h4>
+                  <p class="text-gray-600 text-sm">Rp774 - 859 - 1088 - 1432/pcs</p>
+                </div>
+              </div>
+              <div class="border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-primary transition" onclick="selectType('goodiebag')">
+                <div class="flex flex-col items-center text-center">
+                  <img src="goodiebag.png" alt="Goodiebag" class="w-16 h-16 mb-2">
+                  <h4 class="font-semibold">Goodiebag</h4>
+                  <p class="text-gray-600 text-sm">Rp 20.000 - 30.000/pcs</p>
+                </div>
+              </div>
+              <div class="border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-primary transition" onclick="selectType('oval')">
+                <div class="flex flex-col items-center text-center">
+                  <img src="oval.png" alt="Tas Oval" class="w-16 h-16 mb-2">
+                  <h4 class="font-semibold">Tas Oval</h4>
+                  <p class="text-gray-600 text-sm">Rp446 - 653 - 859 /pcs</p>
+                </div>
+              </div>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-4">Pilih Ukuran Tas</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div class="border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-primary transition" onclick="selectSize('20x26')">
+                <h4 class="font-semibold">20x26 cm</h4>
+                <p class="text-gray-600 text-sm">Rp 24.500/pcs</p>
+              </div>
+              <div class="border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-primary transition" onclick="selectSize('25x35')">
+                <h4 class="font-semibold">25x35 cm</h4>
+                <p class="text-gray-600 text-sm">Rp 28.000/pcs</p>
+              </div>
+              <div class="border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-primary transition" onclick="selectSize('30x40')">
+                <h4 class="font-semibold">30x40 cm</h4>
+                <p class="text-gray-600 text-sm">Rp 32.000/pcs</p>
+              </div>
+              <div class="border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-primary transition" onclick="selectSize('35x45')">
+                <h4 class="font-semibold">35x45 cm</h4>
+                <p class="text-gray-600 text-sm">Rp 35.000/pcs</p>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <label class="block text-gray-700 font-medium mb-2">Jumlah Pesanan (pcs)</label>
+              <div class="flex items-center">
+                <button class="bg-gray-200 w-8 h-8 rounded-l-lg" onclick="decreaseQuantity()">-</button>
+                <input type="number" id="quantity" value="100" min="100" class="w-16 h-8 text-center border-y border-gray-200">
+                <button class="bg-gray-200 w-8 h-8 rounded-r-lg" onclick="increaseQuantity()">+</button>
+                <span class="ml-2 text-gray-600">Min. order 100 pcs</span>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-gray-700 font-medium">Subtotal:</span>
+              <span id="subtotal" class="text-xl font-bold text-primary">Rp 2.450.000</span>
+            </div>
+            
+            <div class="flex gap-4">
+              <a href="https://wa.me/6285221692902?text=Saya%20ingin%20memesan%20tas%20spunbond" target="_blank" class="bg-primary text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition flex-1 text-center">
+                <i class="fab fa-whatsapp mr-2"></i> Pesan Sekarang
+              </a>
+              <button class="bg-gray-200 text-dark font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-300 transition">
+                <i class="fas fa-calculator mr-2"></i> Hitung
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+            <h3 class="font-semibold text-yellow-800 mb-2"><i class="fas fa-info-circle mr-2"></i>Informasi Penting</h3>
+            <ul class="text-sm text-yellow-700 list-disc pl-5">
+              <li>Harga sudah termasuk sablon 1 warna 1 sisi</li>
+              <li>Minimum order 100 pcs per ukuran dan warna</li>
+              <li>Waktu produksi 7-10 hari kerja setelah approval desain</li>
+              <li>Gratis konsultasi desain</li>
+              <li>Gratis pengiriman area Jabodetabek (min. order 500 pcs)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPESIFIKASI PRODUK -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="bg-white rounded-xl shadow-lg p-8">
+        <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Spesifikasi <span class="text-primary">Produk</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Detail Produk</h3>
+            <table class="w-full">
+              <tr class="border-b">
+                <td class="py-2 font-medium">Bahan</td>
+                <td class="py-2">Spunbond 70gr (standard) atau 80gr (premium)</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium">Warna</td>
+                <td class="py-2">Full color (merah, biru, hijau, kuning, hitam, putih, dll)</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium">Teknik Sablon</td>
+                <td class="py-2">Digital printing atau sablon manual</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium">Handle</td>
+                <td class="py-2">Tali spunbond atau tali kur</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium">Finishing</td>
+                <td class="py-2">Jahitan rantai dengan benang nylon</td>
+              </tr>
+            </table>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Detail Ukuran</h3>
+            <table class="w-full">
+              <tr class="border-b">
+                <td class="py-2 font-medium">20x26 cm</td>
+                <td class="py-2">Tinggi 26 cm, Lebar 20 cm, Tali 50 cm</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium">25x35 cm</td>
+                <td class="py-2">Tinggi 35 cm, Lebar 25 cm, Tali 60 cm</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium">30x40 cm</td>
+                <td class="py-2">Tinggi 40 cm, Lebar 30 cm, Tali 70 cm</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium">35x45 cm</td>
+                <td class="py-2">Tinggi 45 cm, Lebar 35 cm, Tali 70 cm</td>
+              </tr>
+            </table>
+            
+            <div class="mt-6">
+              <h3 class="text-xl font-semibold mb-4">Keunggulan Produk</h3>
+              <ul class="list-disc pl-5">
+                <li class="mb-2">Bahan kuat dan tidak mudah robek</li>
+                <li class="mb-2">Sablon tidak luntur dan tahan lama</li>
+                <li class="mb-2">Ramah lingkungan dan reusable</li>
+                <li class="mb-2">Dapat dilipat untuk penyimpanan</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUK LAINNYA -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Produk <span class="text-primary">Lainnya</span></h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Produk 1 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100">
+          <div class="h-48 overflow-hidden">
+            <img src="totebage.png" alt="Totebag" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Totebag</h3>
+            <p class="text-gray-600 mb-4">Tas serbaguna dengan bahan kain yang kuat dan tahan lama.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-primary font-bold">Rp 35.000</span>
+              <a href="#" class="text-sm font-semibold text-secondary hover:underline">Lihat Detail</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Produk 2 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100">
+          <div class="h-48 overflow-hidden">
+            <img src="goodiebag1.png" alt="Goodiebag" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Goodiebag</h3>
+            <p class="text-gray-600 mb-4">Cocok untuk bingkisan acara dengan desain yang menarik.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-primary font-bold">Rp 25.000</span>
+              <a href="#" class="text-sm font-semibold text-secondary hover:underline">Lihat Detail</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Produk 3 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100">
+          <div class="h-48 overflow-hidden">
+            <img src="oval2.png" alt="Tas Oval" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Tas Oval</h3>
+            <p class="text-gray-600 mb-4">Desain oval yang unik, cocok untuk souvenir perusahaan.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-primary font-bold">Rp 40.000</span>
+              <a href="#" class="text-sm font-semibold text-secondary hover:underline">Lihat Detail</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="py-16 bg-primary text-white text-center">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Butuh Penawaran Khusus?</h2>
+      <p class="text-xl mb-10 max-w-2xl mx-auto">Konsultasi gratis dengan tim kami untuk mendapatkan solusi terbaik kebutuhan tas custom Anda</p>
+      <a href="https://wa.me/6285221692902" target="_blank" class="bg-white text-primary font-semibold px-8 py-4 rounded-lg shadow-lg hover:bg-gray-100 transition inline-block">
+        <i class="fab fa-whatsapp mr-2"></i> Hubungi Kami via WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-6">
+            <img src="https://cdn-icons-png.flaticon.com/512/3081/3081980.png" alt="Tassouvenir Logo" class="h-10 w-10 mr-3">
+            <h2 class="text-2xl font-bold text-white">Tas<span class="text-secondary">Souvenir</span></h2>
+          </div>
+          <p class="text-gray-400 mb-6">Spesialis pembuatan tas custom dan sablon untuk berbagai kebutuhan souvenir dan promosi.</p>
+          <p class="text-gray-400">&copy; 2025 Tassouvenir. All rights reserved.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-6">Tautan Cepat</h3>
+          <ul class="space-y-3">
+            <li><a href="index.html#home" class="text-gray-400 hover:text-white transition">Beranda</a></li>
+            <li><a href="index.html#produk" class="text-gray-400 hover:text-white transition">Produk</a></li>
+            <li><a href="index.html#layanan" class="text-gray-400 hover:text-white transition">Layanan</a></li>
+            <li><a href="index.html#tentang" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
+            <li><a href="index.html#kontak" class="text-gray-400 hover:text-white transition">Kontak</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-6">Produk Kami</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Tas Spunbond</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Totebag</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Goodiebag</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Tas Oval</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Tas Seminar</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-6">Kontak</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt text-secondary mt-1 mr-3"></i>
+              <span class="text-gray-400">Kiaracondong ,Sukapura Jl.Salak Gang Jambu Rt05 Rw01 No.49</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-phone text-secondary mt-1 mr-3"></i>
+              <span class="text-gray-400">+62 852-2169-2902</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-envelope text-secondary mt-1 mr-3"></i>
+              <span class="text-gray-400">fardanapriansyah10@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/+6285221692902" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition z-50">
+    <i class="fab fa-whatsapp text-2xl"></i>
+  </a>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+    
+    // Slider functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slider = document.getElementById('main-slider');
+    const dots = document.querySelectorAll('.slider-dot');
+    
+    // Initialize slider
+    function initSlider() {
+      updateSlider();
+    }
+    
+    // Move to specific slide
+    function goToSlide(n) {
+      currentSlide = n;
+      updateSlider();
+    }
+    
+    // Move to next/previous slide
+    function moveSlide(direction) {
+      currentSlide += direction;
+      
+      // Wrap around if at the beginning or end
+      if (currentSlide < 0) {
+        currentSlide = totalSlides - 1;
+      } else if (currentSlide >= totalSlides) {
+        currentSlide = 0;
+      }
+      
+      updateSlider();
+    }
+    
+    // Update slider position and active dot
+    function updateSlider() {
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Update active dot
+      dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+      
+      // Automatically select the corresponding size when slide changes
+      const sizes = ['20x26', '25x35', '30x40', '35x45'];
+      if (currentSlide < sizes.length) {
+        selectSize(sizes[currentSlide]);
+      }
+    }
+    
+    // Auto slide every 5 seconds
+    setInterval(() => {
+      moveSlide(1);
+    }, 5000);
+    
+    // Fungsi untuk memilih jenis tas
+    function selectType(type) {
+      // Hapus seleksi sebelumnya
+      document.querySelectorAll('[onclick^="selectType"]').forEach(item => {
+        item.classList.remove('border-primary');
+        item.classList.add('border-gray-200');
+      });
+      
+      // Tambahkan seleksi pada jenis yang dipilih
+      const typeElements = document.querySelectorAll(`[onclick="selectType('${type}')"]`);
+      if (typeElements.length > 0) {
+        typeElements[0].classList.remove('border-gray-200');
+        typeElements[0].classList.add('border-primary');
+      }
+      
+      // Update UI berdasarkan jenis tas yang dipilih
+      updateTasType(type);
+    }
+    
+    // Fungsi untuk memilih jenis tali
+    function selectHandle(handleType) {
+      // Hapus seleksi sebelumnya
+      document.querySelectorAll('[onclick^="selectHandle"]').forEach(item => {
+        item.classList.remove('border-primary');
+        item.classList.add('border-gray-200');
+      });
+      
+      // Tambahkan seleksi pada jenis yang dipilih
+      const handleElements = document.querySelectorAll(`[onclick="selectHandle('${handleType}')"]`);
+      if (handleElements.length > 0) {
+        handleElements[0].classList.remove('border-gray-200');
+        handleElements[0].classList.add('border-primary');
+      }
+      
+      // Update harga berdasarkan jenis tali
+      calculateSubtotal();
+    }
+    
+    // Fungsi untuk update UI berdasarkan jenis tas
+    function updateTasType(type) {
+      // Update gambar slider berdasarkan jenis tas
+      const sliderImages = document.querySelectorAll('.slide img');
+      const imageTexts = document.querySelectorAll('.slide > div');
+      
+      if (type === 'totebag') {
+        sliderImages[0].src = 'totebag2.png';
+        sliderImages[1].src = 'totebag1.png';
+        sliderImages[2].src = 'totebag3.png';
+        sliderImages[3].src = 'totebag4.png';
+        
+        imageTexts[0].textContent = 'Totebag 20x26x8 cm';
+        imageTexts[1].textContent = 'Totebag 25x35x8 cm';
+        imageTexts[2].textContent = 'Totebag 30x40x8 cm';
+        imageTexts[3].textContent = 'Totebag 38x45x8 cm';
+        
+        // Update harga untuk totebag
+        updatePriceForType('totebag');
+        
+      } else if (type === 'goodiebag') {
+        sliderImages[0].src = 'goodiebag2.png';
+        sliderImages[1].src = 'goodiebag3.png';
+        sliderImages[2].src = 'goodiebag4.png';
+        sliderImages[3].src = 'goodiebag5.png';
+        
+        imageTexts[0].textContent = 'Goodiebag 20x26 cm';
+        imageTexts[1].textContent = 'Goodiebag 25x35 cm';
+        imageTexts[2].textContent = 'Goodiebag 30x40 cm';
+        imageTexts[3].textContent = 'Goodiebag 35x45 cm';
+        
+        // Update harga untuk goodiebag
+        updatePriceForType('goodiebag');
+        
+      } else if (type === 'oval') {
+        sliderImages[0].src = 'oval1.png';
+        sliderImages[1].src = 'oval2.png';
+        sliderImages[2].src = 'oval3.png';
+        
+        imageTexts[0].textContent = 'Tas Oval 20x26 cm';
+        imageTexts[1].textContent = 'Tas Oval 25x35 cm';
+        imageTexts[2].textContent = 'Tas Oval 30x40 cm';
+        
+        // Update harga untuk tas oval
+        updatePriceForType('oval');
+      }
+      
+      // Update thumbnail images
+      const thumbnails = document.querySelectorAll('.grid.grid-cols-4 img');
+      if (type === 'totebag') {
+        thumbnails[0].src = 'totebag2.png';
+        thumbnails[1].src = 'totebag1.png';
+        thumbnails[2].src = 'totebag3.png';
+        thumbnails[3].src = 'totebag4.png';
+      } else if (type === 'goodiebag') {
+        thumbnails[0].src = 'goodiebag2.png';
+        thumbnails[1].src = 'goodiebag3.png';
+        thumbnails[2].src = 'goodiebag4.png';
+        thumbnails[3].src = 'goodiebag5.png';
+      } else if (type === 'oval') {
+        thumbnails[0].src = 'oval1.png';
+        thumbnails[1].src = 'oval2.png';
+        thumbnails[2].src = 'oval3.png';
+      }
+    }
+    
+    // Fungsi untuk update harga berdasarkan jenis tas
+    function updatePriceForType(type) {
+      const sizeElements = document.querySelectorAll('[onclick^="selectSize"]');
+      
+      if (type === 'totebag') {
+        sizeElements[0].querySelector('p').textContent = 'Rp 774/pcs';
+        sizeElements[1].querySelector('p').textContent = 'Rp 859/pcs';
+        sizeElements[2].querySelector('p').textContent = 'Rp 1088/pcs';
+        sizeElements[3].querySelector('p').textContent = 'Rp 1432/pcs';
+      } else if (type === 'goodiebag') {
+        sizeElements[0].querySelector('p').textContent = 'Rp 20.000/pcs';
+        sizeElements[1].querySelector('p').textContent = 'Rp 23.000/pcs';
+        sizeElements[2].querySelector('p').textContent = 'Rp 26.000/pcs';
+        sizeElements[3].querySelector('p').textContent = 'Rp 30.000/pcs';
+      } else if (type === 'oval') {
+        sizeElements[0].querySelector('p').textContent = 'Rp 446/pcs';
+        sizeElements[1].querySelector('p').textContent = 'Rp 653/pcs';
+        sizeElements[2].querySelector('p').textContent = 'Rp 859/pcs';
+      }
+      
+      // Update subtotal berdasarkan jenis dan ukuran yang dipilih
+      calculateSubtotal();
+    }
+    
+    // Fungsi untuk memilih ukuran
+    function selectSize(size) {
+      // Hapus seleksi sebelumnya
+      document.querySelectorAll('[onclick^="selectSize"]').forEach(item => {
+        item.classList.remove('border-primary');
+        item.classList.add('border-gray-200');
+      });
+      
+      // Tambahkan seleksi pada ukuran yang dipilih
+      const sizeElements = document.querySelectorAll(`[onclick="selectSize('${size}')"]`);
+      if (sizeElements.length > 0) {
+        sizeElements[0].classList.remove('border-gray-200');
+        sizeElements[0].classList.add('border-primary');
+      }
+      
+      // Update harga berdasarkan ukuran
+      updatePrice(size);
+    }
+    
+    // Fungsi untuk update harga berdasarkan ukuran
+    function updatePrice(size) {
+      const quantity = parseInt(document.getElementById('quantity').value);
+      let pricePerPcs = 24500; // Default harga 20x26 untuk spunbond
+      
+      // Cari jenis tas yang dipilih
+      let selectedType = 'spunbond'; // Default
+      document.querySelectorAll('[onclick^="selectType"]').forEach(item => {
+        if (item.classList.contains('border-primary')) {
+          selectedType = item.getAttribute('onclick').replace("selectType('", "").replace("')", "");
+        }
+      });
+      
+      // Tentukan harga berdasarkan jenis dan ukuran
+      if (selectedType === 'totebag') {
+        switch(size) {
+          case '20x26': pricePerPcs = 774; break;
+          case '25x35': pricePerPcs = 859 ; break;
+          case '30x40': pricePerPcs = 1088 ; break;
+          case '35x45': pricePerPcs = 1432; break;
+        }
+      } else if (selectedType === 'goodiebag') {
+        switch(size) {
+          case '20x26': pricePerPcs = 20000; break;
+          case '25x35': pricePerPcs = 23000; break;
+          case '30x40': pricePerPcs = 26000; break;
+          case '35x45': pricePerPcs = 30000; break;
+        }
+      } else if (selectedType === 'oval') {
+        switch(size) {
+          case '20x26': pricePerPcs = 446; break;
+          case '25x35': pricePerPcs = 653 ; break;
+          case '30x40': pricePerPcs = 859 ; break;
+        }
+      } else {
+        // Default (spunbond)
+        switch(size) {
+          case '20x26': pricePerPcs = 24500; break;
+          case '25x35': pricePerPcs = 28000; break;
+          case '30x40': pricePerPcs = 32000; break;
+          case '35x45': pricePerPcs = 35000; break;
+        }
+      }
+      
+      // Tambahkan biaya untuk jenis tali yang dipilih
+      let selectedHandle = 'tali-spunbond'; // Default
+      document.querySelectorAll('[onclick^="selectHandle"]').forEach(item => {
+        if (item.classList.contains('border-primary')) {
+          selectedHandle = item.getAttribute('onclick').replace("selectHandle('", "").replace("')", "");
+        }
+      });
+      
+      if (selectedHandle === 'tali-kur') {
+        pricePerPcs += 1500; // Tambahan biaya untuk tali kur
+      }
+      
+      const subtotal = quantity * pricePerPcs;
+      document.getElementById('subtotal').textContent = formatRupiah(subtotal);
+    }
+    
+    // Fungsi untuk menambah jumlah pesanan
+    function increaseQuantity() {
+      const quantityInput = document.getElementById('quantity');
+      let quantity = parseInt(quantityInput.value);
+      quantityInput.value = quantity + 1;
+      calculateSubtotal();
+    }
+    
+    // Fungsi untuk mengurangi jumlah pesanan
+    function decreaseQuantity() {
+      const quantityInput = document.getElementById('quantity');
+      let quantity = parseInt(quantityInput.value);
+      if (quantity > 100) {
+        quantityInput.value = quantity - 1;
+        calculateSubtotal();
+      }
+    }
+    
+    // Fungsi untuk menghitung subtotal
+    function calculateSubtotal() {
+      const quantity = parseInt(document.getElementById('quantity').value);
+      // Cari ukuran yang dipilih
+      let selectedSize = '20x26';
+      document.querySelectorAll('[onclick^="selectSize"]').forEach(item => {
+        if (item.classList.contains('border-primary')) {
+          selectedSize = item.getAttribute('onclick').replace("selectSize('", "").replace("')", "");
+        }
+      });
+      
+      updatePrice(selectedSize);
+    }
+    
+    // Fungsi untuk format mata uang Rupiah
+    function formatRupiah(amount) {
+      return 'Rp ' + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+    
+    // Inisialisasi
+    document.addEventListener('DOMContentLoaded', function() {
+      // Pilih jenis default (spunbond)
+      // Pilih ukuran default
+      selectSize('20x26');
+      
+      // Pilih jenis tali default
+      selectHandle('tali-spunbond');
+      
+      // Initialize slider
+      initSlider();
+      
+      // Add touch events for mobile swipe
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      const sliderContainer = document.querySelector('.slider-container');
+      
+      sliderContainer.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, false);
+      
+      sliderContainer.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, false);
+      
+      function handleSwipe() {
+        if (touchEndX < touchStartX) {
+          moveSlide(1); // Swipe left - next slide
+        }
+        if (touchEndX > touchStartX) {
+          moveSlide(-1); // Swipe right - previous slide
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

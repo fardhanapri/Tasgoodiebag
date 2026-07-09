@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tassouvenir — Tas Sablon Kustom Premium</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e3a5f',
+            accent: '#c8a45a',
+            'accent-light': '#f5edda',
+            dark: '#111827',
+            light: '#ffffff',
+            muted: '#6b7280',
+            'border-soft': '#e5e7eb',
+            'surface': '#f9fafb',
+            'surface-alt': '#f3f4f6',
+            shopee: '#EE4D2D',
+            'shopee-dark': '#D73211'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #ffffff; color: #111827; }
+
+    /* Header scroll effect */
+    .header-scrolled {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.92);
+    }
+
+    /* Shopee bar */
+    .shopee-bar {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .shopee-bar.bar-hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shopee-bar-glow {
+      box-shadow: 0 2px 12px rgba(238,77,45,0.25);
+    }
+    @keyframes shopeeSlideIn {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .shopee-bar-enter {
+      animation: shopeeSlideIn 0.5s ease-out;
+    }
+
+    /* Shopee icon bounce */
+    @keyframes shopeeBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+    .shopee-icon-anim:hover i {
+      animation: shopeeBounce 0.4s ease;
+    }
+
+    /* Shimmer on shopee bar text */
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .shopee-shimmer {
+      background: linear-gradient(90deg, #fff 30%, #ffd6cc 50%, #fff 70%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    /* Header shift when bar visible */
+    .header-with-bar {
+      top: 44px;
+    }
+    .header-no-bar {
+      top: 0;
+    }
+    .hero-with-bar {
+      padding-top: calc(72px + 44px);
+    }
+    .hero-no-bar {
+      padding-top: 72px;
+    }
+
+    /* Subtle pattern for hero */
+    .hero-bg {
+      background: linear-gradient(145deg, #1e3a5f 0%, #0f2440 50%, #1a3352 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(200,164,90,0.12) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #ffffff;
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+
+    /* Product card */
+    .product-card {
+      border: 1px solid #f0f0f0;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.08);
+      border-color: transparent;
+    }
+    .product-card .img-wrap {
+      overflow: hidden;
+      background: #f9fafb;
+    }
+    .product-card .img-wrap img {
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .product-card:hover .img-wrap img {
+      transform: scale(1.05);
+    }
+
+    /* Service card */
+    .service-card {
+      border: 1px solid #f0f0f0;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, #1e3a5f, #c8a45a);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    .service-card:hover {
+      box-shadow: 0 12px 32px -8px rgba(0,0,0,0.06);
+      border-color: transparent;
+    }
+
+    /* Testimonial */
+    .testimonial-card {
+      border: 1px solid #f0f0f0;
+      transition: all 0.35s ease;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -8px rgba(0,0,0,0.06);
+      border-color: transparent;
+    }
+
+    /* Floating animation */
+    .float-anim {
+      animation: floatY 4s ease-in-out infinite;
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    /* Counter animation */
+    .stat-number {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Badge */
+    .badge-new {
+      background: linear-gradient(135deg, #c8a45a, #d4b76a);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+
+    /* CTA section */
+    .cta-section {
+      background: linear-gradient(145deg, #1e3a5f 0%, #0f2440 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(200,164,90,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Form */
+    .form-input {
+      border: 1.5px solid #e5e7eb;
+      transition: all 0.25s ease;
+      background: #fff;
+    }
+    .form-input:focus {
+      border-color: #1e3a5f;
+      box-shadow: 0 0 0 3px rgba(30,58,95,0.08);
+      outline: none;
+    }
+
+    /* Notification */
+    .toast {
+      animation: toastIn 0.4s ease-out;
+    }
+    @keyframes toastIn {
+      from { transform: translateY(-20px) translateX(20px); opacity: 0; }
+      to { transform: translateY(0) translateX(0); opacity: 1; }
+    }
+
+    /* Scroll indicator */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #1e3a5f, #c8a45a);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Smooth link underline */
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: #1e3a5f;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* WhatsApp pulse */
+    .wa-float {
+      animation: waPulse 2s ease-in-out infinite;
+    }
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 4px 14px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 24px rgba(37,211,102,0.6); }
+    }
+
+    /* About image decoration */
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -12px; left: -12px;
+      width: 100%; height: 100%;
+      border: 2px solid #c8a45a;
+      border-radius: 16px;
+      z-index: 0;
+    }
+    .about-img-wrap img {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress" style="width:0%"></div>
+
+  <!-- ===================== SHOPEE TOP BAR ===================== -->
+  <div id="shopeeBar" class="shopee-bar shopee-bar-enter shopee-bar-glow fixed top-0 left-0 w-full z-[60] bg-shopee">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 h-[44px] flex items-center justify-between">
+      <!-- Kiri: Info -->
+      <div class="flex items-center gap-2.5 min-w-0">
+        <!-- Shopee SVG Icon -->
+        <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="6" fill="white" fill-opacity="0.2"/>
+          <path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="white"/>
+          <circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/>
+          <circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/>
+        </svg>
+        <p class="shopee-shimmer text-xs sm:text-sm font-bold whitespace-nowrap">
+          Belanja Langsung di Toko Shopee Kami!
+        </p>
+      </div>
+
+      <!-- Kanan: Tombol + Close -->
+      <div class="flex items-center gap-3">
+        <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener"
+           class="shopee-icon-anim inline-flex items-center gap-1.5 bg-white text-shopee text-xs font-bold px-3.5 py-1.5 rounded-md hover:bg-gray-50 transition-colors whitespace-nowrap">
+          <i class="fas fa-store text-[11px]"></i>
+          <span class="hidden sm:inline">Kunjungi Toko</span>
+          <span class="sm:hidden">Buka</span>
+          <i class="fas fa-arrow-right text-[9px]"></i>
+        </a>
+        <button id="closeShopeeBar" class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-white/20 transition-colors flex-shrink-0" aria-label="Tutup">
+          <i class="fas fa-xmark text-white/80 text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="mainHeader" class="header-with-bar fixed w-full z-50 transition-all duration-300" style="background:rgba(255,255,255,0.95); backdrop-filter:blur(12px);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-[72px]">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
+            <i class="fas fa-bag-shopping text-white text-sm"></i>
+          </div>
+          <span class="text-xl font-bold text-primary tracking-tight">Tas<span class="text-accent">Souvenir</span></span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="#home" class="nav-link text-sm font-medium text-dark hover:text-primary transition-colors">Beranda</a>
+          <a href="#produk" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Produk</a>
+          <a href="#layanan" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Layanan</a>
+          <a href="#tentang" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Tentang</a>
+          <a href="#testimoni" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Testimoni</a>
+          <a href="#kontak" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Kontak</a>
+        </nav>
+
+        <!-- CTA + Shopee + Mobile Toggle -->
+        <div class="flex items-center gap-3">
+          <!-- Shopee button di header -->
+          <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener"
+             class="hidden md:inline-flex items-center gap-2 bg-shopee text-white text-sm font-medium px-4 py-2.5 rounded-lg hover:bg-shopee-dark transition-colors">
+            <i class="fas fa-bag-shopping text-xs"></i>
+            <span>Shopee</span>
+          </a>
+          <a href="https://wa.me/6283173742530" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#152c4a] transition-colors">
+            <i class="fab fa-whatsapp text-base"></i>
+            <span>Chat Kami</span>
+          </a>
+          <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-alt transition-colors">
+            <i class="fas fa-bars text-dark text-lg" id="menuIcon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-border-soft">
+      <div class="max-w-7xl mx-auto px-6 py-4 space-y-1">
+        <!-- Shopee link di mobile menu (paling atas) -->
+        <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener"
+           class="flex items-center justify-center gap-2 bg-shopee text-white text-sm font-semibold px-5 py-3 rounded-xl w-full mb-2">
+          <i class="fas fa-bag-shopping text-sm"></i> Belanja di Shopee
+        </a>
+        <a href="#home" class="block py-2.5 px-3 text-sm font-medium text-dark hover:bg-surface rounded-lg transition-colors">Beranda</a>
+        <a href="#produk" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Produk</a>
+        <a href="#layanan" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Layanan</a>
+        <a href="#tentang" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Tentang</a>
+        <a href="#testimoni" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Testimoni</a>
+        <a href="#kontak" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Kontak</a>
+        <div class="pt-3 border-t border-border-soft">
+          <a href="https://wa.me/6283173742530" target="_blank" class="flex items-center justify-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg w-full">
+            <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Toast Notification -->
+  <div id="globalToast" class="fixed top-24 right-6 z-[60] hidden">
+    <div class="toast bg-white border border-border-soft rounded-xl shadow-lg p-4 flex items-center gap-3 max-w-sm">
+      <div id="toastIcon" class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"></div>
+      <p id="toastMsg" class="text-sm font-medium text-dark"></p>
+    </div>
+  </div>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="home" class="hero-bg hero-with-bar">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 lg:py-36 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Text -->
+        <div data-aos="fade-up" data-aos-duration="800">
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-1.5 mb-6">
+            <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+            <span class="text-white/80 text-xs font-medium tracking-wide uppercase">Dipercaya Sejak 2017</span>
+          </div>
+
+          <h1 class="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
+            Tas Souvenir &<br>
+            Sablon <span class="text-accent">Kustom Premium</span>
+          </h1>
+
+          <p class="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
+            Wujudkan tas souvenir impian Anda dengan bahan berkualitas, sablon tajam, dan harga bersahabat. Melayani kebutuhan perusahaan, pernikahan, hingga komunitas.
+          </p>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="#produk" class="inline-flex items-center gap-2 bg-accent text-primary font-semibold px-7 py-3.5 rounded-lg hover:bg-[#d4b76a] transition-all duration-300 shadow-lg shadow-accent/20">
+              <i class="fas fa-grid-2 text-sm"></i>
+              Lihat Katalog
+            </a>
+            <!-- Shopee CTA di hero -->
+            <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-shopee text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-shopee-dark transition-all duration-300 shadow-lg shadow-shopee/25">
+              <svg class="w-5 h-5" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="6" fill="white" fill-opacity="0.2"/>
+                <path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="white"/>
+                <circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/>
+                <circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/>
+              </svg>
+              Belanja di Shopee
+            </a>
+            <a href="https://wa.me/6283173742530" target="_blank" class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium px-7 py-3.5 rounded-lg hover:bg-white/20 transition-all duration-300">
+              <i class="fab fa-whatsapp text-lg"></i>
+              Konsultasi Gratis
+            </a>
+          </div>
+
+          <!-- Mini stats -->
+          <div class="flex gap-8 mt-12 pt-8 border-t border-white/10">
+            <div>
+              <div class="text-2xl font-bold text-white">5.000<span class="text-accent">+</span></div>
+              <div class="text-white/50 text-xs mt-1 uppercase tracking-wider">Pelanggan</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-white">25.000<span class="text-accent">+</span></div>
+              <div class="text-white/50 text-xs mt-1 uppercase tracking-wider">Tas Terjual</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-white">4.9<span class="text-accent">/5</span></div>
+              <div class="text-white/50 text-xs mt-1 uppercase tracking-wider">Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="flex justify-center lg:justify-end" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+          <div class="relative">
+            <div class="float-anim">
+              <img src="tas.jpeg" alt="Tas Souvenir Custom" class="rounded-2xl shadow-2xl w-full max-w-md object-cover aspect-[4/3]">
+            </div>
+
+            <!-- Floating badge 1 -->
+            <div class="absolute -bottom-4 -left-4 md:-left-6 bg-white rounded-xl shadow-lg p-3.5 hidden md:flex items-center gap-3 z-10">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                <i class="fas fa-award text-primary text-lg"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-dark">Bahan Premium</p>
+                <p class="text-[11px] text-muted">100% Quality Check</p>
+              </div>
+            </div>
+
+            <!-- Floating badge 2 -->
+            <div class="absolute -top-4 -right-4 md:-right-6 bg-white rounded-xl shadow-lg p-3.5 hidden md:flex items-center gap-3 z-10">
+              <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+                <i class="fas fa-truck-fast text-accent text-lg"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-dark">Kirim ke Seluruh</p>
+                <p class="text-[11px] text-muted">Indonesia</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- ===================== PRODUK UNGGULAN ===================== -->
+  <section id="produk" class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-3 block">Katalog</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight mb-4">Produk <span class="text-primary">Unggulan</span></h2>
+        <p class="text-muted max-w-xl mx-auto leading-relaxed">Pilihan tas souvenir terbaik dengan kualitas premium dan harga terjangkau untuk berbagai kebutuhan acara Anda.</p>
+      </div>
+
+      <!-- Grid 3 Kolom: Ukuran, Motif, Custom -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Card 1: Ukuran -->
+        <div class="product-card bg-white rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="50">
+          <div class="img-wrap h-60 relative bg-surface flex items-center justify-center">
+            <img src="tls25.png" alt="Pilihan Ukuran Tas" class="w-full h-full object-cover">
+            <div class="absolute top-4 left-4"><span class="badge-new">Populer</span></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-ruler-combined text-accent text-sm"></i>
+              <span class="text-xs font-bold text-accent uppercase tracking-wider">Katalog</span>
+            </div>
+            <h3 class="text-lg font-bold text-dark mb-1.5">Pilihan Ukuran</h3>
+            <p class="text-muted text-sm leading-relaxed mb-5">Temukan berbagai ukuran tas spunbond mulai dari TLS 20 sampai TLS 60. Lengkap dengan tabel harga dan spesifikasi detail.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[10px] bg-primary/5 text-primary font-semibold px-2 py-1 rounded">TLS 20</span>
+                <span class="text-[10px] bg-primary/5 text-primary font-semibold px-2 py-1 rounded">TLS 25</span>
+                <span class="text-[10px] bg-primary/5 text-primary font-semibold px-2 py-1 rounded">TLS 30</span>
+                <span class="text-[10px] bg-primary/5 text-primary font-semibold px-2 py-1 rounded">+6</span>
+              </div>
+              <a href="ukuran.php" class="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:gap-2.5 transition-all">
+                Lihat <i class="fas fa-arrow-right text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Motif -->
+        <div class="product-card bg-white rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+          <div class="img-wrap h-60 relative bg-surface flex items-center justify-center">
+            <img src="tas1.png" alt="Pilihan Motif Tas" class="w-full h-full object-cover">
+            <div class="absolute top-4 left-4"><span class="badge-new">Inspirasi</span></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-palette text-accent text-sm"></i>
+              <span class="text-xs font-bold text-accent uppercase tracking-wider">Koleksi</span>
+            </div>
+            <h3 class="text-lg font-bold text-dark mb-1.5">Pilihan Motif</h3>
+            <p class="text-muted text-sm leading-relaxed mb-5">Koleksi motif menarik untuk tas souvenir Anda. Tersedia berbagai desain eksklusif yang bisa disesuaikan dengan tema acara.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[10px] bg-accent/10 text-accent font-semibold px-2 py-1 rounded">Minimalis</span>
+                <span class="text-[10px] bg-accent/10 text-accent font-semibold px-2 py-1 rounded">Batik</span>
+                <span class="text-[10px] bg-accent/10 text-accent font-semibold px-2 py-1 rounded">Geometris</span>
+                <span class="text-[10px] bg-accent/10 text-accent font-semibold px-2 py-1 rounded">+5</span>
+              </div>
+              <a href="motif.php" class="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:gap-2.5 transition-all">
+                Lihat <i class="fas fa-arrow-right text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Custom -->
+        <div class="product-card bg-white rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="150">
+          <div class="img-wrap h-60 relative bg-surface flex items-center justify-center">
+            <img src="tas4.png" alt="Custom Tas Souvenir" class="w-full h-full object-cover">
+            <div class="absolute top-4 left-4"><span class="badge-new">Best Seller</span></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-pen-fancy text-accent text-sm"></i>
+              <span class="text-xs font-bold text-accent uppercase tracking-wider">Layanan</span>
+            </div>
+            <h3 class="text-lg font-bold text-dark mb-1.5">Custom Desain</h3>
+            <p class="text-muted text-sm leading-relaxed mb-5">Buat desain tas souvenir sesuai keinginan Anda. Konsultasikan ide Anda dan kami wujudkan dengan hasil terbaik.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[10px] bg-primary/5 text-primary font-semibold px-2 py-1 rounded">Logo</span>
+                <span class="text-[10px] bg-primary/5 text-primary font-semibold px-2 py-1 rounded">Sablon</span>
+                <span class="text-[10px] bg-primary/5 text-primary font-semibold px-2 py-1 rounded">Custom</span>
+                <span class="text-[10px] bg-primary/5 text-primary font-semibold px-2 py-1 rounded">+3</span>
+              </div>
+              <a href="custom.php" class="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:gap-2.5 transition-all">
+                Detail <i class="fas fa-arrow-right text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Shopee CTA di bawah produk -->
+      <div class="mt-12 text-center" data-aos="fade-up">
+        <div class="inline-flex flex-col sm:flex-row items-center gap-3 bg-shopee/5 border border-shopee/15 rounded-2xl px-8 py-5">
+          <svg class="w-8 h-8 flex-shrink-0" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="6" fill="#EE4D2D" fill-opacity="0.1"/>
+            <path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="#EE4D2D"/>
+            <circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/>
+            <circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/>
+          </svg>
+          <div class="text-left">
+            <p class="text-sm font-bold text-dark">Ingin belanja langsung?</p>
+            <p class="text-xs text-muted">Temukan produk lengkap kami di toko Shopee resmi</p>
+          </div>
+          <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 bg-shopee text-white text-sm font-bold px-6 py-2.5 rounded-lg hover:bg-shopee-dark transition-colors whitespace-nowrap mt-1 sm:mt-0">
+            <i class="fas fa-external-link-alt text-xs"></i> Buka Toko Shopee
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+      <!-- Shopee CTA di bawah produk -->
+      <div class="mt-12 text-center" data-aos="fade-up">
+        <div class="inline-flex flex-col sm:flex-row items-center gap-3 bg-shopee/5 border border-shopee/15 rounded-2xl px-8 py-5">
+          <svg class="w-8 h-8 flex-shrink-0" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="6" fill="#EE4D2D" fill-opacity="0.1"/>
+            <path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="#EE4D2D"/>
+            <circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/>
+            <circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/>
+          </svg>
+          <div class="text-left">
+            <p class="text-sm font-bold text-dark">Ingin belanja langsung?</p>
+            <p class="text-xs text-muted">Temukan produk lengkap kami di toko Shopee resmi</p>
+          </div>
+          <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 bg-shopee text-white text-sm font-bold px-6 py-2.5 rounded-lg hover:bg-shopee-dark transition-colors whitespace-nowrap mt-1 sm:mt-0">
+            <i class="fas fa-external-link-alt text-xs"></i> Buka Toko Shopee
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LAYANAN ===================== -->
+  <section id="layanan" class="py-20 md:py-28 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-3 block">Keunggulan</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight mb-4">Layanan <span class="text-primary">Kami</span></h2>
+        <p class="text-muted max-w-xl mx-auto leading-relaxed">Dari konsultasi desain hingga pengiriman, kami pastikan setiap tahap berjalan sempurna</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="service-card bg-white rounded-2xl p-7 text-center" data-aos="fade-up" data-aos-delay="50">
+          <div class="w-14 h-14 bg-primary/8 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i class="fas fa-palette text-primary text-xl"></i>
+          </div>
+          <h3 class="text-base font-bold text-dark mb-2">Desain Custom</h3>
+          <p class="text-muted text-sm leading-relaxed">Buat desain dari nol atau sempurnakan desain yang sudah ada sesuai kebutuhan Anda</p>
+        </div>
+
+        <div class="service-card bg-white rounded-2xl p-7 text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i class="fas fa-print text-accent text-xl"></i>
+          </div>
+          <h3 class="text-base font-bold text-dark mb-2">Sablon Berkualitas</h3>
+          <p class="text-muted text-sm leading-relaxed">Teknik sablon modern dengan tinta premium yang tajam, warna cerah, dan tahan lama</p>
+        </div>
+
+        <div class="service-card bg-white rounded-2xl p-7 text-center" data-aos="fade-up" data-aos-delay="150">
+          <div class="w-14 h-14 bg-primary/8 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i class="fas fa-box-open text-primary text-xl"></i>
+          </div>
+          <h3 class="text-base font-bold text-dark mb-2">Pengemasan Rapi</h3>
+          <p class="text-muted text-sm leading-relaxed">Setiap produk dikemas dengan hati-hati agar sampai di tangan Anda dalam kondisi sempurna</p>
+        </div>
+
+        <div class="service-card bg-white rounded-2xl p-7 text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i class="fas fa-truck-fast text-accent text-xl"></i>
+          </div>
+          <h3 class="text-base font-bold text-dark mb-2">Pengiriman Cepat</h3>
+          <p class="text-muted text-sm leading-relaxed">Dikirim ke seluruh Indonesia melalui ekspedisi terpercaya dengan estimasi akurat</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROSES PEMESANAN ===================== -->
+  <section class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <span class="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-3 block">Cara Pemesanan</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight mb-4">4 Langkah <span class="text-primary">Mudah</span></h2>
+        <p class="text-muted max-w-xl mx-auto leading-relaxed">Proses pemesanan yang simpel dan transparan, tanpa ribet</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 relative">
+        <div class="hidden lg:block absolute top-[36px] left-[12%] right-[12%] h-[2px] bg-gradient-to-r from-primary/20 via-accent/40 to-primary/20 z-0"></div>
+
+        <div class="text-center relative z-10" data-aos="fade-up" data-aos-delay="50">
+          <div class="w-[72px] h-[72px] bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary/20">
+            <span class="text-white text-2xl font-extrabold">1</span>
+          </div>
+          <h3 class="text-base font-bold text-dark mb-2">Konsultasi</h3>
+          <p class="text-muted text-sm leading-relaxed max-w-[200px] mx-auto">Ceritakan kebutuhan Anda via WhatsApp atau form kontak</p>
+        </div>
+
+        <div class="text-center relative z-10" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-[72px] h-[72px] bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary/20">
+            <span class="text-white text-2xl font-extrabold">2</span>
+          </div>
+          <h3 class="text-base font-bold text-dark mb-2">Pemesanan</h3>
+          <p class="text-muted text-sm leading-relaxed max-w-[200px] mx-auto">Setujui desain & harga, lakukan pembayaran sesuai kesepakatan</p>
+        </div>
+
+        <div class="text-center relative z-10" data-aos="fade-up" data-aos-delay="150">
+          <div class="w-[72px] h-[72px] bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary/20">
+            <span class="text-white text-2xl font-extrabold">3</span>
+          </div>
+          <h3 class="text-base font-bold text-dark mb-2">Produksi</h3>
+          <p class="text-muted text-sm leading-relaxed max-w-[200px] mx-auto">Tim kami produksi dengan quality control di setiap tahap</p>
+        </div>
+
+        <div class="text-center relative z-10" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-[72px] h-[72px] bg-accent rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-accent/20">
+            <span class="text-primary text-2xl font-extrabold">4</span>
+          </div>
+          <h3 class="text-base font-bold text-dark mb-2">Pengiriman</h3>
+          <p class="text-muted text-sm leading-relaxed max-w-[200px] mx-auto">Produk dikirim aman dan tepat waktu ke alamat Anda</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TENTANG KAMI ===================== -->
+  <section id="tentang" class="py-20 md:py-28 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div data-aos="fade-right">
+          <div class="about-img-wrap max-w-md mx-auto lg:mx-0">
+            <img src="totebag3.png" alt="Tentang TasSouvenir" class="rounded-2xl shadow-xl w-full object-cover aspect-[4/3]">
+          </div>
+        </div>
+
+        <div data-aos="fade-left">
+          <span class="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-3 block">Tentang Kami</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight mb-6">Lebih dari 14 Tahun <span class="text-primary">Pengalaman</span></h2>
+          <p class="text-muted leading-relaxed mb-4">
+            Berawal dari usaha kecil di Bandung pada tahun 2010, TasSouvenir kini telah dipercaya oleh ribuan pelanggan dari berbagai kalangan — mulai dari perusahaan besar, instansi pemerintah, sekolah, hingga komunitas lokal.
+          </p>
+          <p class="text-muted leading-relaxed mb-8">
+            Kami percaya bahwa setiap tas yang kami buat bukan sekadar wadah, melainkan representasi dari brand dan identitas acara Anda. Oleh karena itu, kami mengutamakan kualitas di setiap jahitan dan setiap goresan sablon.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-primary/8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-check text-primary text-xs"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-dark">Bahan Premium</h4>
+                <p class="text-xs text-muted mt-0.5 leading-relaxed">Hanya spunbond grade A terbaik</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-primary/8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-check text-primary text-xs"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-dark">Harga Bersaing</h4>
+                <p class="text-xs text-muted mt-0.5 leading-relaxed">Kualitas premium tanpa mahal</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-primary/8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-check text-primary text-xs"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-dark">Proses Cepat</h4>
+                <p class="text-xs text-muted mt-0.5 leading-relaxed">Deadline ketat? Kami siap bantu</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-primary/8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-check text-primary text-xs"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-dark">Garansi Kualitas</h4>
+                <p class="text-xs text-muted mt-0.5 leading-relaxed">Jaminan kepuasan setiap pesanan</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONI ===================== -->
+  <section id="testimoni" class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-3 block">Testimoni</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight mb-4">Apa Kata <span class="text-primary">Pelanggan Kami</span></h2>
+        <p class="text-muted max-w-xl mx-auto leading-relaxed">Kepuasan pelanggan adalah prioritas utama kami</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div class="testimonial-card bg-white rounded-2xl p-7" data-aos="fade-up" data-aos-delay="50">
+          <div class="flex items-center gap-1 mb-4">
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <span class="text-xs text-muted ml-2">5.0</span>
+          </div>
+          <p class="text-sm text-dark/80 leading-relaxed mb-6">"Hasil sablonnya sangat rapi dan warnanya tajam. Bahannya juga tebal, tidak murahan. Pelayanannya ramah dan fast response. Sangat recommended!"</p>
+          <div class="flex items-center gap-3 pt-5 border-t border-border-soft">
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Diana Sari" class="w-10 h-10 rounded-full object-cover ring-2 ring-accent/30">
+            <div>
+              <h4 class="text-sm font-bold text-dark">Diana Sari</h4>
+              <p class="text-xs text-muted">Owner — Butik DS</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card bg-white rounded-2xl p-7" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center gap-1 mb-4">
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <span class="text-xs text-muted ml-2">5.0</span>
+          </div>
+          <p class="text-sm text-dark/80 leading-relaxed mb-6">"Pesanan 500 pcs totebag untuk seminar perusahaan. Harganya sangat kompetitif dan hasilnya sesuai ekspektasi. Pasti akan order lagi untuk event selanjutnya."</p>
+          <div class="flex items-center gap-3 pt-5 border-t border-border-soft">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Budi Santoso" class="w-10 h-10 rounded-full object-cover ring-2 ring-accent/30">
+            <div>
+              <h4 class="text-sm font-bold text-dark">Budi Santoso</h4>
+              <p class="text-xs text-muted">HR Manager — PT Maju Jaya</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card bg-white rounded-2xl p-7" data-aos="fade-up" data-aos-delay="150">
+          <div class="flex items-center gap-1 mb-4">
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star text-amber-400 text-sm"></i>
+            <i class="fas fa-star-half-alt text-amber-400 text-sm"></i>
+            <span class="text-xs text-muted ml-2">4.5</span>
+          </div>
+          <p class="text-sm text-dark/80 leading-relaxed mb-6">"Desainnya dibuatkan sesuai request, bahannya tebal dan tidak mudah sobek. Pengiriman tepat waktu. Terima kasih TasSouvenir, kerjasamanya menyenangkan!"</p>
+          <div class="flex items-center gap-3 pt-5 border-t border-border-soft">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Rina Wijaya" class="w-10 h-10 rounded-full object-cover ring-2 ring-accent/30">
+            <div>
+              <h4 class="text-sm font-bold text-dark">Rina Wijaya</h4>
+              <p class="text-xs text-muted">Event Organizer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-surface rounded-3xl p-8 md:p-12" data-aos="fade-up">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <div class="stat-number text-3xl md:text-4xl font-extrabold text-primary" data-target="5000">0</div>
+            <div class="text-xs text-muted mt-2 uppercase tracking-wider font-medium">Pelanggan Puas</div>
+          </div>
+          <div>
+            <div class="stat-number text-3xl md:text-4xl font-extrabold text-primary" data-target="98">0</div>
+            <div class="text-xs text-muted mt-2 uppercase tracking-wider font-medium">Tingkat Kepuasan</div>
+          </div>
+          <div>
+            <div class="stat-number text-3xl md:text-4xl font-extrabold text-primary" data-target="25000">0</div>
+            <div class="text-xs text-muted mt-2 uppercase tracking-wider font-medium">Tas Terproduksi</div>
+          </div>
+          <div>
+            <div class="stat-number text-3xl md:text-4xl font-extrabold text-accent">4.9<span class="text-lg">/5</span></div>
+            <div class="text-xs text-muted mt-2 uppercase tracking-wider font-medium">Rating Rata-rata</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="cta-section py-20 md:py-28 text-white text-center relative z-10">
+    <div class="max-w-3xl mx-auto px-6" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-5 leading-tight">
+        Siap Pesan Tas<br>Souvenir Custom?
+      </h2>
+      <p class="text-white/65 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
+        Konsultasikan kebutuhan Anda sekarang. Gratis, tanpa komitmen.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://wa.me/6283173742530" target="_blank" class="inline-flex items-center gap-2.5 bg-accent text-primary font-bold px-8 py-4 rounded-xl hover:bg-[#d4b76a] transition-all shadow-lg shadow-accent/25">
+          <i class="fab fa-whatsapp text-xl"></i>
+          Hubungi via WhatsApp
+        </a>
+        <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2.5 bg-shopee text-white font-bold px-8 py-4 rounded-xl hover:bg-shopee-dark transition-all shadow-lg shadow-shopee/25">
+          <i class="fas fa-bag-shopping text-lg"></i>
+          Belanja di Shopee
+        </a>
+        <a href="#kontak" class="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium px-8 py-4 rounded-xl hover:bg-white/20 transition-all">
+          <i class="fas fa-envelope text-base"></i>
+          Kirim Pesan
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== KONTAK ===================== -->
+  <section id="kontak" class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-3 block">Hubungi Kami</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight mb-4">Ada Pertanyaan? <span class="text-primary">Kami Siap Membantu</span></h2>
+        <p class="text-muted max-w-xl mx-auto leading-relaxed">Silakan kirim pesan atau hubungi kami langsung untuk konsultasi dan pemesanan</p>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-8 lg:gap-12">
+        <div class="lg:col-span-3" data-aos="fade-right">
+          <form id="contactForm" class="bg-surface rounded-2xl p-8 md:p-10">
+            <input type="hidden" name="_subject" value="Pesan Baru dari Website TasSouvenir">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_autoresponse" value="Terima kasih telah menghubungi TasSouvenir. Pesan Anda telah kami terima dan akan segera kami balas.">
+
+            <div class="grid sm:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label for="name" class="block text-sm font-semibold text-dark mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
+                <input type="text" id="name" name="name" required placeholder="Masukkan nama Anda" class="form-input w-full px-4 py-3 rounded-xl text-sm">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-semibold text-dark mb-2">Email <span class="text-red-500">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="email@contoh.com" class="form-input w-full px-4 py-3 rounded-xl text-sm">
+              </div>
+            </div>
+
+            <div class="mb-5">
+              <label for="subject" class="block text-sm font-semibold text-dark mb-2">Subjek</label>
+              <input type="text" id="subject" name="subject" placeholder="Tentang apa pesan Anda?" class="form-input w-full px-4 py-3 rounded-xl text-sm">
+            </div>
+
+            <div class="mb-6">
+              <label for="message" class="block text-sm font-semibold text-dark mb-2">Pesan <span class="text-red-500">*</span></label>
+              <textarea id="message" name="message" rows="5" required placeholder="Jelaskan kebutuhan Anda di sini..." class="form-input w-full px-4 py-3 rounded-xl text-sm resize-none"></textarea>
+            </div>
+
+            <button type="submit" id="submitButton" class="w-full bg-primary text-white font-semibold py-3.5 rounded-xl hover:bg-[#152c4a] transition-all flex items-center justify-center gap-2">
+              <i class="fas fa-paper-plane text-sm"></i>
+              Kirim Pesan
+            </button>
+
+            <div id="formNotification" class="hidden mt-4 p-4 rounded-xl text-sm"></div>
+          </form>
+        </div>
+
+        <div class="lg:col-span-2" data-aos="fade-left">
+          <div class="bg-surface rounded-2xl p-8 h-full flex flex-col">
+            <h3 class="text-lg font-bold text-dark mb-6">Informasi Kontak</h3>
+
+            <div class="space-y-5 flex-1">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-primary/8 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-map-marker-alt text-primary text-sm"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-dark">Alamat</h4>
+                  <p class="text-sm text-muted mt-0.5 leading-relaxed">Kiaracondong, Sukapura, Jl. Salak Gang Jambu RT05/RW01 No.49, Bandung</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-phone text-accent text-sm"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-dark">Telepon</h4>
+                  <p class="text-sm text-muted mt-0.5">+62 831-7374-2530</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-primary/8 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-envelope text-primary text-sm"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-dark">Email</h4>
+                  <p class="text-sm text-muted mt-0.5">fardanapriansyah10@gmail.com</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fab fa-whatsapp text-green-600 text-sm"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-dark">WhatsApp</h4>
+                  <p class="text-sm text-muted mt-0.5">+62 831-7374-2530</p>
+                </div>
+              </div>
+
+              <!-- Shopee di info kontak -->
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-shopee/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-bag-shopping text-shopee text-sm"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-dark">Toko Shopee</h4>
+                  <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener" class="text-sm text-shopee hover:underline mt-0.5 block">Kunjungi toko kami →</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-border-soft">
+              <h4 class="text-sm font-semibold text-dark mb-3">Ikuti Kami</h4>
+              <div class="flex gap-3">
+                <a href="#" class="w-10 h-10 bg-white border border-border-soft rounded-xl flex items-center justify-center text-muted hover:text-primary hover:border-primary/20 hover:bg-primary/5 transition-all">
+                  <i class="fab fa-instagram text-sm"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-white border border-border-soft rounded-xl flex items-center justify-center text-muted hover:text-primary hover:border-primary/20 hover:bg-primary/5 transition-all">
+                  <i class="fab fa-facebook-f text-sm"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-white border border-border-soft rounded-xl flex items-center justify-center text-muted hover:text-primary hover:border-primary/20 hover:bg-primary/5 transition-all">
+                  <i class="fab fa-tiktok text-sm"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-white border border-border-soft rounded-xl flex items-center justify-center text-muted hover:text-primary hover:border-primary/20 hover:bg-primary/5 transition-all">
+                  <i class="fab fa-youtube text-sm"></i>
+                </a>
+                <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener"
+                   class="w-10 h-10 bg-shopee/10 border border-shopee/20 rounded-xl flex items-center justify-center text-shopee hover:bg-shopee hover:text-white transition-all">
+                  <i class="fas fa-bag-shopping text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="bg-dark text-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <div class="sm:col-span-2 lg:col-span-1">
+          <a href="#home" class="flex items-center gap-2.5 mb-5">
+            <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
+              <i class="fas fa-bag-shopping text-white text-sm"></i>
+            </div>
+            <span class="text-xl font-bold tracking-tight">Tas<span class="text-accent">Souvenir</span></span>
+          </a>
+          <p class="text-gray-400 text-sm leading-relaxed mb-5">Spesialis pembuatan tas custom dan sablon berkualitas untuk berbagai kebutuhan souvenir dan promosi Anda.</p>
+          <p class="text-gray-500 text-xs">&copy; 2025 TasSouvenir. All rights reserved.</p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Navigasi</h4>
+          <ul class="space-y-3">
+            <li><a href="#home" class="text-gray-400 text-sm hover:text-accent transition-colors">Beranda</a></li>
+            <li><a href="#produk" class="text-gray-400 text-sm hover:text-accent transition-colors">Produk</a></li>
+            <li><a href="#layanan" class="text-gray-400 text-sm hover:text-accent transition-colors">Layanan</a></li>
+            <li><a href="#tentang" class="text-gray-400 text-sm hover:text-accent transition-colors">Tentang Kami</a></li>
+            <li><a href="#kontak" class="text-gray-400 text-sm hover:text-accent transition-colors">Kontak</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Marketplace</h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener" class="text-shopee text-sm hover:text-[#ff6b4a] transition-colors flex items-center gap-2">
+                <i class="fas fa-bag-shopping text-xs"></i> Toko Shopee Resmi
+              </a>
+            </li>
+            <li><a href="#" class="text-gray-400 text-sm hover:text-accent transition-colors">Tas Spunbond</a></li>
+            <li><a href="#" class="text-gray-400 text-sm hover:text-accent transition-colors">Totebag Custom</a></li>
+            <li><a href="#" class="text-gray-400 text-sm hover:text-accent transition-colors">Tas Oval</a></li>
+            <li><a href="#" class="text-gray-400 text-sm hover:text-accent transition-colors">Goodie Bag</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Kontak</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2.5">
+              <i class="fas fa-map-marker-alt text-accent text-xs mt-1.5 flex-shrink-0"></i>
+              <span class="text-gray-400 text-sm leading-relaxed">Kiaracondong, Sukapura, Jl. Salak Gang Jambu RT05/RW01 No.49</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i class="fas fa-phone text-accent text-xs flex-shrink-0"></i>
+              <span class="text-gray-400 text-sm">+62 831-7374-2530</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i class="fas fa-envelope text-accent text-xs flex-shrink-0"></i>
+              <span class="text-gray-400 text-sm">fardanapriansyah10@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-gray-500 text-xs">Dibuat dengan <i class="fas fa-heart text-accent text-[10px]"></i> di Bandung, Indonesia</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-instagram text-sm"></i></a>
+          <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
+          <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-tiktok text-sm"></i></a>
+          <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-youtube text-sm"></i></a>
+          <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener" class="text-shopee hover:text-[#ff6b4a] transition-colors"><i class="fas fa-bag-shopping text-sm"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WA -->
+  <a href="https://wa.me/6283173742530" target="_blank" class="wa-float fixed bottom-6 left-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform">
+    <i class="fab fa-whatsapp text-2xl"></i>
+  </a>
+
+  <!-- Floating Shopee Button -->
+  <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener"
+     class="fixed bottom-6 right-6 bg-shopee text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform"
+     style="box-shadow: 0 4px 14px rgba(238,77,45,0.4);">
+    <i class="fas fa-bag-shopping text-xl"></i>
+  </a>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    // ========== AOS Init ==========
+    AOS.init({
+      duration: 700,
+      once: true,
+      offset: 80,
+      easing: 'ease-out-cubic'
+    });
+
+    // ========== Shopee Bar Logic ==========
+    const shopeeBar = document.getElementById('shopeeBar');
+    const mainHeader = document.getElementById('mainHeader');
+    const heroSection = document.getElementById('home');
+    const BAR_HEIGHT = 44;
+
+    // Cek apakah bar sudah pernah ditutup (simpan di localStorage)
+    const barDismissed = localStorage.getItem('shopeeBarDismissed');
+    const dismissExpiry = localStorage.getItem('shopeeBarDismissedAt');
+    const now = Date.now();
+
+    // Reset setelah 24 jam agar muncul lagi
+    let shouldShowBar = true;
+    if (barDismissed === 'true' && dismissExpiry) {
+      const elapsed = now - parseInt(dismissExpiry);
+      if (elapsed < 24 * 60 * 60 * 1000) {
+        shouldShowBar = false;
+      }
+    }
+
+    if (!shouldShowBar) {
+      hideShopeeBar();
+    }
+
+    // Tombol tutup
+    document.getElementById('closeShopeeBar').addEventListener('click', function () {
+      hideShopeeBar();
+      localStorage.setItem('shopeeBarDismissed', 'true');
+      localStorage.setItem('shopeeBarDismissedAt', now.toString());
+    });
+
+    function hideShopeeBar() {
+      shopeeBar.classList.add('bar-hidden');
+      mainHeader.classList.remove('header-with-bar');
+      mainHeader.classList.add('header-no-bar');
+      heroSection.classList.remove('hero-with-bar');
+      heroSection.classList.add('hero-no-bar');
+    }
+
+    // ========== Scroll Progress Bar ==========
+    const progressBar = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', function () {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progressBar.style.width = scrollPercent + '%';
+    });
+
+    // ========== Header Scroll Effect ==========
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 20) {
+        header.classList.add('header-scrolled');
+      } else {
+        header.classList.remove('header-scrolled');
+      }
+    });
+
+    // ========== Mobile Menu Toggle ==========
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+
+    menuToggle.addEventListener('click', function () {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.className = isOpen ? 'fas fa-bars text-dark text-lg' : 'fas fa-xmark text-dark text-lg';
+    });
+
+    document.querySelectorAll('#mobileMenu a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.add('hidden');
+        menuIcon.className = 'fas fa-bars text-dark text-lg';
+      });
+    });
+
+    // ========== Active Nav Highlight ==========
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', function () {
+      let current = '';
+      sections.forEach(function (section) {
+        const sectionTop = section.offsetTop - 140;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(function (link) {
+        link.classList.remove('active', 'text-dark');
+        link.classList.add('text-muted');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active', 'text-dark');
+          link.classList.remove('text-muted');
+        }
+      });
+    });
+
+    // ========== Counter Animation ==========
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    let counterStarted = false;
+
+    function animateCounters() {
+      statNumbers.forEach(function (el) {
+        const target = parseInt(el.getAttribute('data-target'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        function update() {
+          current += step;
+          if (current >= target) {
+            el.textContent = target.toLocaleString('id-ID') + (target >= 1000 ? '+' : '%');
+            return;
+          }
+          el.textContent = Math.floor(current).toLocaleString('id-ID') + (target >= 1000 ? '+' : '%');
+          requestAnimationFrame(update);
+        }
+        update();
+      });
+    }
+
+    const statsObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !counterStarted) {
+          counterStarted = true;
+          animateCounters();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    statNumbers.forEach(function (el) {
+      const container = el.closest('.bg-surface');
+      if (container) statsObserver.observe(container);
+    });
+
+    // ========== Toast Notification ==========
+    function showToast(message, type) {
+      const toast = document.getElementById('globalToast');
+      const toastMsg = document.getElementById('toastMsg');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastMsg.textContent = message;
+      if (type === 'success') {
+        toastIcon.innerHTML = '<i class="fas fa-check text-white text-xs"></i>';
+        toastIcon.className = 'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-green-500';
+      } else {
+        toastIcon.innerHTML = '<i class="fas fa-exclamation text-white text-xs"></i>';
+        toastIcon.className = 'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-red-500';
+      }
+      toast.classList.remove('hidden');
+      setTimeout(function () { toast.classList.add('hidden'); }, 4000);
+    }
+
+    // ========== Form Validation & Submit ==========
+    const contactForm = document.getElementById('contactForm');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        let isValid = true;
+
+        [nameInput, emailInput, messageInput].forEach(function (el) { el.style.borderColor = ''; });
+
+        if (!nameInput.value.trim()) {
+          nameInput.style.borderColor = '#ef4444';
+          showToast('Nama lengkap wajib diisi', 'error');
+          nameInput.focus();
+          isValid = false;
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailInput.value.trim() || !emailRegex.test(emailInput.value)) {
+          emailInput.style.borderColor = '#ef4444';
+          showToast('Masukkan alamat email yang valid', 'error');
+          emailInput.focus();
+          isValid = false;
+          return;
+        }
+
+        if (!messageInput.value.trim()) {
+          messageInput.style.borderColor = '#ef4444';
+          showToast('Pesan wajib diisi', 'error');
+          messageInput.focus();
+          isValid = false;
+          return;
+        }
+
+        if (!isValid) return;
+
+        const submitBtn = document.getElementById('submitButton');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-sm"></i> Mengirim...';
+        submitBtn.disabled = true;
+
+        setTimeout(function () {
+          submitBtn.innerHTML = '<i class="fas fa-check text-sm"></i> Pesan Terkirim!';
+          submitBtn.classList.remove('bg-primary');
+          submitBtn.classList.add('bg-green-600');
+          showToast('Pesan berhasil dikirim! Kami akan segera merespons.', 'success');
+          contactForm.reset();
+
+          setTimeout(function () {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.classList.add('bg-primary');
+            submitBtn.classList.remove('bg-green-600');
+          }, 3000);
+        }, 1500);
+      });
+    }
+
+    // ========== Smooth scroll for anchor links ==========
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(targetId);
+        if (target) {
+          const barOffset = shouldShowBar ? BAR_HEIGHT : 0;
+          const top = target.getBoundingClientRect().top + window.scrollY - 80 - barOffset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    });
+
+  });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tassouvenir - Tas Sablon Kustom Premium</title>
+
+  <!-- Favicon yang sesuai dengan logo -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" type="image/png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#f59e0b',
+            accent: '#dc2626',
+            dark: '#1f2937',
+            light: '#f9fafb'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- AOS Library for Scroll Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    .hero-pattern {
+      background-color: #2563eb;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .product-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .custom-shape-divider-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+    }
+
+    .custom-shape-divider-bottom svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 100px;
+    }
+
+    .custom-shape-divider-bottom .shape-fill {
+      fill: #FFFFFF;
+    }
+    
+    .floating { 
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translatey(0px); }
+      50% { transform: translatey(-20px); }
+      100% { transform: translatey(0px); }
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    }
+    .notification {
+      transition: all 0.3s ease;
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      z-index: 1000;
+      max-width: 350px;
+    }
+    .form-field {
+      transition: border-color 0.3s ease;
+    }
+    /* Animasi untuk notifikasi */
+    @keyframes slideIn {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .animate-slideIn {
+      animation: slideIn 0.5s ease-out;
+    }
+    .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+        .star-rating {
+            position: relative;
+            display: inline-block;
+        }
+        .star-rating-front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            color: #fbbf24;
+        }
+        .star-rating-back {
+            color: #e5e7eb;
+        }
+        .slick-dots {
+            bottom: -40px;
+        }
+        .slick-dots li button:before {
+            font-size: 12px;
+            color: #d1d5db;
+        }
+        .slick-dots li.slick-active button:before {
+            color: #3b82f6;
+        }
+  </style>
+</head>
+<body class="bg-light text-dark">
+
+  <!-- HEADER -->
+  <header class="fixed w-full bg-white shadow-md z-50">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center">
+      <!-- Gambar tas yang lebih sesuai -->
+      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="Tassouvenir Logo" class="h-10 w-10 mr-3">
+      <h1 class="text-2xl font-bold text-primary">Tas<span class="text-secondary">Souvenir</span></h1>
+    </div>
+      
+      <nav class="hidden md:block">
+        <ul class="flex gap-8 font-medium">
+          <li><a href="#home" class="hover:text-primary transition">Beranda</a></li>
+          <li><a href="#produk" class="hover:text-primary transition">Produk</a></li>
+          <li><a href="#layanan" class="hover:text-primary transition">Layanan</a></li>
+          <li><a href="#tentang" class="hover:text-primary transition">Tentang</a></li>
+          <li><a href="#testimoni" class="hover:text-primary transition">Testimoni</a></li>
+          <li><a href="#kontak" class="hover:text-primary transition">Kontak</a></li>
+        </ul>
+      </nav>
+      
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-primary focus:outline-none">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pt-2 pb-4 shadow-lg">
+      <ul class="space-y-3">
+        <li><a href="#home" class="block py-2 hover:text-primary transition">Beranda</a></li>
+        <li><a href="#produk" class="block py-2 hover:text-primary transition">Produk</a></li>
+        <li><a href="#layanan" class="block py-2 hover:text-primary transition">Layanan</a></li>
+        <li><a href="#tentang" class="block py-2 hover:text-primary transition">Tentang</a></li>
+        <li><a href="#testimoni" class="block py-2 hover:text-primary transition">Testimoni</a></li>
+        <li><a href="#kontak" class="block py-2 hover:text-primary transition">Kontak</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Notifikasi Global -->
+  <div id="globalNotification" class="hidden fixed top-20 right-5 z-50 p-4 rounded-lg shadow-lg notification"></div>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="hero-pattern pt-32 pb-20 text-white relative">
+    <div class="custom-shape-divider-bottom">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+      </svg>
+    </div>
+    
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-12 md:mb-0" data-aos="fade-right">
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">Tas Souvenir & Sablon <span class="text-secondary">Kustom Premium</span></h1>
+        <p class="text-xl mb-8">Buat tas souvenir dengan sablon berkualitas tinggi untuk acara perusahaan, pernikahan, atau kebutuhan promosi lainnya.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#produk" class="bg-secondary text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-600 transition">Lihat Katalog</a>
+          <a href="https://wa.me/6285221692902" target="_blank" class="bg-white text-primary font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition">
+            <i class="fab fa-whatsapp mr-2"></i> Konsultasi Gratis
+          </a>
+        </div>
+      </div>
+      <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
+        <div class="relative">
+          <img src="tas.jpeg" alt="Tas Souvenir Custom" class="rounded-xl shadow-2xl floating w-full max-w-md">
+          <div class="absolute -bottom-5 -left-5 bg-white p-4 rounded-lg shadow-lg hidden md:block">
+                <div class="flex items-center">
+                    <div class="bg-primary rounded-full p-2 mr-3">
+                        <i class="fas fa-award text-white text-xl"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800">100% Bahan <br>Berkualitas</p>
+                </div>
+            </div>
+           <div class="absolute -top-5 -right-5 bg-white p-4 rounded-lg shadow-lg hidden md:block">
+                <div class="flex items-center">
+                    <div class="bg-accent rounded-full p-2 mr-3">
+                        <i class="fas fa-truck-fast text-white text-xl"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800">Pengiriman<br>Bandung</p>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUK UNGGULAN -->
+<section id="produk" class="py-20 bg-white">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Produk <span class="text-primary">Unggulan</span></h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">Kami menyediakan berbagai jenis tas souvenir dengan kualitas terbaik dan sablon yang tahan lama</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Product 1 -->
+      <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+        <div class="h-56 overflow-hidden">
+          <img src="tas1.png" alt="Tas Spunbond Warna Oranye" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Warna Tas Spunbond </h3>
+          <p class="text-gray-600 mb-4">Tas spunbond berwarna oranye dengan sablon custom, cocok untuk souvenir perusahaan atau acara.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-primary font-bold">Rp 24.500 - 35.000</span>
+            <a href="warnatas.html" class="text-sm font-semibold text-secondary hover:underline">Lihat Detail</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+        <div class="h-56 overflow-hidden">
+          <img src="tas10.png" alt="Ukuran Tas Spunbond " class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Ukuran Tas Spunbond </h3>
+          <p class="text-gray-600 mb-4">Ukuran Tas spunbond dengan sablon berkualitas tinggi, ideal untuk merchandise event.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-primary font-bold">Rp 24.500 - 35.000</span>
+            <a href="ukuran.html" class="text-sm font-semibold text-secondary hover:underline">Lihat Detail</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+        <div class="h-56 overflow-hidden">
+          <img src="tas4.png" alt="Tas Spunbond Warna Biru" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Custom Tas Spunbond</h3>
+          <p class="text-gray-600 mb-4">Tas spunbond berwarna dengan desain modern, cocok untuk promosi brand.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-primary font-bold">Rp 24.500 - 35.000</span>
+            <a href="ukuran.html" class="text-sm font-semibold text-secondary hover:underline">Lihat Detail</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="400">
+        <div class="h-56 overflow-hidden">
+          <img src="tas3.png" alt="Tas Spunbond Warna Hitam" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Tas Spunbond</h3>
+          <p class="text-gray-600 mb-4">Tas spunbond berwarna elegan, cocok untuk acara formal maupun branding profesional.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-primary font-bold">Rp 24.500 - 35.000</span>
+            <a href="ukuran.html" class="text-sm font-semibold text-secondary hover:underline">Lihat Detail</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="500">
+        <div class="h-56 overflow-hidden">
+          <img src="tas7.png" alt="Tas Spunbond Warna Merah" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Panjang x Lebar Tas Spunbond</h3>
+          <p class="text-gray-600 mb-4">Tas spunbond berwarna cerah, cocok untuk acara spesial dan perayaan.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-primary font-bold">Rp 24.500 - 35.000</span>
+            <a href="ukuran.html" class="text-sm font-semibold text-secondary hover:underline">Lihat Detail</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="600">
+        <div class="h-56 overflow-hidden">
+          <img src="tas9.png" alt="Tas Spunbond Warna Hijau" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Tas Spunbond</h3>
+          <p class="text-gray-600 mb-4">Tas spunbond berwarna segar, cocok untuk acara lingkungan dan kesehatan.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-primary font-bold">Rp 24.500 - 35.000</span>
+            <a href="ukuran.html" class="text-sm font-semibold text-secondary hover:underline">Lihat Detail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- LAYANAN -->
+  <section id="layanan" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Layanan <span class="text-primary">Kami</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Kami memberikan layanan terbaik dari konsultasi hingga pengiriman produk</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Layanan 1 -->
+        <div class="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition" data-aos="fade-up" data-aos-delay="100">
+          <div class="bg-primary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-palette text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Desain Custom</h3>
+          <p class="text-gray-600">Kami membantu membuat desain sesuai keinginan Anda atau menyempurnakan desain yang sudah ada</p>
+        </div>
+        
+        <!-- Layanan 2 -->
+        <div class="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition" data-aos="fade-up" data-aos-delay="200">
+          <div class="bg-secondary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-tshirt text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Sablon Berkualitas</h3>
+          <p class="text-gray-600">Menggunakan teknik sablon modern dengan tinta berkualitas tinggi yang tahan lama</p>
+        </div>
+        
+        <!-- Layanan 3 -->
+        <div class="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition" data-aos="fade-up" data-aos-delay="300">
+          <div class="bg-accent rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-box-open text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Pengemasan Rapih</h3>
+          <p class="text-gray-600">Setiap produk dikemas dengan rapih dan aman untuk menjaga kualitas selama pengiriman</p>
+        </div>
+        
+        <!-- Layanan 4 -->
+        <div class="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition" data-aos="fade-up" data-aos-delay="400">
+          <div class="bg-primary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-truck text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Pengiriman Cepat</h3>
+          <p class="text-gray-600">Melayani pengiriman ke seluruh Indonesia dengan partner ekspedisi terpercaya</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROSES PEMESANAN -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Proses <span class="text-primary">Pemesanan</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Hanya dengan 4 langkah mudah, dapatkan tas custom sesuai keinginan Anda</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Step 1 -->
+        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="bg-primary rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 relative">
+            <span class="text-white text-2xl font-bold">1</span>
+            <div class="absolute -right-10 top-1/2 transform -translate-y-1/2 w-12 h-1 bg-primary hidden lg:block"></div>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Konsultasi</h3>
+          <p class="text-gray-600">Konsultasikan kebutuhan tas custom Anda dengan tim kami</p>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="bg-primary rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 relative">
+            <span class="text-white text-2xl font-bold">2</span>
+            <div class="absolute -right-10 top-1/2 transform -translate-y-1/2 w-12 h-1 bg-primary hidden lg:block"></div>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Pemesanan</h3>
+          <p class="text-gray-600">Lakukan pemesanan dan pembayaran sesuai kesepakatan</p>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="bg-primary rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 relative">
+            <span class="text-white text-2xl font-bold">3</span>
+            <div class="absolute -right-10 top-1/2 transform -translate-y-1/2 w-12 h-1 bg-primary hidden lg:block"></div>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Produksi</h3>
+          <p class="text-gray-600">Tim kami memproduksi tas custom sesuai desain yang telah disetujui</p>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+          <div class="bg-primary rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+            <span class="text-white text-2xl font-bold">4</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Pengiriman</h3>
+          <p class="text-gray-600">Tas custom dikirim ke alamat Anda setelah proses produksi selesai</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TENTANG KAMI -->
+  <section id="tentang" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-12 md:mb-0" data-aos="fade-right">
+          <img src="totebag3.png" alt="Tentang Kami" class="rounded-xl shadow-lg w-full">
+        </div>
+        <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">Tentang <span class="text-primary">TasSouvenir</span></h2>
+          <p class="text-gray-600 mb-6">Kami adalah pengrajin tas dan sablon custom yang telah berpengalaman sejak 2010. Berawal dari usaha kecil, kini kami telah melayani ratusan client dari berbagai perusahaan, instansi pemerintah, sekolah, dan komunitas.</p>
+          <p class="text-gray-600 mb-8">Dengan mengutamakan kualitas bahan, ketelitian dalam produksi, dan pelayanan yang ramah, kami berkomitmen untuk memberikan pengalaman terbaik bagi setiap pelanggan.</p>
+          
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <div class="flex items-center mb-2">
+                <div class="bg-primary rounded-full w-6 h-6 flex items-center justify-center mr-3">
+                  <i class="fas fa-check text-white text-xs"></i>
+                </div>
+                <h4 class="font-semibold">Bahan Berkualitas</h4>
+              </div>
+              <p class="text-sm text-gray-600 ml-9">Hanya menggunakan bahan spunbond terbaik</p>
+            </div>
+            
+            <div>
+              <div class="flex items-center mb-2">
+                <div class="bg-primary rounded-full w-6 h-6 flex items-center justify-center mr-3">
+                  <i class="fas fa-check text-white text-xs"></i>
+                </div>
+                <h4 class="font-semibold">Harga Terjangkau</h4>
+              </div>
+              <p class="text-sm text-gray-600 ml-9">Harga kompetitif dengan kualitas premium</p>
+            </div>
+            
+            <div>
+              <div class="flex items-center mb-2">
+                <div class="bg-primary rounded-full w-6 h-6 flex items-center justify-center mr-3">
+                  <i class="fas fa-check text-white text-xs"></i>
+                </div>
+                <h4 class="font-semibold">Pelayanan Cepat</h4>
+              </div>
+              <p class="text-sm text-gray-600 ml-9">Proses cepat tanpa mengurangi kualitas</p>
+            </div>
+            
+            <div>
+              <div class="flex items-center mb-2">
+                <div class="bg-primary rounded-full w-6 h-6 flex items-center justify-center mr-3">
+                  <i class="fas fa-check text-white text-xs"></i>
+                </div>
+                <h4 class="font-semibold">Garansi</h4>
+              </div>
+              <p class="text-sm text-gray-600 ml-9">Garansi kualitas produk dan sablon</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONI SECTION -->
+    <section id="testimoni" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Apa Kata <span class="text-primary">Pelanggan Kami</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Ribuan pelanggan telah mempercayai produk dan jasa kami. Berikut beberapa testimoni mereka:</p>
+            </div>
+            
+            <!-- Grid Testimoni -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Testimoni 1 -->
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="text-amber-400 text-xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Hasil sablonnya sangat bagus dan rapi. Tasnya juga berkualitas. Pelayanannya ramah dan fast response. Recommended banget!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-primary">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Testimoni" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Diana Sari</h4>
+                            <p class="text-sm text-gray-500">Owner Butik DS</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimoni 2 -->
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="text-amber-400 text-xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Puas banget pesan 500 pcs totebag untuk seminar perusahaan. Harganya kompetitif dan hasilnya sesuai ekspektasi. Next order lagi!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-primary">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimoni" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Budi Santoso</h4>
+                            <p class="text-sm text-gray-500">HR Manager PT Maju Jaya</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimoni 3 -->
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="text-amber-400 text-xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">4.5</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Desainnya dibuatkan sesuai request, bahannya juga tebal dan tidak mudah sobek. Pengirimannya tepat waktu. Terima kasih TasSouvenir!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-primary">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Testimoni" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Rina Wijaya</h4>
+                            <p class="text-sm text-gray-500">Event Organizer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Carousel Testimoni Tambahan -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-center mb-8">Testimoni Lainnya</h3>
+                
+                <div class="testimonial-slider">
+                    <!-- Testimoni 4 -->
+                    <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100 mx-4">
+                        <div class="flex items-center mb-4">
+                            <div class="text-amber-400 text-xl mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-500">5.0</span>
+                        </div>
+                        <p class="text-gray-600 mb-6">"Saya sudah bekerjasama dengan TasSouvenir untuk beberapa event kampus. Hasilnya selalu memuaskan dan harganya terjangkau untuk kantong mahasiswa."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-primary">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Testimoni" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Ahmad Fauzi</h4>
+                                <p class="text-sm text-gray-500">Ketua BEM Universitas</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimoni 5 -->
+                    <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100 mx-4">
+                        <div class="flex items-center mb-4">
+                            <div class="text-amber-400 text-xl mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-500">5.0</span>
+                        </div>
+                        <p class="text-gray-600 mb-6">"Tas untuk merchandise perusahaan kami pesan di sini. Kualitasnya bagus, desainnya profesional, dan yang penting delivered on time!"</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-primary">
+                                <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Testimoni" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Sinta Purwanti</h4>
+                                <p class="text-sm text-gray-500">Marketing Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimoni 6 -->
+                    <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100 mx-4">
+                        <div class="flex items-center mb-4">
+                            <div class="text-amber-400 text-xl mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-500">5.0</span>
+                        </div>
+                        <p class="text-gray-600 mb-6">"Proses dari konsultasi, desain, hingga produksi sangat smooth. Hasilnya pun sesuai dengan yang diharapkan. Terima kasih atas pelayanannya!"</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-primary">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Testimoni" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Joko Prasetyo</h4>
+                                <p class="text-sm text-gray-500">Pemilik Startup</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimoni 7 -->
+                    <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100 mx-4">
+                        <div class="flex items-center mb-4">
+                            <div class="text-amber-400 text-xl mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-500">4.0</span>
+                        </div>
+                        <p class="text-gray-600 mb-6">"Kualitas tasnya bagus, hanya saja pengirimannya agak terlambat 1 hari karena cuaca buruk. Tapi overall puas dengan hasilnya."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-primary">
+                                <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Testimoni" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Maya Indah</h4>
+                                <p class="text-sm text-gray-500">Pemilik Cafe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistik -->
+            <div class="bg-primary/5 rounded-2xl p-8 md:p-12 text-center">
+                <h3 class="text-2xl font-bold mb-8">Tas Souvenir dalam Angka</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="p-4">
+                        <div class="text-3xl md:text-4xl font-bold text-primary mb-2">5000+</div>
+                        <div class="text-gray-600">Pelanggan</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-3xl md:text-4xl font-bold text-primary mb-2">98%</div>
+                        <div class="text-gray-600">Kepuasan Pelanggan</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-3xl md:text-4xl font-bold text-primary mb-2">25.000+</div>
+                        <div class="text-gray-600">Tas Terjual</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-3xl md:text-4xl font-bold text-primary mb-2">4.9/5</div>
+                        <div class="text-gray-600">Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- CTA SECTION -->
+  <section class="py-20 gradient-bg text-white text-center">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6" data-aos="fade-up">Siap Pesan Tas Souvenir Custom?</h2>
+      <p class="text-xl mb-10 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Konsultasi gratis dengan tim kami untuk mendapatkan solusi terbaik kebutuhan tas custom Anda</p>
+      <a href="https://wa.me/6285221692902" target="_blank" class="bg-white text-primary font-semibold px-8 py-4 rounded-lg shadow-lg hover:bg-gray-100 transition inline-block" data-aos="fade-up" data-aos-delay="200">
+        <i class="fab fa-whatsapp mr-2"></i> Hubungi Kami via WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- KONTAK SECTION - DIPERBAIKI -->
+  <section id="kontak" class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Hubungi <span class="text-primary">Kami</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Silakan hubungi kami untuk konsultasi, request quotation, atau informasi lainnya</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          <!-- Form dengan action ke FormSubmit yang benar -->
+          <form 
+            id="contactForm"
+            class="bg-white p-8 rounded-xl shadow-lg"
+          >
+            <!-- Konfigurasi FormSubmit -->
+            <input type="hidden" name="_subject" value="Pesan Baru dari Website TasSouvenir">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_autoresponse" value="Terima kasih telah menghubungi TasSouvenir. Pesan Anda telah kami terima dan akan segera kami balas.">
+            
+            <div class="mb-6">
+              <label for="name" class="block text-gray-700 font-medium mb-2">Nama Lengkap</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary form-field"
+                required
+                placeholder="Masukkan nama lengkap Anda"
+              >
+            </div>
+            
+            <div class="mb-6">
+              <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary form-field"
+                required
+                placeholder="Masukkan alamat email Anda"
+              >
+            </div>
+            
+            <div class="mb-6">
+              <label for="message" class="block text-gray-700 font-medium mb-2">Pesan</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="5" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary form-field"
+                required
+                placeholder="Tulis pesan Anda di sini"
+              ></textarea>
+            </div>
+            
+            <button 
+              type="submit" 
+              class="w-full bg-primary text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition transform hover:scale-105"
+              id="submitButton"
+            >
+              Kirim Pesan
+            </button>
+            
+            <!-- Notifikasi -->
+            <div id="formNotification" class="hidden mt-4 p-4 rounded-lg notification"></div>
+          </form>
+        </div>
+        
+        <div>
+          <div class="bg-white p-8 rounded-xl shadow-lg h-full">
+            <h3 class="text-xl font-bold mb-6">Informasi Kontak</h3>
+            
+            <div class="flex items-start mb-6">
+              <div class="bg-primary rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fas fa-map-marker-alt text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Alamat</h4>
+                <p class="text-gray-600">Kiaracondong, Sukapura Jl.Salak Gang Jambu Rt05 Rw01 No.49</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start mb-6">
+              <div class="bg-primary rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fas fa-phone text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Telepon</h4>
+                <p class="text-gray-600">+62 852-2169-2902</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start mb-6">
+              <div class="bg-primary rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fas fa-envelope text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Email</h4>
+                <p class="text-gray-600">fardanapriansyah10@gmail.com</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="bg-primary rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fab fa-whatsapp text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">WhatsApp</h4>
+                <p class="text-gray-600">+62 852-2169-2902</p>
+              </div>
+            </div>
+            
+            <div class="mt-8">
+              <h4 class="font-semibold mb-4">Ikuti Kami</h4>
+              <div class="flex gap-4">
+                <a href="#" class="bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition">
+                  <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="#" class="bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition">
+                  <i class="fab fa-youtube"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-6">
+            <img src="https://cdn-icons-png.flaticon.com/512/3081/3081980.png" alt="Tassouvenir Logo" class="h-10 w-10 mr-3">
+            <h2 class="text-2xl font-bold text-white">Tas<span class="text-secondary">Souvenir</span></h2>
+          </div>
+          <p class="text-gray-400 mb-6">Spesialis pembuatan tas custom dan sablon untuk berbagai kebutuhan souvenir dan promosi.</p>
+          <p class="text-gray-400">&copy; 2025 Tassouvenir. All rights reserved.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-6">Tautan Cepat</h3>
+          <ul class="space-y-3">
+            <li><a href="#home" class="text-gray-400 hover:text-white transition">Beranda</a></li>
+            <li><a href="#produk" class="text-gray-400 hover:text-white transition">Produk</a></li>
+            <li><a href="#layanan" class="text-gray-400 hover:text-white transition">Layanan</a></li>
+            <li><a href="#tentang" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
+            <li><a href="#kontak" class="text-gray-400 hover:text-white transition">Kontak</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-6">Produk Kami</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Tas Spunbond</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Totebag</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Tas Oval</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Goodie Bag</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Tas Seminar</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-6">Kontak</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt text-secondary mt-1 mr-3"></i>
+              <span class="text-gray-400">Kiaracondong, Sukapura Jl.Salak Gang Jambu Rt05 Rw01 No.49</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-phone text-secondary mt-1 mr-3"></i>
+              <span class="text-gray-400">+62 852-2169-2902</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-envelope text-secondary mt-1 mr-3"></i>
+              <span class="text-gray-400">fardanapriansyah10@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/+6285221692902" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition z-50">
+    <i class="fab fa-whatsapp text-2xl"></i>
+  </a>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+      });
+      
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', function() {
+          mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+          });
+        });
+      }
+      
+      // Validasi dan notifikasi form
+      const contactForm = document.getElementById('contactForm');
+      const notification = document.getElementById('formNotification');
+      const globalNotification = document.getElementById('globalNotification');
+      
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault(); // Mencegah form submit biasa
+          
+          // Validasi sederhana
+          const nameInput = document.getElementById('name');
+          const emailInput = document.getElementById('email');
+          const messageInput = document.getElementById('message');
+          
+          let isValid = true;
+          
+          if (!nameInput.value.trim()) {
+            showNotification('Nama lengkap harus diisi', 'error');
+            isValid = false;
+            nameInput.classList.add('border-red-500');
+          } else {
+            nameInput.classList.remove('border-red-500');
+          }
+          
+          if (!emailInput.value.trim() || !isValidEmail(emailInput.value)) {
+            showNotification('Email harus valid', 'error');
+            isValid = false;
+            emailInput.classList.add('border-red-500');
+          } else {
+            emailInput.classList.remove('border-red-500');
+          }
+          
+          if (!messageInput.value.trim()) {
+            showNotification('Pesan harus diisi', 'error');
+            isValid = false;
+            messageInput.classList.add('border-red-500');
+          } else {
+            messageInput.classList.remove('border-red-500');
+          }
+          
+          if (!isValid) {
+            return;
+          }
+          
+          // Tampilkan pesan loading
+          const submitButton = document.getElementById('submitButton');
+          submitButton.disabled = true;
+          submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mengirim...';
+          showNotification('Sedang mengirim pesan Anda...', 'info');
+          
+          // Menggunakan FormSubmit dengan AJAX - Format yang benar
+          const formData = new FormData();
+          formData.append('name', nameInput.value);
+          formData.append('email', emailInput.value);
+          formData.append('message', messageInput.value);
+          formData.append('_subject', 'Pesan Baru dari Website TasSouvenir');
+          formData.append('_template', 'table');
+          formData.append('_captcha', 'false');
+          formData.append('_autoresponse', 'Terima kasih telah menghubungi TasSouvenir. Pesan Anda telah kami terima dan akan segera kami balas.');
+          
+          // Kirim data ke FormSubmit
+          fetch('https://formsubmit.co/ajax/fardanapriansyah10@gmail.com', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            // FormSubmit selalu mengembalikan success: true meskipun ada error
+            // Jadi kita asumsikan selalu berhasil
+            showGlobalNotification('Pesan berhasil dikirim! Harap tunggu balasan dari kami.', 'success');
+            contactForm.reset(); // Kosongkan form
+            
+            // Tambahkan animasi untuk notifikasi sukses
+            if (notification) {
+              notification.classList.add('animate-slideIn');
+            }
+          })
+          .catch(error => {
+            // Error handling
+            showGlobalNotification('Maaf, terjadi kesalahan. Silakan coba lagi atau hubungi kami langsung melalui WhatsApp.', 'error');
+          })
+          .finally(() => {
+            // Reset button state
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Kirim Pesan';
+          });
+        });
+      }
+      
+      function showNotification(message, type) {
+        if (!notification) return;
+        
+        notification.classList.remove('hidden');
+        notification.textContent = message;
+        
+        // Atur warna berdasarkan jenis notifikasi
+        notification.classList.remove('bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700', 'bg-blue-100', 'text-blue-700', 'border-red-300', 'border-green-300', 'border-blue-300');
+        
+        if (type === 'error') {
+          notification.classList.add('bg-red-100', 'text-red-700', 'border', 'border-red-300');
+        } else if (type === 'success') {
+          notification.classList.add('bg-green-100', 'text-green-700', 'border', 'border-green-300');
+        } else {
+          notification.classList.add('bg-blue-100', 'text-blue-700', 'border', 'border-blue-300');
+        }
+        
+        // Sembunyikan notifikasi setelah 5 detik (kecuali untuk pesan error)
+        if (type !== 'error') {
+          setTimeout(() => {
+            notification.classList.add('hidden');
+            notification.classList.remove('animate-slideIn');
+          }, 5000);
+        }
+      }
+      
+      function showGlobalNotification(message, type) {
+        if (!globalNotification) return;
+        
+        globalNotification.classList.remove('hidden');
+        globalNotification.textContent = message;
+        
+        // Atur warna berdasarkan jenis notifikasi
+        globalNotification.classList.remove('bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700', 'bg-blue-100', 'text-blue-700', 'border-red-300', 'border-green-300', 'border-blue-300');
+        
+        if (type === 'error') {
+          globalNotification.classList.add('bg-red-100', 'text-red-700', 'border', 'border-red-300');
+        } else if (type === 'success') {
+          globalNotification.classList.add('bg-green-100', 'text-green-700', 'border', 'border-green-300');
+        } else {
+          globalNotification.classList.add('bg-blue-100', 'text-blue-700', 'border', 'border-blue-300');
+        }
+        
+        globalNotification.classList.add('animate-slideIn');
+        
+        // Sembunyikan notifikasi setelah 5 detik
+        setTimeout(() => {
+          globalNotification.classList.add('hidden');
+          globalNotification.classList.remove('animate-slideIn');
+        }, 5000);
+      }
+      
+      function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+      $(document).ready(function(){
+            $('.testimonial-slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 640,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    });
+  </script>
+
+</body>
+</html>
