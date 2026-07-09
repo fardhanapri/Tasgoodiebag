@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oval 30 - Detail Ukuran Tas Spunbond - Fardhan_Store</title>
+  <title>TLS 35 - Detail Ukuran Tas Spunbond - Fardhan_Store</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -45,7 +45,16 @@
     .shopee-bar.bar-hidden{transform:translateY(-100%);opacity:0;pointer-events:none}
     .shopee-bar-glow{box-shadow:0 2px 12px rgba(238,77,45,.25)}
     .hero-gradient{background:linear-gradient(145deg,#1e3a5f 0%,#0f2440 100%)}
-    .qty-btn{transition:all .15s ease;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#f3f4f6;border:1.5px solid #e5e7eb;cursor:pointer;font-size:18px;font-weight:700;color:#374151}
+    .gsm-btn{transition:all .2s ease;border:2px solid #e5e7eb;cursor:pointer}
+    .gsm-btn:hover{border-color:#c8a45a;background:#f9fafb}
+    .gsm-btn.active{border-color:#1e3a5f;background:#1e3a5f;color:#fff}
+    .handle-btn{transition:all .2s ease;border:2px solid #e5e7eb;cursor:pointer}
+    .handle-btn:hover{border-color:#c8a45a;background:#f9fafb}
+    .handle-btn.active{border-color:#1e3a5f;background:#1e3a5f;color:#fff}
+    .color-dot{width:28px;height:28px;border-radius:50%;border:2px solid #e5e7eb;cursor:pointer;transition:all .2s ease}
+    .color-dot:hover{transform:scale(1.1);border-color:#c8a45a}
+    .color-dot.active{border-color:#1e3a5f;box-shadow:0 0 0 3px rgba(30,58,95,.2)}
+    .qty-btn{transition:all .15s ease;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#f3f4f6;border:1.5px solid #e5e7eb;cursor:pointer}
     .qty-btn:hover{background:#e5e7eb}
     .qty-btn:active{transform:scale(.9)}
     .form-input{border:1.5px solid #e5e7eb;transition:all .25s ease;background:#fff}
@@ -59,19 +68,8 @@
     .tabs-scroll::-webkit-scrollbar{display:none}
     .gsm-badge{display:inline-block;padding:2px 12px;border-radius:12px;font-size:10px;font-weight:700}
     .gsm-70{background:#e0f2fe;color:#0369a1}
-    
-    .color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
-    .color-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;border-radius:8px;cursor:pointer;transition:all .2s ease;border:2px solid transparent}
-    .color-item:hover{background:#f9fafb;border-color:#e5e7eb}
-    .color-item.active{background:#f5edda;border-color:#c8a45a}
-    .color-item .color-circle{width:36px;height:36px;border-radius:50%;border:2px solid #e5e7eb}
-    .color-item .color-name{font-size:10px;font-weight:500;color:#374151;text-align:center}
-    
-    .qty-wrapper{display:flex;align-items:center;gap:0;border:1.5px solid #e5e7eb;border-radius:10px;overflow:hidden}
-    .qty-wrapper .qty-btn{border:none;border-radius:0}
-    .qty-wrapper .qty-btn:first-child{border-right:1.5px solid #e5e7eb}
-    .qty-wrapper .qty-btn:last-child{border-left:1.5px solid #e5e7eb}
-    .qty-wrapper .form-input{border:none;border-radius:0;text-align:center;width:80px;height:40px}
+    .gsm-75{background:#fef3c7;color:#92400e}
+    .gsm-100{background:#d1fae5;color:#065f46}
   </style>
 </head>
 <body>
@@ -98,15 +96,15 @@
   <header id="mainHeader" class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-lg" style="top:44px;border-bottom:1px solid rgba(0,0,0,.05)">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
       <div class="flex items-center justify-between h-[68px]">
-        <a href="index.php" class="flex items-center gap-2.5 group">
+        <a href="index.html" class="flex items-center gap-2.5 group">
           <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300"><i class="fas fa-bag-shopping text-white text-sm"></i></div>
           <span class="text-lg font-bold text-primary tracking-tight">Fardhan<span class="text-accent">_Store</span></span>
         </a>
         <nav class="hidden lg:flex items-center gap-6">
-          <a href="index.php" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Beranda</a>
-          <a href="ukuran.php" class="nav-link text-sm font-medium text-primary border-b-2 border-primary pb-0.5">Katalog</a>
-          <a href="index.php#tentang" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Tentang</a>
-          <a href="index.php#kontak" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Kontak</a>
+          <a href="index.html" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Beranda</a>
+          <a href="ukuran.html" class="nav-link text-sm font-medium text-primary border-b-2 border-primary pb-0.5">Katalog</a>
+          <a href="index.html#tentang" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Tentang</a>
+          <a href="index.html#kontak" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Kontak</a>
         </nav>
         <div class="flex items-center gap-2">
           <a href="https://wa.me/6283173742530" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-whatsapp text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"><i class="fab fa-whatsapp"></i> Chat</a>
@@ -116,10 +114,10 @@
     </div>
     <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-border-soft">
       <div class="max-w-7xl mx-auto px-4 py-4 space-y-1">
-        <a href="index.php" class="block py-2.5 px-3 text-sm font-medium text-dark hover:bg-surface rounded-lg transition-colors">Beranda</a>
-        <a href="ukuran.php" class="block py-2.5 px-3 text-sm font-medium text-primary bg-primary/5 rounded-lg transition-colors">Katalog</a>
-        <a href="index.php#tentang" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Tentang</a>
-        <a href="index.php#kontak" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Kontak</a>
+        <a href="index.html" class="block py-2.5 px-3 text-sm font-medium text-dark hover:bg-surface rounded-lg transition-colors">Beranda</a>
+        <a href="ukuran.html" class="block py-2.5 px-3 text-sm font-medium text-primary bg-primary/5 rounded-lg transition-colors">Katalog</a>
+        <a href="index.html#tentang" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Tentang</a>
+        <a href="index.html#kontak" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Kontak</a>
         <a href="https://wa.me/6283173742530" target="_blank" class="flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-5 py-3 rounded-xl w-full mt-2"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
       </div>
     </div>
@@ -132,13 +130,13 @@
       <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <a href="ukuran.php" class="inline-flex items-center gap-1 text-white/60 hover:text-white transition-colors text-sm mb-2"><i class="fas fa-arrow-left"></i> Kembali ke Katalog</a>
-            <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight">Oval <span class="text-accent">30</span></h1>
-            <p class="text-white/70 text-sm mt-1">30 × 40 cm • Ukuran sedang untuk berbagai kebutuhan</p>
+            <a href="ukuran.html" class="inline-flex items-center gap-1 text-white/60 hover:text-white transition-colors text-sm mb-2"><i class="fas fa-arrow-left"></i> Kembali ke Katalog</a>
+            <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight">TLS <span class="text-accent">35</span></h1>
+            <p class="text-white/70 text-sm mt-1">35 × 40 × 10 cm • Ukuran besar untuk membawa dokumen dan barang</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-ruler-combined text-accent"></i> 30 × 40 cm</span>
-            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-layer-group text-accent"></i> 70 GSM</span>
+            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-ruler-combined text-accent"></i> 35 × 40 × 10 cm</span>
+            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-layer-group text-accent"></i> 70 | 75 | 100 GSM</span>
           </div>
         </div>
       </div>
@@ -148,11 +146,11 @@
     <div class="bg-white border-b border-border-soft py-3">
       <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <nav class="flex items-center gap-2 text-xs text-muted">
-          <a href="index.php" class="hover:text-primary transition-colors">Beranda</a>
+          <a href="index.html" class="hover:text-primary transition-colors">Beranda</a>
           <i class="fas fa-chevron-right text-[8px]"></i>
-          <a href="ukuran.php" class="hover:text-primary transition-colors">Katalog</a>
+          <a href="ukuran.html" class="hover:text-primary transition-colors">Katalog</a>
           <i class="fas fa-chevron-right text-[8px]"></i>
-          <span class="text-primary font-semibold">Oval 30</span>
+          <span class="text-primary font-semibold">TLS 35</span>
         </nav>
       </div>
     </div>
@@ -167,110 +165,40 @@
 
             <!-- Image -->
             <div class="bg-white rounded-2xl p-8 flex items-center justify-center mb-6 border border-border-soft shadow-sm">
-              <img src="oval30.png" alt="Oval 30" class="max-h-[280px] object-contain drop-shadow-lg">
+              <img src="tas10.png" alt="TLS 35" class="max-h-[280px] object-contain drop-shadow-lg">
             </div>
 
             <!-- Detail Grid -->
             <div class="bg-white border border-border-soft rounded-2xl overflow-hidden shadow-sm">
               <div class="p-5 border-b border-border-soft">
-                <h3 class="text-sm font-bold text-dark flex items-center gap-2"><i class="fas fa-info-circle text-accent"></i> Spesifikasi Oval 30</h3>
+                <h3 class="text-sm font-bold text-dark flex items-center gap-2"><i class="fas fa-info-circle text-accent"></i> Spesifikasi TLS 35</h3>
               </div>
               <div class="p-5 grid sm:grid-cols-2 gap-4 text-sm">
-                <div><span class="text-muted text-xs uppercase tracking-wider block">Nama</span><span class="font-semibold text-dark">Oval 30</span></div>
-                <div><span class="text-muted text-xs uppercase tracking-wider block">Ukuran</span><span class="font-semibold text-dark">30 × 40 cm</span></div>
-                <div><span class="text-muted text-xs uppercase tracking-wider block">GSM</span><span class="font-semibold text-dark flex gap-1.5 mt-0.5"><span class="gsm-badge gsm-70">70 GSM</span></span></div>
-                <div><span class="text-muted text-xs uppercase tracking-wider block">Area Sablon</span><span class="font-semibold text-dark">24 × 32 cm</span></div>
-                <div><span class="text-muted text-xs uppercase tracking-wider block">Min. Order</span><span class="font-semibold text-dark">10 pcs</span></div>
-                <div><span class="text-muted text-xs uppercase tracking-wider block">Estimasi Produksi</span><span class="font-semibold text-dark">1 - 2 Hari Kerja</span></div>
-                <div class="sm:col-span-2">
-                  <span class="text-muted text-xs uppercase tracking-wider block mb-2">Pilihan Warna</span>
-                  <div class="color-grid" id="colorPalette">
-                    <!-- Baris 1 -->
-                    <div class="color-item active" data-color="Hitam" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#1a1a1a"></span>
-                      <span class="color-name">Hitam</span>
-                    </div>
-                    <div class="color-item" data-color="Krem" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#f5e6d3"></span>
-                      <span class="color-name">Krem</span>
-                    </div>
-                    <div class="color-item" data-color="Kuning" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#fcd34d"></span>
-                      <span class="color-name">Kuning</span>
-                    </div>
-                    <div class="color-item" data-color="Tosca" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#0d9488"></span>
-                      <span class="color-name">Tosca</span>
-                    </div>
-                    <div class="color-item" data-color="Pocari" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#7dd3fc"></span>
-                      <span class="color-name">Pocari</span>
-                    </div>
-                    <!-- Baris 2 -->
-                    <div class="color-item" data-color="Fanta" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#fb923c"></span>
-                      <span class="color-name">Fanta</span>
-                    </div>
-                    <div class="color-item" data-color="Merah" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#dc2626"></span>
-                      <span class="color-name">Merah</span>
-                    </div>
-                    <div class="color-item" data-color="Hijau Tua" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#166534"></span>
-                      <span class="color-name">Hijau Tua</span>
-                    </div>
-                    <div class="color-item" data-color="Putih" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#ffffff;border-color:#d1d5db"></span>
-                      <span class="color-name">Putih</span>
-                    </div>
-                    <div class="color-item" data-color="Orange" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#f97316"></span>
-                      <span class="color-name">Orange</span>
-                    </div>
-                    <!-- Baris 3 -->
-                    <div class="color-item" data-color="Ungu" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#7c3aed"></span>
-                      <span class="color-name">Ungu</span>
-                    </div>
-                    <div class="color-item" data-color="Biru Muda" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#60a5fa"></span>
-                      <span class="color-name">Biru Muda</span>
-                    </div>
-                    <div class="color-item" data-color="Pink Muda" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#f472b6"></span>
-                      <span class="color-name">Pink Muda</span>
-                    </div>
-                    <div class="color-item" data-color="Navy" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#1e293b"></span>
-                      <span class="color-name">Navy</span>
-                    </div>
-                    <div class="color-item" data-color="Abu" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#6b7280"></span>
-                      <span class="color-name">Abu</span>
-                    </div>
-                    <!-- Baris 4 -->
-                    <div class="color-item" data-color="Maroon" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#991b1b"></span>
-                      <span class="color-name">Maroon</span>
-                    </div>
-                    <div class="color-item" data-color="Biru Tua" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#1e40af"></span>
-                      <span class="color-name">Biru Tua</span>
-                    </div>
-                    <div class="color-item" data-color="Hijau Muda" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#4ade80"></span>
-                      <span class="color-name">Hijau Muda</span>
-                    </div>
-                    <div class="color-item" data-color="Moka" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#a67c52"></span>
-                      <span class="color-name">Moka</span>
-                    </div>
-                    <div class="color-item" data-color="Mix Warna" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:linear-gradient(135deg,#dc2626,#fcd34d,#2563eb,#16a34a)"></span>
-                      <span class="color-name">Mix Warna</span>
-                    </div>
+                <div><span class="text-muted text-xs uppercase tracking-wider block">Nama</span><span class="font-semibold text-dark">TLS 35</span></div>
+                <div><span class="text-muted text-xs uppercase tracking-wider block">Ukuran</span><span class="font-semibold text-dark">35 × 40 × 10 cm</span></div>
+                <div><span class="text-muted text-xs uppercase tracking-wider block">GSM</span><span class="font-semibold text-dark flex gap-1.5 mt-0.5"><span class="gsm-badge gsm-70">70</span><span class="gsm-badge gsm-75">75</span><span class="gsm-badge gsm-100">100</span></span></div>
+                <div><span class="text-muted text-xs uppercase tracking-wider block">Area Sablon</span><span class="font-semibold text-dark">28 × 32 cm</span></div>
+                <div><span class="text-muted text-xs uppercase tracking-wider block">Min. Order</span><span class="font-semibold text-dark">100 pcs</span></div>
+                <div><span class="text-muted text-xs uppercase tracking-wider block">Estimasi Produksi</span><span class="font-semibold text-dark">5 - 10 Hari Kerja</span></div>
+                <div class="sm:col-span-2"><span class="text-muted text-xs uppercase tracking-wider block">Warna</span>
+                  <div class="flex flex-wrap gap-2 mt-1" id="colorPalette">
+                    <span class="color-dot active" style="background:#1a1a1a" data-color="Hitam"></span>
+                    <span class="color-dot" style="background:#ffffff;border-color:#d1d5db" data-color="Putih"></span>
+                    <span class="color-dot" style="background:#dc2626" data-color="Merah"></span>
+                    <span class="color-dot" style="background:#2563eb" data-color="Biru Royal"></span>
+                    <span class="color-dot" style="background:#1e293b" data-color="Navy"></span>
+                    <span class="color-dot" style="background:#16a34a" data-color="Hijau"></span>
+                    <span class="color-dot" style="background:#eab308" data-color="Kuning"></span>
+                    <span class="color-dot" style="background:#f97316" data-color="Orange"></span>
+                    <span class="color-dot" style="background:#ec4899" data-color="Pink"></span>
+                    <span class="color-dot" style="background:#7c3aed" data-color="Ungu"></span>
+                    <span class="color-dot" style="background:#78350f" data-color="Coklat"></span>
+                    <span class="color-dot" style="background:#6b7280" data-color="Abu-Abu"></span>
+                    <span class="color-dot" style="background:#991b1b" data-color="Maroon"></span>
+                    <span class="color-dot" style="background:#0d9488" data-color="Tosca"></span>
+                    <span class="color-dot" style="background:#fde68a" data-color="Cream"></span>
                   </div>
-                  <p class="text-xs text-muted mt-2">Warna terpilih: <span id="selectedColorLabel" class="font-semibold text-dark">Hitam</span></p>
+                  <p class="text-xs text-muted mt-1">Warna terpilih: <span id="selectedColorLabel" class="font-semibold text-dark">Hitam</span></p>
                 </div>
               </div>
             </div>
@@ -278,23 +206,21 @@
             <!-- Price Table -->
             <div class="bg-white border border-border-soft rounded-2xl overflow-hidden shadow-sm mt-6">
               <div class="p-4 border-b border-border-soft">
-                <h3 class="text-sm font-bold text-dark flex items-center gap-2"><i class="fas fa-table-list text-accent"></i> Tabel Harga Oval 30</h3>
+                <h3 class="text-sm font-bold text-dark flex items-center gap-2"><i class="fas fa-table-list text-accent"></i> Tabel Harga TLS 35</h3>
               </div>
               <div class="overflow-x-auto">
                 <table class="price-table w-full">
                   <thead>
                     <tr>
                       <th class="text-left">GSM</th>
-                      <th>Harga per pcs</th>
-                      <th>Min. Order</th>
+                      <th>100-299</th>
+                      <th>300-499</th>
+                      <th>500-999</th>
+                      <th>1000+</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr class="highlight">
-                      <td class="font-bold text-left">70 GSM</td>
-                      <td>Rp 1.300</td>
-                      <td>10 pcs</td>
-                    </tr>
+                  <tbody id="priceTableBody">
+                    <!-- Filled by JS -->
                   </tbody>
                 </table>
               </div>
@@ -315,35 +241,43 @@
                 <div class="space-y-3.5">
                   <div>
                     <label class="block text-[11px] font-semibold text-muted uppercase tracking-wider mb-1">Ukuran</label>
-                    <div class="bg-surface border border-border-soft rounded-xl px-4 py-2.5 text-sm font-semibold text-dark">Oval 30 — 30 × 40 cm</div>
+                    <div class="bg-surface border border-border-soft rounded-xl px-4 py-2.5 text-sm font-semibold text-dark">TLS 35 — 35 × 40 × 10 cm</div>
                   </div>
                   <div>
                     <label class="block text-[11px] font-semibold text-muted uppercase tracking-wider mb-1">GSM</label>
-                    <div class="bg-primary/10 border border-primary rounded-lg py-2.5 text-center text-xs font-bold text-primary">70 GSM</div>
+                    <div class="grid grid-cols-3 gap-1.5">
+                      <button class="gsm-btn active rounded-lg py-2 text-xs font-bold" data-gsm="70" onclick="selectGsm('70')">70 GSM</button>
+                      <button class="gsm-btn rounded-lg py-2 text-xs font-bold" data-gsm="75" onclick="selectGsm('75')">75 GSM</button>
+                      <button class="gsm-btn rounded-lg py-2 text-xs font-bold" data-gsm="100" onclick="selectGsm('100')">100 GSM</button>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-muted uppercase tracking-wider mb-1">Jenis Handle</label>
+                    <div class="grid grid-cols-2 gap-1.5">
+                      <button class="handle-btn active rounded-lg py-2 text-xs font-bold" data-handle="press" onclick="selectHandle('press')">Press</button>
+                      <button class="handle-btn rounded-lg py-2 text-xs font-bold" data-handle="jahit" onclick="selectHandle('jahit')">Jahit</button>
+                      <button class="handle-btn rounded-lg py-2 text-xs font-bold" data-handle="kur" onclick="selectHandle('kur')">Kur +Rp1.500</button>
+                      <button class="handle-btn rounded-lg py-2 text-xs font-bold" data-handle="loop" onclick="selectHandle('loop')">Loop +Rp2.000</button>
+                    </div>
                   </div>
                   <div>
                     <label class="block text-[11px] font-semibold text-muted uppercase tracking-wider mb-1">Jumlah Order</label>
-                    <div class="qty-wrapper">
-                      <button onclick="changeQty(-1)" class="qty-btn">−</button>
-                      <input type="number" id="qtyInput" value="10" min="10" class="form-input">
-                      <button onclick="changeQty(1)" class="qty-btn">+</button>
+                    <div class="flex items-center">
+                      <button onclick="changeQty(-50)" class="qty-btn rounded-l-lg border-r-0 text-muted font-bold">−</button>
+                      <input type="number" id="qtyInput" value="100" min="100" step="50" class="form-input w-full h-9 text-center text-sm font-semibold rounded-none border-l-0 border-r-0">
+                      <button onclick="changeQty(50)" class="qty-btn rounded-r-lg border-l-0 text-muted font-bold">+</button>
                     </div>
-                    <p class="text-[10px] text-muted mt-1">Min. 10 pcs • Bebas berapa pun jumlahnya</p>
+                    <p class="text-[10px] text-muted mt-1">Min. 100 pcs, kelipatan 50</p>
                   </div>
                 </div>
 
                 <div class="bg-surface rounded-xl p-4 space-y-2 mt-4">
-                  <div class="flex justify-between text-xs">
-                    <span class="text-muted">Harga per pcs</span>
-                    <span id="pricePerPcs" class="font-bold text-dark">Rp 1.300</span>
-                  </div>
-                  <div class="flex justify-between text-xs">
-                    <span class="text-muted">Jumlah</span>
-                    <span id="qtyDisplay" class="font-bold text-dark">10 pcs</span>
-                  </div>
+                  <div class="flex justify-between text-xs"><span class="text-muted">Harga per pcs</span><span id="pricePerPcs" class="font-bold text-dark">Rp 4.500</span></div>
+                  <div class="flex justify-between text-xs"><span class="text-muted">Biaya handle</span><span id="handleCost" class="font-bold text-dark">Rp 0</span></div>
+                  <div class="flex justify-between text-xs"><span class="text-muted">Jumlah</span><span id="qtyDisplay" class="font-bold text-dark">100 pcs</span></div>
                   <div class="border-t border-border-soft pt-2.5 flex justify-between items-center">
                     <span class="text-xs font-bold text-dark">Total Estimasi</span>
-                    <span id="totalPrice" class="text-xl font-extrabold text-primary">Rp 13.000</span>
+                    <span id="totalPrice" class="text-xl font-extrabold text-primary">Rp 450.000</span>
                   </div>
                 </div>
 
@@ -358,10 +292,9 @@
                 <h4 class="text-[11px] font-bold text-dark mb-2.5 flex items-center gap-2"><i class="fas fa-lightbulb text-accent"></i> Info Penting</h4>
                 <ul class="space-y-1.5 text-[11px] text-dark/70">
                   <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Harga sudah termasuk sablon 1 warna 1 sisi</li>
-                  <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Min. order 10 pcs per warna</li>
-                  <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Produksi 1-2 hari kerja</li>
+                  <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Min. order 100 pcs per warna</li>
+                  <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Produksi 5-10 hari kerja</li>
                   <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Gratis konsultasi desain</li>
-                  <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Untuk order > 100 pcs, hubungi WA untuk harga khusus</li>
                 </ul>
               </div>
 
@@ -369,10 +302,16 @@
               <div class="bg-white border border-border-soft rounded-2xl p-4">
                 <h4 class="text-[11px] font-bold text-dark mb-2.5 flex items-center gap-2"><i class="fas fa-ruler-combined text-accent"></i> Ukuran Lainnya</h4>
                 <div class="grid grid-cols-2 gap-1.5">
-                  <a href="oval20.php" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">Oval 20</a>
-                  <a href="oval25.php" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">Oval 25</a>
+                  <a href="tls20.html" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">TLS 20</a>
+                  <a href="tls25.html" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">TLS 25</a>
+                  <a href="tls30.html" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">TLS 30</a>
+                  <a href="tls38.html" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">TLS 38</a>
+                  <a href="tls40.html" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">TLS 40</a>
+                  <a href="tls45.html" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">TLS 45</a>
+                  <a href="tls50.html" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">TLS 50</a>
+                  <a href="tls60.html" class="text-xs text-muted hover:text-primary transition-colors px-2 py-1.5 rounded-lg hover:bg-surface">TLS 60</a>
                 </div>
-                <a href="ukuran.php" class="block text-center text-xs text-accent font-semibold mt-2 hover:underline">Lihat Semua</a>
+                <a href="ukuran.html" class="block text-center text-xs text-accent font-semibold mt-2 hover:underline">Lihat Semua</a>
               </div>
             </div>
           </div>
@@ -398,24 +337,27 @@
     <div class="max-w-7xl mx-auto px-4 lg:px-8 py-12">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
-          <a href="index.php" class="flex items-center gap-2.5 mb-4"><span class="text-lg font-bold">Fardhan<span class="text-accent">_Store</span></span></a>
+          <a href="index.html" class="flex items-center gap-2.5 mb-4"><span class="text-lg font-bold">Fardhan<span class="text-accent">_Store</span></span></a>
           <p class="text-gray-400 text-sm leading-relaxed">Spesialis tas spunbond custom berkualitas untuk souvenir, promosi, dan kebutuhan event.</p>
         </div>
         <div>
           <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-white">Navigasi</h4>
           <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="index.php" class="hover:text-accent transition-colors">Beranda</a></li>
-            <li><a href="ukuran.php" class="hover:text-accent transition-colors">Katalog</a></li>
-            <li><a href="index.php#tentang" class="hover:text-accent transition-colors">Tentang</a></li>
-            <li><a href="index.php#kontak" class="hover:text-accent transition-colors">Kontak</a></li>
+            <li><a href="index.html" class="hover:text-accent transition-colors">Beranda</a></li>
+            <li><a href="ukuran.html" class="hover:text-accent transition-colors">Katalog</a></li>
+            <li><a href="index.html#tentang" class="hover:text-accent transition-colors">Tentang</a></li>
+            <li><a href="index.html#kontak" class="hover:text-accent transition-colors">Kontak</a></li>
           </ul>
         </div>
         <div>
           <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-white">Ukuran</h4>
           <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="oval20.php" class="hover:text-accent transition-colors">Oval 20</a></li>
-            <li><a href="oval25.php" class="hover:text-accent transition-colors">Oval 25</a></li>
-            <li><a href="oval30.php" class="hover:text-accent transition-colors">Oval 30</a></li>
+            <li><a href="tls20.html" class="hover:text-accent transition-colors">TLS 20</a></li>
+            <li><a href="tls25.html" class="hover:text-accent transition-colors">TLS 25</a></li>
+            <li><a href="tls30.html" class="hover:text-accent transition-colors">TLS 30</a></li>
+            <li><a href="tls35.html" class="hover:text-accent transition-colors">TLS 35</a></li>
+            <li><a href="tls40.html" class="hover:text-accent transition-colors">TLS 40</a></li>
+            <li><a href="tls60.html" class="hover:text-accent transition-colors">TLS 60</a></li>
           </ul>
         </div>
         <div>
@@ -446,11 +388,18 @@
   document.addEventListener('DOMContentLoaded', function() {
     AOS.init({ duration: 600, once: true, offset: 60 });
 
-    // Data harga Oval 30 - Hanya 70 GSM
-    const PRICE_PER_PCS = 1300;
-    const MIN_ORDER = 10;
+    // Data harga TLS 35
+    const PRICES = {
+      '70': [4500, 3900, 3400, 2900],
+      '75': [4800, 4200, 3600, 3200],
+      '100': [5500, 4900, 4300, 3800]
+    };
+    const HANDLE_COSTS = { press: 0, jahit: 0, kur: 1500, loop: 2000 };
 
+    let currentGsm = '70';
+    let currentHandle = 'press';
     let selectedColor = 'Hitam';
+    const TIERS = ['100-299', '300-499', '500-999', '1000+'];
 
     /* ===== SHOPEE BAR ===== */
     const shopeeBar = document.getElementById('shopeeBar');
@@ -481,30 +430,54 @@
     });
 
     /* ===== COLOR SELECTOR ===== */
-    function selectColor(el) {
-      document.querySelectorAll('.color-item').forEach(item => item.classList.remove('active'));
-      el.classList.add('active');
-      selectedColor = el.dataset.color;
-      document.getElementById('selectedColorLabel').textContent = selectedColor;
-      updateCalc();
+    document.querySelectorAll('.color-dot').forEach(el => {
+      el.addEventListener('click', function() {
+        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+        this.classList.add('active');
+        selectedColor = this.dataset.color;
+        document.getElementById('selectedColorLabel').textContent = selectedColor;
+        updateCalc();
+      });
+    });
+
+    /* ===== PRICE TABLE ===== */
+    function renderPriceTable() {
+      const tbody = document.getElementById('priceTableBody');
+      let html = '';
+      ['70', '75', '100'].forEach(gsm => {
+        const prices = PRICES[gsm];
+        const isActive = gsm === currentGsm ? 'highlight' : '';
+        html += `<tr class="${isActive}">
+          <td class="font-bold text-left">${gsm} GSM</td>
+          ${prices.map(p => `<td>Rp ${p.toLocaleString('id-ID')}</td>`).join('')}
+        </tr>`;
+      });
+      tbody.innerHTML = html;
     }
-    window.selectColor = selectColor;
 
     /* ===== CALCULATOR ===== */
+    function getTier(qty) {
+      return qty >= 1000 ? 3 : qty >= 500 ? 2 : qty >= 300 ? 1 : 0;
+    }
+
     function updateCalc() {
-      const qty = Math.max(MIN_ORDER, parseInt(document.getElementById('qtyInput').value) || MIN_ORDER);
-      const price = PRICE_PER_PCS;
+      const qty = Math.max(100, parseInt(document.getElementById('qtyInput').value) || 100);
+      const tier = getTier(qty);
+      const price = PRICES[currentGsm][tier] + HANDLE_COSTS[currentHandle];
       const total = price * qty;
       
       document.getElementById('pricePerPcs').textContent = 'Rp ' + price.toLocaleString('id-ID');
+      document.getElementById('handleCost').textContent = HANDLE_COSTS[currentHandle] > 0 ? 'Rp ' + HANDLE_COSTS[currentHandle].toLocaleString('id-ID') : 'Rp 0';
       document.getElementById('qtyDisplay').textContent = qty.toLocaleString('id-ID') + ' pcs';
       document.getElementById('totalPrice').textContent = 'Rp ' + total.toLocaleString('id-ID');
 
+      const handleNames = { press: 'Press', jahit: 'Jahit', kur: 'Kur', loop: 'Loop' };
       const msg = encodeURIComponent(
         `Halo Fardhan_Store\n\nSaya ingin memesan:\n\n` +
-        `Jenis Tas : Oval 30\n` +
-        `Ukuran : 30 × 40 cm\n` +
-        `Bahan : 70 GSM\n` +
+        `Jenis Tas : TLS 35\n` +
+        `Ukuran : 35 × 40 × 10 cm\n` +
+        `Bahan : ${currentGsm} GSM\n` +
+        `Handle : ${handleNames[currentHandle]}\n` +
         `Warna : ${selectedColor}\n` +
         `Jumlah : ${qty} pcs\n\n` +
         `Harga per pcs : Rp ${price.toLocaleString('id-ID')}\n` +
@@ -515,21 +488,35 @@
       document.getElementById('waOrderLink').href = 'https://wa.me/6283173742530?text=' + msg;
     }
 
+    window.selectGsm = function(gsm) {
+      currentGsm = gsm;
+      document.querySelectorAll('.gsm-btn').forEach(b => b.classList.toggle('active', b.dataset.gsm === gsm));
+      renderPriceTable();
+      updateCalc();
+    };
+
+    window.selectHandle = function(handle) {
+      currentHandle = handle;
+      document.querySelectorAll('.handle-btn').forEach(b => b.classList.toggle('active', b.dataset.handle === handle));
+      updateCalc();
+    };
+
     window.changeQty = function(delta) {
       const inp = document.getElementById('qtyInput');
-      let v = (parseInt(inp.value) || MIN_ORDER) + delta;
-      if (v < MIN_ORDER) v = MIN_ORDER;
+      let v = Math.max(100, (parseInt(inp.value) || 100) + delta);
+      if (v % 50 !== 0) v = Math.ceil(v / 50) * 50;
       inp.value = v;
       updateCalc();
     };
 
     document.getElementById('qtyInput').addEventListener('input', function() {
       let v = parseInt(this.value);
-      if (isNaN(v) || v < MIN_ORDER) this.value = MIN_ORDER;
+      if (isNaN(v) || v < 100) this.value = 100;
       updateCalc();
     });
 
     /* ===== INIT ===== */
+    renderPriceTable();
     updateCalc();
   });
   </script>

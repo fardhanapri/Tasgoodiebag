@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koleksi Motif Tas Souvenir - Fardhan_Store</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e3a5f',
+            'primary-light': '#2a4a7a',
+            'primary-dark': '#0f2440',
+            accent: '#c8a45a',
+            'accent-light': '#f5edda',
+            dark: '#111827',
+            light: '#ffffff',
+            muted: '#6b7280',
+            'border-soft': '#e5e7eb',
+            'surface': '#f9fafb',
+            'surface-alt': '#f3f4f6',
+            shopee: '#EE4D2D',
+            'shopee-dark': '#D73211',
+            'whatsapp': '#25D366'
+          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:#fafbfc;color:#111827}
+    
+    .header-scrolled{box-shadow:0 1px 3px rgba(0,0,0,.08);backdrop-filter:blur(12px);background:rgba(255,255,255,.95)}
+    .scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#1e3a5f,#c8a45a);z-index:9999;transition:width .1s linear}
+    
+    .nav-link{position:relative}
+    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#1e3a5f;transition:width .3s ease}
+    .nav-link:hover::after{width:100%}
+    
+    .wa-float{animation:waPulse 2s ease-in-out infinite}
+    @keyframes waPulse{0%,100%{box-shadow:0 4px 14px rgba(37,211,102,.4)}50%{box-shadow:0 4px 24px rgba(37,211,102,.6)}}
+    
+    .shopee-bar{transition:all .4s cubic-bezier(.4,0,.2,1)}
+    .shopee-bar.bar-hidden{transform:translateY(-100%);opacity:0;pointer-events:none}
+    .shopee-bar-glow{box-shadow:0 2px 12px rgba(238,77,45,.25)}
+    
+    .hero-gradient{background:linear-gradient(145deg,#1e3a5f 0%,#0f2440 100%)}
+    
+    .motif-card{transition:all .3s ease;border:2px solid #f0f0f0;cursor:pointer}
+    .motif-card:hover{border-color:#c8a45a;box-shadow:0 4px 20px rgba(0,0,0,.06);transform:translateY(-4px)}
+    .motif-card .motif-preview{width:100%;height:200px;position:relative;overflow:hidden;background:#f9fafb}
+    .motif-card .motif-preview .motif-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+    .motif-card .motif-preview .motif-label{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.7);color:#fff;padding:4px 14px;border-radius:20px;font-size:11px;font-weight:600;backdrop-filter:blur(4px)}
+    
+    .category-tab{transition:all .3s ease;border:2px solid transparent;cursor:pointer}
+    .category-tab:hover{border-color:#e5e7eb;background:#f9fafb}
+    .category-tab.active{border-color:#1e3a5f;background:#f9fafb}
+    .category-tab.active .tab-icon{background:#1e3a5f!important;color:#fff!important}
+    
+    .tabs-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .tabs-scroll::-webkit-scrollbar{display:none}
+    
+    .badge-new{background:linear-gradient(135deg,#c8a45a,#d4b76a);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:2px}
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Shopee Bar -->
+  <div id="shopeeBar" class="shopee-bar shopee-bar-glow fixed top-0 left-0 w-full z-[60] bg-shopee">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 h-[44px] flex items-center justify-between">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="white" fill-opacity="0.2"/><path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="white"/><circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/><circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/></svg>
+        <p class="text-white text-xs sm:text-sm font-bold truncate">Belanja Langsung di Toko Shopee Kami!</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-white text-shopee text-xs font-bold px-3 py-1.5 rounded-md hover:bg-gray-50 transition-colors whitespace-nowrap">
+          <i class="fas fa-store text-[10px]"></i><span class="hidden sm:inline">Kunjungi Toko</span><span class="sm:hidden">Buka</span>
+        </a>
+        <button id="closeShopeeBar" class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-white/20 transition-colors flex-shrink-0"><i class="fas fa-xmark text-white/80 text-sm"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header id="mainHeader" class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-lg" style="top:44px;border-bottom:1px solid rgba(0,0,0,.05)">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+      <div class="flex items-center justify-between h-[68px]">
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300"><i class="fas fa-bag-shopping text-white text-sm"></i></div>
+          <span class="text-lg font-bold text-primary tracking-tight">Fardhan<span class="text-accent">_Store</span></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-6">
+          <a href="index.html" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Beranda</a>
+          <a href="ukuran.html" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Ukuran</a>
+          <a href="motif.html" class="nav-link text-sm font-medium text-primary border-b-2 border-primary pb-0.5">Motif</a>
+          <a href="index.html#tentang" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Tentang</a>
+          <a href="index.html#kontak" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Kontak</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <a href="https://wa.me/6283173742530" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-whatsapp text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"><i class="fab fa-whatsapp"></i> Chat</a>
+          <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-alt transition-colors"><i class="fas fa-bars text-dark text-lg" id="menuIcon"></i></button>
+        </div>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-border-soft">
+      <div class="max-w-7xl mx-auto px-4 py-4 space-y-1">
+        <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 bg-shopee text-white text-sm font-semibold px-5 py-3 rounded-xl w-full mb-2"><i class="fas fa-bag-shopping text-sm"></i> Belanja di Shopee</a>
+        <a href="index.html" class="block py-2.5 px-3 text-sm font-medium text-dark hover:bg-surface rounded-lg transition-colors">Beranda</a>
+        <a href="ukuran.html" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Ukuran</a>
+        <a href="motif.html" class="block py-2.5 px-3 text-sm font-medium text-primary bg-primary/5 rounded-lg transition-colors">Motif</a>
+        <a href="index.html#tentang" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Tentang</a>
+        <a href="index.html#kontak" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Kontak</a>
+        <a href="https://wa.me/6283173742530" target="_blank" class="flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-5 py-3 rounded-xl w-full mt-2"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top:calc(68px + 44px)">
+
+    <!-- Hero -->
+    <section class="hero-gradient text-white py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div>
+            <span class="text-accent text-xs font-bold uppercase tracking-[0.2em]">Koleksi</span>
+            <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight mt-1">Pilihan <span class="text-accent">Motif</span> Tas</h1>
+            <p class="text-white/70 text-sm mt-2 max-w-2xl">Temukan inspirasi motif untuk tas souvenir Anda. Tersedia berbagai desain eksklusif yang bisa disesuaikan dengan tema acara.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-palette text-accent"></i> 20+ Motif</span>
+            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-print text-accent"></i> Sablon Custom</span>
+            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-pen-fancy text-accent"></i> Bisa Request</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-border-soft py-3">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <nav class="flex items-center gap-2 text-xs text-muted">
+          <a href="index.html" class="hover:text-primary transition-colors">Beranda</a>
+          <i class="fas fa-chevron-right text-[8px]"></i>
+          <span class="text-primary font-semibold">Koleksi Motif</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <section class="py-8 md:py-12">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+
+        <!-- Category Tabs -->
+        <div class="tabs-scroll mb-10">
+          <div class="flex gap-2 min-w-max lg:min-w-0" id="categoryTabs">
+            <button class="category-tab active rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('all')">
+              <div class="tab-icon w-10 h-10 bg-primary rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-th-large text-white text-sm"></i></div>
+              <h3 class="text-[11px] font-bold text-dark">Semua</h3>
+              <p class="text-[9px] text-muted mt-0.5">21 motif</p>
+            </button>
+            <button class="category-tab rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('minimalis')">
+              <div class="tab-icon w-10 h-10 bg-surface-alt rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-circle text-muted"></i></div>
+              <h3 class="text-[11px] font-bold text-dark">Minimalis</h3>
+              <p class="text-[9px] text-muted mt-0.5">5 motif</p>
+            </button>
+            <button class="category-tab rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('batik')">
+              <div class="tab-icon w-10 h-10 bg-surface-alt rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-palette text-muted"></i></div>
+              <h3 class="text-[11px] font-bold text-dark">Batik</h3>
+              <p class="text-[9px] text-muted mt-0.5">5 motif</p>
+            </button>
+            <button class="category-tab rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('geometris')">
+              <div class="tab-icon w-10 h-10 bg-surface-alt rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-shapes text-muted"></i></div>
+              <h3 class="text-[11px] font-bold text-dark">Geometris</h3>
+              <p class="text-[9px] text-muted mt-0.5">5 motif</p>
+            </button>
+            <button class="category-tab rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('floral')">
+              <div class="tab-icon w-10 h-10 bg-surface-alt rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-leaf text-muted"></i></div>
+              <h3 class="text-[11px] font-bold text-dark">Floral</h3>
+              <p class="text-[9px] text-muted mt-0.5">6 motif</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Motif Grid -->
+        <div id="motifGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Info -->
+        <div class="mt-12 bg-accent/5 border border-accent/15 rounded-2xl p-6 text-center">
+          <h3 class="text-sm font-bold text-dark mb-2">Butuh Motif Custom?</h3>
+          <p class="text-sm text-muted">Kami juga menerima request desain motif sesuai keinginan Anda. Konsultasikan ide Anda dengan kami.</p>
+          <a href="https://wa.me/6283173742530" target="_blank" class="inline-flex items-center gap-2 bg-whatsapp text-white font-semibold px-6 py-2.5 rounded-lg mt-3 hover:bg-opacity-90 transition-colors text-sm"><i class="fab fa-whatsapp"></i> Konsultasi Custom</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 hero-gradient text-white text-center">
+      <div class="max-w-3xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">Butuh <span class="text-accent">Penawaran</span> Khusus?</h2>
+        <p class="text-white/70 text-base mb-6">Dapatkan harga terbaik untuk pesanan dalam jumlah besar</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="https://wa.me/6283173742530" target="_blank" class="inline-flex items-center gap-2 bg-accent text-primary font-bold px-7 py-3.5 rounded-xl hover:bg-opacity-90 transition-all text-sm shadow-lg shadow-accent/20"><i class="fab fa-whatsapp text-lg"></i>Hubungi WhatsApp</a>
+          <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-shopee text-white font-bold px-7 py-3.5 rounded-xl hover:bg-shopee-dark transition-all text-sm"><i class="fas fa-bag-shopping"></i>Belanja di Shopee</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 py-12">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <a href="index.html" class="flex items-center gap-2.5 mb-4"><span class="text-lg font-bold">Fardhan<span class="text-accent">_Store</span></span></a>
+          <p class="text-gray-400 text-sm leading-relaxed">Spesialis tas spunbond custom berkualitas untuk souvenir, promosi, dan kebutuhan event.</p>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-white">Navigasi</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="index.html" class="hover:text-accent transition-colors">Beranda</a></li>
+            <li><a href="ukuran.html" class="hover:text-accent transition-colors">Katalog Ukuran</a></li>
+            <li><a href="motif.html" class="hover:text-accent transition-colors">Koleksi Motif</a></li>
+            <li><a href="index.html#tentang" class="hover:text-accent transition-colors">Tentang</a></li>
+            <li><a href="index.html#kontak" class="hover:text-accent transition-colors">Kontak</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-white">Produk</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="ukuran.html" class="hover:text-accent transition-colors">Tas Spunbond</a></li>
+            <li><a href="ukuran.html" class="hover:text-accent transition-colors">Totebag Custom</a></li>
+            <li><a href="ukuran.html" class="hover:text-accent transition-colors">Tas Oval</a></li>
+            <li><a href="ukuran.html" class="hover:text-accent transition-colors">Goodie Bag</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-white">Kontak</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex items-start gap-2"><i class="fas fa-phone text-accent text-xs mt-1"></i>+62 831-7374-2530</li>
+            <li class="flex items-start gap-2"><i class="fas fa-envelope text-accent text-xs mt-1"></i>fardanapriansyah10@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/5 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+        <p>&copy; 2025 Fardhan_Store. All rights reserved.</p>
+        <div class="flex gap-4 mt-2 sm:mt-0">
+          <a href="https://shopee.co.id/fardhan_storee" target="_blank" class="hover:text-accent transition-colors"><i class="fas fa-bag-shopping"></i> Shopee</a>
+          <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <a href="https://wa.me/6283173742530" target="_blank" class="wa-float fixed bottom-6 left-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform"><i class="fab fa-whatsapp text-2xl"></i></a>
+  <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="fixed bottom-6 right-6 bg-shopee text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform" style="box-shadow:0 4px 14px rgba(238,77,45,.4)"><i class="fas fa-bag-shopping text-xl"></i></a>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({ duration: 600, once: true, offset: 60 });
+
+    /* ===== SHOPEE BAR ===== */
+    const shopeeBar = document.getElementById('shopeeBar');
+    if (localStorage.getItem('shopeeBarDismissed') === 'true' && localStorage.getItem('shopeeBarDismissedAt') && (Date.now() - parseInt(localStorage.getItem('shopeeBarDismissedAt')) < 86400000)) {
+      shopeeBar.classList.add('bar-hidden');
+    }
+    document.getElementById('closeShopeeBar').addEventListener('click', function() {
+      shopeeBar.classList.add('bar-hidden');
+      localStorage.setItem('shopeeBarDismissed', 'true');
+      localStorage.setItem('shopeeBarDismissedAt', Date.now().toString());
+    });
+
+    /* ===== SCROLL ===== */
+    window.addEventListener('scroll', function() {
+      const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('scrollProgress').style.width = (s / d * 100) + '%';
+      document.getElementById('mainHeader').classList.toggle('header-scrolled', s > 20);
+    });
+
+    /* ===== MOBILE MENU ===== */
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    menuToggle.addEventListener('click', function() {
+      const open = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.className = open ? 'fas fa-bars text-dark text-lg' : 'fas fa-xmark text-dark text-lg';
+    });
+
+    /* ===== DATA MOTIF ===== */
+    const MOTIFS = [
+      // ===== MINIMALIS =====
+      { id: 1, name: 'Minimalis Hitam', category: 'minimalis', colors: ['#1a1a1a', '#f5f5f5'], pattern: 'solid', desc: 'Desain simpel elegan dengan warna solid hitam' },
+      { id: 2, name: 'Minimalis Putih', category: 'minimalis', colors: ['#ffffff', '#e0e0e0'], pattern: 'solid', desc: 'Desain minimalis putih bersih untuk tampilan modern' },
+      { id: 3, name: 'Minimalis Abu', category: 'minimalis', colors: ['#9ca3af', '#6b7280'], pattern: 'gradient', desc: 'Gradasi abu-abu minimalis untuk kesan profesional' },
+      { id: 4, name: 'Minimalis Garis', category: 'minimalis', colors: ['#1a1a1a', '#ffffff'], pattern: 'stripes', desc: 'Motif garis hitam putih minimalis dan tegas' },
+      { id: 5, name: 'Minimalis Polka', category: 'minimalis', colors: ['#ffffff', '#1a1a1a'], pattern: 'polka', desc: 'Motif polka hitam putih yang playful namun elegan' },
+
+      // ===== BATIK =====
+      { id: 6, name: 'Batik Kawung', category: 'batik', colors: ['#8B4513', '#D2691E', '#F5DEB3'], pattern: 'batik', desc: 'Motif batik kawung klasik dengan warna earth tone' },
+      { id: 7, name: 'Batik Parang', category: 'batik', colors: ['#2F1B14', '#8B6914', '#F5E6C8'], pattern: 'batik', desc: 'Motif batik parang yang anggun dan berkarakter' },
+      { id: 8, name: 'Batik Mega Mendung', category: 'batik', colors: ['#1a2a6c', '#b21f1f', '#fdbb2d'], pattern: 'batik', desc: 'Motif mega mendung dengan gradasi warna yang dramatis' },
+      { id: 9, name: 'Batik Cendrawasih', category: 'batik', colors: ['#8B008B', '#FF4500', '#FFD700'], pattern: 'batik', desc: 'Motif cendrawasih dengan warna-warna cerah khas Papua' },
+      { id: 10, name: 'Batik Sekar Jagad', category: 'batik', colors: ['#800000', '#DAA520', '#F5DEB3'], pattern: 'batik', desc: 'Motif sekar jagad yang sarat akan filosofi kehidupan' },
+
+      // ===== GEOMETRIS =====
+      { id: 11, name: 'Geometris Segitiga', category: 'geometris', colors: ['#1e3a5f', '#c8a45a', '#ffffff'], pattern: 'geometric', desc: 'Motif segitiga geometris dengan warna premium' },
+      { id: 12, name: 'Geometris Persegi', category: 'geometris', colors: ['#2d3436', '#fdcb6e', '#0984e3'], pattern: 'geometric', desc: 'Motif persegi warna-warni yang modern dan dinamis' },
+      { id: 13, name: 'Geometris Hexagon', category: 'geometris', colors: ['#6c5ce7', '#00b894', '#fdcb6e'], pattern: 'geometric', desc: 'Motif hexagon dengan warna-warna cerah dan energik' },
+      { id: 14, name: 'Geometris Chevron', category: 'geometris', colors: ['#2d3436', '#e17055', '#00cec9'], pattern: 'geometric', desc: 'Motif chevron yang dinamis dan penuh semangat' },
+      { id: 15, name: 'Geometris Zigzag', category: 'geometris', colors: ['#1a1a2e', '#e94560', '#f5f5f5'], pattern: 'geometric', desc: 'Motif zigzag modern dengan kontras warna yang kuat' },
+
+      // ===== FLORAL =====
+      { id: 16, name: 'Floral Sakura', category: 'floral', colors: ['#ffb7c5', '#ff6b8a', '#ffe4e6'], pattern: 'floral', desc: 'Motif bunga sakura yang lembut dan romantis' },
+      { id: 17, name: 'Floral Mawar', category: 'floral', colors: ['#c0392b', '#e74c3c', '#f1948a'], pattern: 'floral', desc: 'Motif mawar merah yang elegan dan klasik' },
+      { id: 18, name: 'Floral Tulip', category: 'floral', colors: ['#e8b4b8', '#f7dc6f', '#82e0aa'], pattern: 'floral', desc: 'Motif tulip dengan warna-warna pastel yang menenangkan' },
+      { id: 19, name: 'Floral Anggrek', category: 'floral', colors: ['#6c3483', '#af7ac5', '#d2b4de'], pattern: 'floral', desc: 'Motif anggrek ungu yang anggun dan eksotis' },
+      { id: 20, name: 'Floral Daisy', category: 'floral', colors: ['#f9e79f', '#f5b041', '#fadbd8'], pattern: 'floral', desc: 'Motif daisy yang ceria dan penuh keceriaan' },
+      { id: 21, name: 'Floral Lotus', category: 'floral', colors: ['#f5b7b1', '#f8c471', '#a9dfbf'], pattern: 'floral', desc: 'Motif lotus yang sakral dan penuh makna' }
+    ];
+
+    /* ===== RENDER MOTIF ===== */
+    function renderMotifs(filter = 'all') {
+      const container = document.getElementById('motifGrid');
+      const filtered = filter === 'all' ? MOTIFS : MOTIFS.filter(m => m.category === filter);
+      
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-10">
+          <i class="fas fa-palette text-4xl text-muted/30 mb-3"></i>
+          <p class="text-muted">Belum ada motif dalam kategori ini.</p>
+        </div>`;
+        return;
+      }
+
+      let html = '';
+      filtered.forEach((m, i) => {
+        const delay = i * 50;
+        const bgColor = m.colors[0] || '#e5e7eb';
+        const accentColor = m.colors[1] || '#c8a45a';
+        
+        // Generate pattern preview based on pattern type
+        let patternStyle = '';
+        switch(m.pattern) {
+          case 'solid':
+            patternStyle = `background: ${bgColor};`;
+            break;
+          case 'gradient':
+            patternStyle = `background: linear-gradient(135deg, ${m.colors[0]}, ${m.colors[1] || '#e5e7eb'});`;
+            break;
+          case 'stripes':
+            patternStyle = `background: repeating-linear-gradient(45deg, ${m.colors[0]} 0px, ${m.colors[0]} 20px, ${m.colors[1]} 20px, ${m.colors[1]} 40px);`;
+            break;
+          case 'polka':
+            patternStyle = `background: ${m.colors[1] || '#ffffff'}; background-image: radial-gradient(circle at 30% 30%, ${m.colors[0]} 8px, transparent 8px), radial-gradient(circle at 70% 70%, ${m.colors[0]} 8px, transparent 8px); background-size: 40px 40px;`;
+            break;
+          case 'batik':
+            patternStyle = `background: ${m.colors[0] || '#8B4513'}; background-image: radial-gradient(circle at 20% 20%, ${m.colors[1] || '#D2691E'} 10px, transparent 10px), radial-gradient(circle at 60% 60%, ${m.colors[2] || '#F5DEB3'} 15px, transparent 15px), radial-gradient(circle at 80% 30%, ${m.colors[1] || '#D2691E'} 8px, transparent 8px); background-size: 80px 80px;`;
+            break;
+          case 'geometric':
+            patternStyle = `background: ${m.colors[1] || '#c8a45a'}; clip-path: polygon(0% 0%, 100% 0%, 50% 100%); background: linear-gradient(135deg, ${m.colors[0]} 0%, ${m.colors[1]} 50%, ${m.colors[2]} 100%);`;
+            break;
+          case 'floral':
+            patternStyle = `background: ${m.colors[2] || '#f5f5f5'}; background-image: radial-gradient(circle at 30% 30%, ${m.colors[0]} 12px, transparent 12px), radial-gradient(circle at 70% 70%, ${m.colors[1]} 10px, transparent 10px), radial-gradient(circle at 50% 80%, ${m.colors[0]} 8px, transparent 8px); background-size: 60px 60px;`;
+            break;
+          default:
+            patternStyle = `background: ${bgColor};`;
+        }
+
+        html += `
+          <div class="motif-card bg-white rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="${delay}" data-category="${m.category}">
+            <div class="motif-preview">
+              <div class="motif-bg" style="${patternStyle}"></div>
+              <span class="motif-label">${m.category.charAt(0).toUpperCase() + m.category.slice(1)}</span>
+            </div>
+            <div class="p-5">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-base font-bold text-dark">${m.name}</h3>
+                <span class="text-[10px] bg-primary/5 text-primary font-semibold px-2 py-0.5 rounded">${m.id}</span>
+              </div>
+              <p class="text-xs text-muted leading-relaxed">${m.desc}</p>
+              <div class="flex items-center gap-1.5 mt-3">
+                <span class="text-[10px] font-semibold text-muted uppercase tracking-wider">Warna:</span>
+                ${m.colors.map(c => `<span class="w-5 h-5 rounded-full border border-border-soft" style="background:${c}"></span>`).join('')}
+              </div>
+              <div class="mt-3 pt-3 border-t border-border-soft flex items-center justify-between">
+                <span class="text-[10px] text-muted">Bisa custom warna</span>
+                <a href="https://wa.me/6283173742530?text=Halo%20Fardhan_Store%2C%20saya%20tertarik%20dengan%20motif%20${encodeURIComponent(m.name)}.%20Apakah%20bisa%20dipesan%3F" target="_blank" class="inline-flex items-center gap-1 text-accent text-xs font-semibold hover:gap-2 transition-all">
+                  Pesan <i class="fas fa-arrow-right text-[9px]"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+      AOS.refresh();
+    }
+
+    /* ===== FILTER ===== */
+    window.filterCategory = function(type) {
+      document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.category-tab').forEach(t => {
+        const btnType = t.textContent.toLowerCase().trim();
+        if (type === 'all' && btnType === 'semua') {
+          t.classList.add('active');
+        } else if (btnType === type) {
+          t.classList.add('active');
+        }
+      });
+      renderMotifs(type);
+    };
+
+    /* ===== INIT ===== */
+    renderMotifs('all');
+  });
+  </script>
+</body>
+</html>
