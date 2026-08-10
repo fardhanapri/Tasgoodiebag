@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oval 30 - Detail Ukuran Tas Spunbond - Fardhan_Store</title>
+  <title>Oval 30 - Detail Ukuran Tas Spunbond - ryanti_shopp</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -17,8 +17,6 @@
             muted: '#6b7280',
             'border-soft': '#e5e7eb',
             'surface': '#f9fafb',
-            shopee: '#EE4D2D',
-            'shopee-dark': '#D73211',
             'whatsapp': '#25D366'
           },
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
@@ -41,9 +39,6 @@
     .nav-link:hover::after{width:100%}
     .wa-float{animation:waPulse 2s ease-in-out infinite}
     @keyframes waPulse{0%,100%{box-shadow:0 4px 14px rgba(37,211,102,.4)}50%{box-shadow:0 4px 24px rgba(37,211,102,.6)}}
-    .shopee-bar{transition:all .4s cubic-bezier(.4,0,.2,1)}
-    .shopee-bar.bar-hidden{transform:translateY(-100%);opacity:0;pointer-events:none}
-    .shopee-bar-glow{box-shadow:0 2px 12px rgba(238,77,45,.25)}
     .hero-gradient{background:linear-gradient(145deg,#1e3a5f 0%,#0f2440 100%)}
     .qty-btn{transition:all .15s ease;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#f3f4f6;border:1.5px solid #e5e7eb;cursor:pointer;font-size:18px;font-weight:700;color:#374151}
     .qty-btn:hover{background:#e5e7eb}
@@ -72,35 +67,362 @@
     .qty-wrapper .qty-btn:first-child{border-right:1.5px solid #e5e7eb}
     .qty-wrapper .qty-btn:last-child{border-left:1.5px solid #e5e7eb}
     .qty-wrapper .form-input{border:none;border-radius:0;text-align:center;width:80px;height:40px}
+
+    /* Admin Edit Button */
+    .admin-edit-btn {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 999;
+      background: #1e3a5f;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(30,58,95,.4);
+      transition: all .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .admin-edit-btn:hover { transform: scale(1.1); }
+
+    .admin-panel {
+      position: fixed;
+      top: 0;
+      right: -450px;
+      width: 450px;
+      height: 100vh;
+      background: white;
+      z-index: 1000;
+      box-shadow: -4px 0 30px rgba(0,0,0,.15);
+      transition: right .4s cubic-bezier(.4,0,.2,1);
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .admin-panel.open { right: 0; }
+    .admin-panel .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #f0f0f0;
+      margin-bottom: 20px;
+    }
+    .admin-panel .panel-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e3a5f;
+    }
+    .admin-panel .panel-header .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #6b7280;
+      padding: 0 10px;
+    }
+    .admin-panel .panel-header .close-btn:hover { color: #ef4444; }
+    
+    .admin-item {
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #e5e7eb;
+    }
+    .admin-item .form-row { margin-top: 8px; }
+    .admin-item label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6b7280;
+      display: block;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .admin-item input[type="text"],
+    .admin-item input[type="number"] {
+      width: 100%;
+      padding: 6px 10px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 13px;
+      transition: all .2s ease;
+      background: white;
+    }
+    .admin-item input:focus {
+      border-color: #1e3a5f;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(30,58,95,.08);
+    }
+
+    .image-upload-area {
+      border: 2px dashed #e5e7eb;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      transition: all .3s ease;
+      background: white;
+    }
+    .image-upload-area:hover { border-color: #c8a45a; }
+    .image-upload-area .preview-img {
+      max-height: 150px;
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      object-fit: contain;
+    }
+    .image-upload-area .file-input-wrapper {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .image-upload-area .file-btn {
+      padding: 6px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .image-upload-area .file-btn.primary {
+      background: #1e3a5f;
+      color: white;
+    }
+    .image-upload-area .file-btn.primary:hover { background: #152c4a; }
+    .image-upload-area .file-btn.danger {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    .image-upload-area .file-btn.danger:hover { background: #fecaca; }
+    .image-upload-area .file-name {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+    
+    .admin-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #f0f0f0;
+    }
+    .admin-actions button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .admin-actions .btn-save {
+      background: #c8a45a;
+      color: #1e3a5f;
+    }
+    .admin-actions .btn-save:hover { background: #d4b76a; }
+    
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.3);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease;
+    }
+    .overlay.show { opacity: 1; pointer-events: all; }
+
+    .password-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 1001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.5);
+      backdrop-filter: blur(4px);
+    }
+    .password-popup.show { display: flex; }
+    .password-popup .popup-box {
+      background: white;
+      padding: 40px;
+      border-radius: 24px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      animation: modalIn .3s ease;
+    }
+    @keyframes modalIn {
+      from { transform: scale(.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .password-popup .popup-box h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e3a5f;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .password-popup .popup-box p {
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .password-popup .popup-box .lock-icon {
+      width: 60px;
+      height: 60px;
+      background: #1e3a5f;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .password-popup .popup-box .lock-icon i {
+      font-size: 26px;
+      color: #c8a45a;
+    }
+    .password-popup .popup-box input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .password-popup .popup-box input:focus {
+      border-color: #1e3a5f;
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(30,58,95,.08);
+    }
+    .password-popup .popup-box .popup-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .password-popup .popup-box .popup-actions button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .password-popup .popup-box .popup-actions .btn-confirm {
+      background: #1e3a5f;
+      color: white;
+    }
+    .password-popup .popup-box .popup-actions .btn-confirm:hover { background: #152c4a; }
+    .password-popup .popup-box .popup-actions .btn-confirm:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+    .password-popup .popup-box .popup-actions .btn-cancel {
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+    .password-popup .popup-box .popup-actions .btn-cancel:hover { background: #e5e7eb; }
+    .password-popup .popup-box .error-msg {
+      color: #ef4444;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+    .password-popup .popup-box .error-msg.show { display: block; }
+
+    .toast-notification {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 2000;
+      background: #10b981;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 14px;
+      box-shadow: 0 4px 14px rgba(16,185,129,.3);
+      transform: translateX(120%);
+      transition: transform .4s ease;
+    }
+    .toast-notification.show { transform: translateX(0); }
+    .toast-notification.error { background: #ef4444; box-shadow: 0 4px 14px rgba(239,68,68,.3); }
+    
+    @media (max-width: 640px) {
+      .admin-panel { width: 100%; right: -100%; }
+      .admin-edit-btn { bottom: 70px; right: 15px; width: 44px; height: 44px; font-size: 16px; }
+      .password-popup .popup-box { padding: 24px; }
+      .password-popup .popup-box .popup-actions { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
 
   <div class="scroll-progress" id="scrollProgress"></div>
 
-  <!-- Shopee Bar -->
-  <div id="shopeeBar" class="shopee-bar shopee-bar-glow fixed top-0 left-0 w-full z-[60] bg-shopee">
-    <div class="max-w-7xl mx-auto px-4 lg:px-8 h-[44px] flex items-center justify-between">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="white" fill-opacity="0.2"/><path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="white"/><circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/><circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/></svg>
-        <p class="text-white text-xs sm:text-sm font-bold truncate">Belanja Langsung di Toko Shopee Kami!</p>
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-notification"></div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay" onclick="closeAdminPanel()"></div>
+
+  <!-- Password Popup -->
+  <div class="password-popup" id="passwordPopup">
+    <div class="popup-box">
+      <div class="lock-icon"><i class="fas fa-lock"></i></div>
+      <h2>Verifikasi Admin</h2>
+      <p>Masukkan password untuk mengedit produk ini</p>
+      <input type="password" id="adminPassword" placeholder="Masukkan password admin" onkeydown="if(event.key==='Enter') verifyPassword()">
+      <div class="popup-actions">
+        <button class="btn-cancel" onclick="closePasswordPopup()">Batal</button>
+        <button class="btn-confirm" id="verifyBtn" onclick="verifyPassword()">
+          <i class="fas fa-check mr-1"></i>Verifikasi
+        </button>
       </div>
-      <div class="flex items-center gap-2">
-        <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-white text-shopee text-xs font-bold px-3 py-1.5 rounded-md hover:bg-gray-50 transition-colors whitespace-nowrap">
-          <i class="fas fa-store text-[10px]"></i><span class="hidden sm:inline">Kunjungi Toko</span><span class="sm:hidden">Buka</span>
-        </a>
-        <button id="closeShopeeBar" class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-white/20 transition-colors flex-shrink-0"><i class="fas fa-xmark text-white/80 text-sm"></i></button>
-      </div>
+      <div class="error-msg" id="loginError">❌ Password salah! Coba lagi.</div>
     </div>
   </div>
 
+  <!-- Admin Edit Button -->
+  <button class="admin-edit-btn" id="adminEditBtn" onclick="showPasswordPopup()" title="Edit Produk Ini">
+    <i class="fas fa-pen"></i>
+  </button>
+
+  <!-- Admin Panel -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="panel-header">
+      <h2><i class="fas fa-edit text-accent mr-2"></i>Edit Produk</h2>
+      <button class="close-btn" onclick="closeAdminPanel()"><i class="fas fa-times"></i></button>
+    </div>
+    <p class="text-xs text-muted mb-4">Edit gambar, ukuran, nama, harga, dan deskripsi produk.</p>
+    
+    <div id="adminList"></div>
+    
+    <div class="admin-actions">
+      <button class="btn-save" onclick="saveChanges()"><i class="fas fa-save mr-1"></i>Simpan</button>
+    </div>
+    <p class="text-[10px] text-muted mt-3 text-center">Perubahan akan tersimpan di browser Anda (localStorage)</p>
+  </div>
+
   <!-- Header -->
-  <header id="mainHeader" class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-lg" style="top:44px;border-bottom:1px solid rgba(0,0,0,.05)">
+  <header id="mainHeader" class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-lg top-0 border-b border-border-soft">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
       <div class="flex items-center justify-between h-[68px]">
         <a href="index.html" class="flex items-center gap-2.5 group">
           <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300"><i class="fas fa-bag-shopping text-white text-sm"></i></div>
-          <span class="text-lg font-bold text-primary tracking-tight">Fardhan<span class="text-accent">_Store</span></span>
+          <span class="text-lg font-bold text-primary tracking-tight">ryanti<span class="text-accent">_shopp</span></span>
         </a>
         <nav class="hidden lg:flex items-center gap-6">
           <a href="index.html" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Beranda</a>
@@ -109,7 +431,7 @@
           <a href="index.html#kontak" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Kontak</a>
         </nav>
         <div class="flex items-center gap-2">
-          <a href="https://wa.me/6283173742530" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-whatsapp text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"><i class="fab fa-whatsapp"></i> Chat</a>
+          <a href="https://wa.me/6285221692902" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-whatsapp text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"><i class="fab fa-whatsapp"></i> Chat</a>
           <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-alt transition-colors"><i class="fas fa-bars text-dark text-lg" id="menuIcon"></i></button>
         </div>
       </div>
@@ -120,12 +442,12 @@
         <a href="ukuran.html" class="block py-2.5 px-3 text-sm font-medium text-primary bg-primary/5 rounded-lg transition-colors">Katalog</a>
         <a href="index.html#tentang" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Tentang</a>
         <a href="index.html#kontak" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Kontak</a>
-        <a href="https://wa.me/6283173742530" target="_blank" class="flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-5 py-3 rounded-xl w-full mt-2"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
+        <a href="https://wa.me/6285221692902" target="_blank" class="flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-5 py-3 rounded-xl w-full mt-2"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
       </div>
     </div>
   </header>
 
-  <main style="padding-top:calc(68px + 44px)">
+  <main style="padding-top:68px">
 
     <!-- Hero -->
     <section class="hero-gradient text-white py-10 md:py-14">
@@ -133,11 +455,11 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <a href="ukuran.html" class="inline-flex items-center gap-1 text-white/60 hover:text-white transition-colors text-sm mb-2"><i class="fas fa-arrow-left"></i> Kembali ke Katalog</a>
-            <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight">Oval <span class="text-accent">30</span></h1>
-            <p class="text-white/70 text-sm mt-1">30 × 40 cm • Ukuran sedang untuk berbagai kebutuhan</p>
+            <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight" id="productName">Oval <span class="text-accent">30</span></h1>
+            <p class="text-white/70 text-sm mt-1" id="productSubtitle">30 × 40 cm • Ukuran sedang untuk berbagai kebutuhan</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-ruler-combined text-accent"></i> 30 × 40 cm</span>
+            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-ruler-combined text-accent"></i> <span id="heroSize">30 × 40 cm</span></span>
             <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-layer-group text-accent"></i> 70 GSM</span>
           </div>
         </div>
@@ -152,7 +474,7 @@
           <i class="fas fa-chevron-right text-[8px]"></i>
           <a href="ukuran.html" class="hover:text-primary transition-colors">Katalog</a>
           <i class="fas fa-chevron-right text-[8px]"></i>
-          <span class="text-primary font-semibold">Oval 30</span>
+          <span class="text-primary font-semibold" id="breadcrumbName">Oval 30</span>
         </nav>
       </div>
     </div>
@@ -166,18 +488,22 @@
           <div class="lg:col-span-3">
 
             <!-- Image -->
-            <div class="bg-white rounded-2xl p-8 flex items-center justify-center mb-6 border border-border-soft shadow-sm">
-              <img src="oval30.png" alt="Oval 30" class="max-h-[280px] object-contain drop-shadow-lg">
+            <div class="bg-white rounded-2xl p-8 flex items-center justify-center mb-6 border border-border-soft shadow-sm min-h-[280px]" id="productImageContainer">
+              <img id="productImage" src="oval30.png" alt="Oval 30" class="max-h-[280px] object-contain drop-shadow-lg">
+              <div id="noImagePlaceholder" class="hidden text-gray-400 flex-col items-center select-none">
+                <i class="fas fa-image text-5xl mb-3 opacity-20"></i>
+                <p class="text-sm font-medium opacity-50">Gambar Belum Diatur</p>
+              </div>
             </div>
 
             <!-- Detail Grid -->
             <div class="bg-white border border-border-soft rounded-2xl overflow-hidden shadow-sm">
               <div class="p-5 border-b border-border-soft">
-                <h3 class="text-sm font-bold text-dark flex items-center gap-2"><i class="fas fa-info-circle text-accent"></i> Spesifikasi Oval 30</h3>
+                <h3 class="text-sm font-bold text-dark flex items-center gap-2"><i class="fas fa-info-circle text-accent"></i> Spesifikasi <span id="detailName">Oval 30</span></h3>
               </div>
               <div class="p-5 grid sm:grid-cols-2 gap-4 text-sm">
-                <div><span class="text-muted text-xs uppercase tracking-wider block">Nama</span><span class="font-semibold text-dark">Oval 30</span></div>
-                <div><span class="text-muted text-xs uppercase tracking-wider block">Ukuran</span><span class="font-semibold text-dark">30 × 40 cm</span></div>
+                <div><span class="text-muted text-xs uppercase tracking-wider block">Nama</span><span class="font-semibold text-dark" id="specName">Oval 30</span></div>
+                <div><span class="text-muted text-xs uppercase tracking-wider block">Ukuran</span><span class="font-semibold text-dark" id="specSize">30 × 40 cm</span></div>
                 <div><span class="text-muted text-xs uppercase tracking-wider block">GSM</span><span class="font-semibold text-dark flex gap-1.5 mt-0.5"><span class="gsm-badge gsm-70">70 GSM</span></span></div>
                 <div><span class="text-muted text-xs uppercase tracking-wider block">Area Sablon</span><span class="font-semibold text-dark">24 × 32 cm</span></div>
                 <div><span class="text-muted text-xs uppercase tracking-wider block">Min. Order</span><span class="font-semibold text-dark">10 pcs</span></div>
@@ -185,90 +511,26 @@
                 <div class="sm:col-span-2">
                   <span class="text-muted text-xs uppercase tracking-wider block mb-2">Pilihan Warna</span>
                   <div class="color-grid" id="colorPalette">
-                    <!-- Baris 1 -->
-                    <div class="color-item active" data-color="Hitam" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#1a1a1a"></span>
-                      <span class="color-name">Hitam</span>
-                    </div>
-                    <div class="color-item" data-color="Krem" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#f5e6d3"></span>
-                      <span class="color-name">Krem</span>
-                    </div>
-                    <div class="color-item" data-color="Kuning" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#fcd34d"></span>
-                      <span class="color-name">Kuning</span>
-                    </div>
-                    <div class="color-item" data-color="Tosca" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#0d9488"></span>
-                      <span class="color-name">Tosca</span>
-                    </div>
-                    <div class="color-item" data-color="Pocari" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#7dd3fc"></span>
-                      <span class="color-name">Pocari</span>
-                    </div>
-                    <!-- Baris 2 -->
-                    <div class="color-item" data-color="Fanta" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#fb923c"></span>
-                      <span class="color-name">Fanta</span>
-                    </div>
-                    <div class="color-item" data-color="Merah" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#dc2626"></span>
-                      <span class="color-name">Merah</span>
-                    </div>
-                    <div class="color-item" data-color="Hijau Tua" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#166534"></span>
-                      <span class="color-name">Hijau Tua</span>
-                    </div>
-                    <div class="color-item" data-color="Putih" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#ffffff;border-color:#d1d5db"></span>
-                      <span class="color-name">Putih</span>
-                    </div>
-                    <div class="color-item" data-color="Orange" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#f97316"></span>
-                      <span class="color-name">Orange</span>
-                    </div>
-                    <!-- Baris 3 -->
-                    <div class="color-item" data-color="Ungu" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#7c3aed"></span>
-                      <span class="color-name">Ungu</span>
-                    </div>
-                    <div class="color-item" data-color="Biru Muda" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#60a5fa"></span>
-                      <span class="color-name">Biru Muda</span>
-                    </div>
-                    <div class="color-item" data-color="Pink Muda" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#f472b6"></span>
-                      <span class="color-name">Pink Muda</span>
-                    </div>
-                    <div class="color-item" data-color="Navy" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#1e293b"></span>
-                      <span class="color-name">Navy</span>
-                    </div>
-                    <div class="color-item" data-color="Abu" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#6b7280"></span>
-                      <span class="color-name">Abu</span>
-                    </div>
-                    <!-- Baris 4 -->
-                    <div class="color-item" data-color="Maroon" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#991b1b"></span>
-                      <span class="color-name">Maroon</span>
-                    </div>
-                    <div class="color-item" data-color="Biru Tua" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#1e40af"></span>
-                      <span class="color-name">Biru Tua</span>
-                    </div>
-                    <div class="color-item" data-color="Hijau Muda" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#4ade80"></span>
-                      <span class="color-name">Hijau Muda</span>
-                    </div>
-                    <div class="color-item" data-color="Moka" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:#a67c52"></span>
-                      <span class="color-name">Moka</span>
-                    </div>
-                    <div class="color-item" data-color="Mix Warna" onclick="selectColor(this)">
-                      <span class="color-circle" style="background:linear-gradient(135deg,#dc2626,#fcd34d,#2563eb,#16a34a)"></span>
-                      <span class="color-name">Mix Warna</span>
-                    </div>
+                    <div class="color-item active" data-color="Hitam" onclick="selectColor(this)"><span class="color-circle" style="background:#1a1a1a"></span><span class="color-name">Hitam</span></div>
+                    <div class="color-item" data-color="Krem" onclick="selectColor(this)"><span class="color-circle" style="background:#f5e6d3"></span><span class="color-name">Krem</span></div>
+                    <div class="color-item" data-color="Kuning" onclick="selectColor(this)"><span class="color-circle" style="background:#fcd34d"></span><span class="color-name">Kuning</span></div>
+                    <div class="color-item" data-color="Tosca" onclick="selectColor(this)"><span class="color-circle" style="background:#0d9488"></span><span class="color-name">Tosca</span></div>
+                    <div class="color-item" data-color="Pocari" onclick="selectColor(this)"><span class="color-circle" style="background:#7dd3fc"></span><span class="color-name">Pocari</span></div>
+                    <div class="color-item" data-color="Fanta" onclick="selectColor(this)"><span class="color-circle" style="background:#fb923c"></span><span class="color-name">Fanta</span></div>
+                    <div class="color-item" data-color="Merah" onclick="selectColor(this)"><span class="color-circle" style="background:#dc2626"></span><span class="color-name">Merah</span></div>
+                    <div class="color-item" data-color="Hijau Tua" onclick="selectColor(this)"><span class="color-circle" style="background:#166534"></span><span class="color-name">Hijau Tua</span></div>
+                    <div class="color-item" data-color="Putih" onclick="selectColor(this)"><span class="color-circle" style="background:#ffffff;border-color:#d1d5db"></span><span class="color-name">Putih</span></div>
+                    <div class="color-item" data-color="Orange" onclick="selectColor(this)"><span class="color-circle" style="background:#f97316"></span><span class="color-name">Orange</span></div>
+                    <div class="color-item" data-color="Ungu" onclick="selectColor(this)"><span class="color-circle" style="background:#7c3aed"></span><span class="color-name">Ungu</span></div>
+                    <div class="color-item" data-color="Biru Muda" onclick="selectColor(this)"><span class="color-circle" style="background:#60a5fa"></span><span class="color-name">Biru Muda</span></div>
+                    <div class="color-item" data-color="Pink Muda" onclick="selectColor(this)"><span class="color-circle" style="background:#f472b6"></span><span class="color-name">Pink Muda</span></div>
+                    <div class="color-item" data-color="Navy" onclick="selectColor(this)"><span class="color-circle" style="background:#1e293b"></span><span class="color-name">Navy</span></div>
+                    <div class="color-item" data-color="Abu" onclick="selectColor(this)"><span class="color-circle" style="background:#6b7280"></span><span class="color-name">Abu</span></div>
+                    <div class="color-item" data-color="Maroon" onclick="selectColor(this)"><span class="color-circle" style="background:#991b1b"></span><span class="color-name">Maroon</span></div>
+                    <div class="color-item" data-color="Biru Tua" onclick="selectColor(this)"><span class="color-circle" style="background:#1e40af"></span><span class="color-name">Biru Tua</span></div>
+                    <div class="color-item" data-color="Hijau Muda" onclick="selectColor(this)"><span class="color-circle" style="background:#4ade80"></span><span class="color-name">Hijau Muda</span></div>
+                    <div class="color-item" data-color="Moka" onclick="selectColor(this)"><span class="color-circle" style="background:#a67c52"></span><span class="color-name">Moka</span></div>
+                    <div class="color-item" data-color="Mix Warna" onclick="selectColor(this)"><span class="color-circle" style="background:linear-gradient(135deg,#dc2626,#fcd34d,#2563eb,#16a34a)"></span><span class="color-name">Mix Warna</span></div>
                   </div>
                   <p class="text-xs text-muted mt-2">Warna terpilih: <span id="selectedColorLabel" class="font-semibold text-dark">Hitam</span></p>
                 </div>
@@ -278,7 +540,7 @@
             <!-- Price Table -->
             <div class="bg-white border border-border-soft rounded-2xl overflow-hidden shadow-sm mt-6">
               <div class="p-4 border-b border-border-soft">
-                <h3 class="text-sm font-bold text-dark flex items-center gap-2"><i class="fas fa-table-list text-accent"></i> Tabel Harga Oval 30</h3>
+                <h3 class="text-sm font-bold text-dark flex items-center gap-2"><i class="fas fa-table-list text-accent"></i> Tabel Harga <span id="priceName">Oval 30</span></h3>
               </div>
               <div class="overflow-x-auto">
                 <table class="price-table w-full">
@@ -292,7 +554,7 @@
                   <tbody>
                     <tr class="highlight">
                       <td class="font-bold text-left">70 GSM</td>
-                      <td>Rp 1.300</td>
+                      <td id="tablePrice">Rp 1.300</td>
                       <td>10 pcs</td>
                     </tr>
                   </tbody>
@@ -315,7 +577,7 @@
                 <div class="space-y-3.5">
                   <div>
                     <label class="block text-[11px] font-semibold text-muted uppercase tracking-wider mb-1">Ukuran</label>
-                    <div class="bg-surface border border-border-soft rounded-xl px-4 py-2.5 text-sm font-semibold text-dark">Oval 30 — 30 × 40 cm</div>
+                    <div class="bg-surface border border-border-soft rounded-xl px-4 py-2.5 text-sm font-semibold text-dark" id="calcSize">Oval 30 — 30 × 40 cm</div>
                   </div>
                   <div>
                     <label class="block text-[11px] font-semibold text-muted uppercase tracking-wider mb-1">GSM</label>
@@ -349,7 +611,6 @@
 
                 <div class="flex gap-2.5 mt-4">
                   <a id="waOrderLink" href="#" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 bg-whatsapp text-white font-bold py-3 rounded-xl hover:bg-opacity-90 transition-colors text-sm"><i class="fab fa-whatsapp text-base"></i>Pesan via WA</a>
-                  <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener" class="inline-flex items-center justify-center bg-shopee text-white font-bold py-3 px-4 rounded-xl hover:bg-shopee-dark transition-colors"><i class="fas fa-bag-shopping"></i></a>
                 </div>
               </div>
 
@@ -386,8 +647,7 @@
         <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">Butuh <span class="text-accent">Penawaran</span> Khusus?</h2>
         <p class="text-white/70 text-base mb-6">Dapatkan harga terbaik untuk pesanan dalam jumlah besar</p>
         <div class="flex flex-wrap justify-center gap-3">
-          <a href="https://wa.me/6283173742530" target="_blank" class="inline-flex items-center gap-2 bg-accent text-primary font-bold px-7 py-3.5 rounded-xl hover:bg-opacity-90 transition-all text-sm shadow-lg shadow-accent/20"><i class="fab fa-whatsapp text-lg"></i>Hubungi WhatsApp</a>
-          <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-shopee text-white font-bold px-7 py-3.5 rounded-xl hover:bg-shopee-dark transition-all text-sm"><i class="fas fa-bag-shopping"></i>Belanja di Shopee</a>
+          <a href="https://wa.me/6285221692902" target="_blank" class="inline-flex items-center gap-2 bg-accent text-primary font-bold px-7 py-3.5 rounded-xl hover:bg-opacity-90 transition-all text-sm shadow-lg shadow-accent/20"><i class="fab fa-whatsapp text-lg"></i>Hubungi WhatsApp</a>
         </div>
       </div>
     </section>
@@ -398,7 +658,7 @@
     <div class="max-w-7xl mx-auto px-4 lg:px-8 py-12">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
-          <a href="index.html" class="flex items-center gap-2.5 mb-4"><span class="text-lg font-bold">Fardhan<span class="text-accent">_Store</span></span></a>
+          <a href="index.html" class="flex items-center gap-2.5 mb-4"><span class="text-lg font-bold">ryanti<span class="text-accent">_shopp</span></span></a>
           <p class="text-gray-400 text-sm leading-relaxed">Spesialis tas spunbond custom berkualitas untuk souvenir, promosi, dan kebutuhan event.</p>
         </div>
         <div>
@@ -421,15 +681,15 @@
         <div>
           <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-white">Kontak</h4>
           <ul class="space-y-2 text-sm text-gray-400">
-            <li class="flex items-start gap-2"><i class="fas fa-phone text-accent text-xs mt-1"></i>+62 831-7374-2530</li>
+            <li class="flex items-start gap-2"><i class="fas fa-user text-accent text-xs mt-1"></i>Hendar Sulistiana</li>
+            <li class="flex items-start gap-2"><i class="fas fa-phone text-accent text-xs mt-1"></i>+62 852-2169-2902</li>
             <li class="flex items-start gap-2"><i class="fas fa-envelope text-accent text-xs mt-1"></i>fardanapriansyah10@gmail.com</li>
           </ul>
         </div>
       </div>
       <div class="border-t border-white/5 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
-        <p>&copy; 2025 Fardhan_Store. All rights reserved.</p>
+        <p>&copy; 2025 ryanti_shopp. All rights reserved.</p>
         <div class="flex gap-4 mt-2 sm:mt-0">
-          <a href="https://shopee.co.id/fardhanapri" target="_blank" class="hover:text-accent transition-colors"><i class="fas fa-bag-shopping"></i> Shopee</a>
           <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-instagram"></i></a>
           <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-whatsapp"></i></a>
         </div>
@@ -438,39 +698,330 @@
   </footer>
 
   <!-- Floating Buttons -->
-  <a href="https://wa.me/6283173742530" target="_blank" class="wa-float fixed bottom-6 left-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform"><i class="fab fa-whatsapp text-2xl"></i></a>
-  <a href="https://shopee.co.id/fardhanapri" target="_blank" rel="noopener" class="fixed bottom-6 right-6 bg-shopee text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform" style="box-shadow:0 4px 14px rgba(238,77,45,.4)"><i class="fas fa-bag-shopping text-xl"></i></a>
+  <a href="https://wa.me/6285221692902" target="_blank" class="wa-float fixed bottom-6 left-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform"><i class="fab fa-whatsapp text-2xl"></i></a>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+  // ============================================================
+  // SISTEM ADMIN EDIT UNTUK HALAMAN PRODUK
+  // ============================================================
+
+  const ADMIN_PASSWORD = 'admin123';
+  let isLoggedIn = false; // Hanya disimpan di memori sementara, tidak disimpan di localStorage
+
+  // Data produk yang bisa diedit
+  let productData = {
+    name: 'Oval 30',
+    size: '30 × 40 cm',
+    img: 'oval30.png',
+    desc: 'Ukuran sedang untuk berbagai kebutuhan',
+    price: 1300
+  };
+
+  let tempImageData = null;
+  let tempImageName = '';
+  let imageRemoved = false; 
+
+  // ===== TAMPILKAN POPUP PASSWORD =====
+  function showPasswordPopup() {
+    // Selalu tampilkan popup password setiap kali tombol edit diklik
+    document.getElementById('passwordPopup').classList.add('show');
+    document.getElementById('adminPassword').value = '';
+    document.getElementById('adminPassword').focus();
+    document.getElementById('loginError').classList.remove('show');
+  }
+
+  function closePasswordPopup() {
+    document.getElementById('passwordPopup').classList.remove('show');
+    document.getElementById('loginError').classList.remove('show');
+  }
+
+  function verifyPassword() {
+    const input = document.getElementById('adminPassword');
+    const btn = document.getElementById('verifyBtn');
+    const error = document.getElementById('loginError');
+    const password = input.value.trim();
+
+    if (!password) {
+      error.textContent = '⚠️ Masukkan password terlebih dahulu!';
+      error.classList.add('show');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Memeriksa...';
+
+    setTimeout(() => {
+      if (password === ADMIN_PASSWORD) {
+        isLoggedIn = true; // Set status login di memori
+        closePasswordPopup();
+        openAdminPanel();
+        showToast('✅ Login berhasil!', 'success');
+        input.value = '';
+      } else {
+        error.textContent = '❌ Password salah! Coba lagi.';
+        error.classList.add('show');
+        input.value = '';
+        input.focus();
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-check mr-1"></i>Verifikasi';
+    }, 800);
+  }
+
+  // ===== BUKA ADMIN PANEL =====
+  function openAdminPanel() {
+    if (!isLoggedIn) {
+      showPasswordPopup();
+      return;
+    }
+    const panel = document.getElementById('adminPanel');
+    const overlay = document.getElementById('overlay');
+    
+    panel.classList.add('open');
+    overlay.classList.add('show');
+    renderAdminPanel();
+  }
+
+  function closeAdminPanel() {
+    document.getElementById('adminPanel').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+    // Saat panel ditutup, reset status login agar harus memasukkan password lagi saat dibuka kembali
+    isLoggedIn = false; 
+  }
+
+  function renderAdminPanel() {
+    if (!isLoggedIn) return;
+    
+    imageRemoved = false;
+    tempImageData = null;
+    
+    const container = document.getElementById('adminList');
+    const currentImg = productData.img || '';
+    const isBase64 = currentImg.startsWith('data:image');
+    
+    container.innerHTML = `
+      <div class="admin-item">
+        <div class="form-row">
+          <label>Gambar Produk</label>
+          <div class="image-upload-area">
+            <div id="imagePreviewContainer">
+              ${currentImg ? `<img id="editImagePreview" src="${currentImg}" alt="Preview" class="preview-img">` : '<p style="color:#9ca3af;font-size:13px;padding:10px 0;">Belum ada gambar</p>'}
+            </div>
+            <div class="file-input-wrapper">
+              <button class="file-btn primary" onclick="document.getElementById('fileInput').click()">
+                <i class="fas fa-folder-open mr-1"></i>Pilih Gambar
+              </button>
+              <button class="file-btn danger" onclick="removeImage()">
+                <i class="fas fa-trash mr-1"></i>Hapus
+              </button>
+            </div>
+            <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleImageSelect(event)">
+            <div class="file-name" id="fileNameDisplay">${isBase64 ? 'Gambar dari file' : (currentImg || 'Tidak ada gambar')}</div>
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-top:10px;">
+          <label>Nama Produk</label>
+          <input type="text" id="editName" value="${productData.name}" placeholder="Nama produk">
+        </div>
+        <div class="form-row" style="margin-top:10px;">
+          <label>Ukuran</label>
+          <input type="text" id="editSize" value="${productData.size}" placeholder="Contoh: 30 × 40 cm">
+        </div>
+        <div class="form-row" style="margin-top:10px;">
+          <label>Harga (Rp)</label>
+          <input type="number" id="editPrice" value="${productData.price}" placeholder="Contoh: 1300">
+        </div>
+        <div class="form-row" style="margin-top:10px;">
+          <label>Deskripsi Singkat</label>
+          <input type="text" id="editDesc" value="${productData.desc}" placeholder="Deskripsi produk">
+        </div>
+      </div>
+    `;
+  }
+
+  function handleImageSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      tempImageData = e.target.result;
+      tempImageName = file.name;
+      imageRemoved = false; 
+      
+      const previewContainer = document.getElementById('imagePreviewContainer');
+      previewContainer.innerHTML = `<img id="editImagePreview" src="${tempImageData}" alt="Preview" class="preview-img">`;
+      document.getElementById('fileNameDisplay').textContent = `📎 ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+      showToast('✅ Gambar berhasil dipilih!', 'success');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function removeImage() {
+    tempImageData = null;
+    tempImageName = '';
+    imageRemoved = true; 
+    document.getElementById('fileInput').value = '';
+    
+    const previewContainer = document.getElementById('imagePreviewContainer');
+    previewContainer.innerHTML = '<p style="color:#dc2626;font-size:13px;padding:10px 0;font-weight:600;">🗑️ Gambar akan dihapus saat disimpan</p>';
+    document.getElementById('fileNameDisplay').textContent = 'Tidak ada gambar';
+    showToast('🗑️ Gambar dihapus, jangan lupa klik Simpan', 'info');
+  }
+
+  function saveChanges() {
+    const name = document.getElementById('editName').value.trim() || productData.name;
+    const size = document.getElementById('editSize').value.trim() || productData.size;
+    const desc = document.getElementById('editDesc').value.trim() || productData.desc;
+    const price = parseInt(document.getElementById('editPrice').value) || 0;
+
+    let img = productData.img; 
+    
+    if (tempImageData) {
+      img = tempImageData;
+    } else if (imageRemoved) {
+      img = ''; // Kosongkan total
+    }
+
+    productData.name = name;
+    productData.size = size;
+    productData.img = img;
+    productData.desc = desc;
+    productData.price = price;
+
+    tempImageData = null;
+    tempImageName = '';
+    imageRemoved = false;
+
+    localStorage.setItem('fardhan_product_oval30', JSON.stringify(productData));
+    updateDisplay();
+    showToast('✅ Produk berhasil diperbarui!', 'success');
+  }
+
+  function updateDisplay() {
+    const imgElement = document.getElementById('productImage');
+    const placeholderElement = document.getElementById('noImagePlaceholder');
+    
+    // Cek gambar
+    if (productData.img && productData.img !== '') {
+      imgElement.src = productData.img;
+      imgElement.style.display = 'block';
+      imgElement.alt = productData.name;
+      placeholderElement.style.display = 'none';
+    } else {
+      imgElement.src = '';
+      imgElement.style.display = 'none';
+      placeholderElement.style.display = 'flex'; 
+    }
+
+    // Update teks biasa (Cari angka di nama produk dan beri warna accent tanpa menduplikatinya)
+    const nameText = productData.name;
+    const match = nameText.match(/\d+/);
+    if (match) {
+      const num = match[0];
+      document.getElementById('productName').innerHTML = nameText.replace(num, `<span class="text-accent">${num}</span>`);
+    } else {
+      document.getElementById('productName').textContent = nameText;
+    }
+
+    document.getElementById('productSubtitle').textContent = `${productData.size} • ${productData.desc}`;
+    document.getElementById('heroSize').textContent = productData.size;
+    document.getElementById('breadcrumbName').textContent = productData.name;
+    document.getElementById('detailName').textContent = productData.name;
+    document.getElementById('specName').textContent = productData.name;
+    document.getElementById('specSize').textContent = productData.size;
+    document.getElementById('priceName').textContent = productData.name;
+    document.getElementById('calcSize').textContent = `${productData.name} — ${productData.size}`;
+
+    // Update harga di tabel
+    document.getElementById('tablePrice').textContent = 'Rp ' + productData.price.toLocaleString('id-ID');
+
+    // Update kalkulator
+    updateCalc();
+  }
+
+  function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = 'toast-notification ' + (type === 'error' ? 'error' : '');
+    setTimeout(() => toast.classList.add('show'), 10);
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  // ============================================================
+  // FUNGSI UTAMA HALAMAN
+  // ============================================================
+
+  function selectColor(el) {
+    document.querySelectorAll('.color-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('selectedColorLabel').textContent = el.dataset.color;
+    updateCalc();
+  }
+
+  const MIN_ORDER = 10;
+
+  function updateCalc() {
+    const qty = Math.max(MIN_ORDER, parseInt(document.getElementById('qtyInput').value) || MIN_ORDER);
+    const price = productData.price; 
+    const total = price * qty;
+    
+    document.getElementById('pricePerPcs').textContent = 'Rp ' + price.toLocaleString('id-ID');
+    document.getElementById('qtyDisplay').textContent = qty.toLocaleString('id-ID') + ' pcs';
+    document.getElementById('totalPrice').textContent = 'Rp ' + total.toLocaleString('id-ID');
+
+    const msg = encodeURIComponent(
+      `Halo ryanti_shopp\n\nSaya ingin memesan:\n\n` +
+      `Jenis Tas : ${productData.name}\n` +
+      `Ukuran : ${productData.size}\n` +
+      `Bahan : 70 GSM\n` +
+      `Warna : ${document.getElementById('selectedColorLabel').textContent}\n` +
+      `Jumlah : ${qty} pcs\n\n` +
+      `Harga per pcs : Rp ${price.toLocaleString('id-ID')}\n` +
+      `Total estimasi : Rp ${total.toLocaleString('id-ID')}\n\n` +
+      `Mohon penawaran terbaik.\n` +
+      `Terima kasih.`
+    );
+    document.getElementById('waOrderLink').href = 'https://wa.me/6285221692902?text=' + msg;
+  }
+
+  function changeQty(delta) {
+    const inp = document.getElementById('qtyInput');
+    let v = (parseInt(inp.value) || MIN_ORDER) + delta;
+    if (v < MIN_ORDER) v = MIN_ORDER;
+    inp.value = v;
+    updateCalc();
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     AOS.init({ duration: 600, once: true, offset: 60 });
 
-    // Data harga Oval 30 - Hanya 70 GSM
-    const PRICE_PER_PCS = 1300;
-    const MIN_ORDER = 10;
-
-    let selectedColor = 'Hitam';
-
-    /* ===== SHOPEE BAR ===== */
-    const shopeeBar = document.getElementById('shopeeBar');
-    if (localStorage.getItem('shopeeBarDismissed') === 'true' && localStorage.getItem('shopeeBarDismissedAt') && (Date.now() - parseInt(localStorage.getItem('shopeeBarDismissedAt')) < 86400000)) {
-      shopeeBar.classList.add('bar-hidden');
+    // Load data produk dari localStorage
+    const stored = localStorage.getItem('fardhan_product_oval30');
+    if (stored) {
+      try {
+        const data = JSON.parse(stored);
+        productData.name = data.name || productData.name;
+        productData.size = data.size || productData.size;
+        if (data.img !== undefined) {
+          productData.img = data.img;
+        }
+        productData.desc = data.desc || productData.desc;
+        productData.price = data.price || productData.price; 
+      } catch (e) {}
     }
-    document.getElementById('closeShopeeBar').addEventListener('click', function() {
-      shopeeBar.classList.add('bar-hidden');
-      localStorage.setItem('shopeeBarDismissed', 'true');
-      localStorage.setItem('shopeeBarDismissedAt', Date.now().toString());
-    });
 
-    /* ===== SCROLL ===== */
+    updateDisplay();
+
     window.addEventListener('scroll', function() {
       const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight;
       document.getElementById('scrollProgress').style.width = (s / d * 100) + '%';
       document.getElementById('mainHeader').classList.toggle('header-scrolled', s > 20);
     });
 
-    /* ===== MOBILE MENU ===== */
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     const menuIcon = document.getElementById('menuIcon');
@@ -480,58 +1031,26 @@
       menuIcon.className = open ? 'fas fa-bars text-dark text-lg' : 'fas fa-xmark text-dark text-lg';
     });
 
-    /* ===== COLOR SELECTOR ===== */
-    function selectColor(el) {
-      document.querySelectorAll('.color-item').forEach(item => item.classList.remove('active'));
-      el.classList.add('active');
-      selectedColor = el.dataset.color;
-      document.getElementById('selectedColorLabel').textContent = selectedColor;
-      updateCalc();
-    }
-    window.selectColor = selectColor;
-
-    /* ===== CALCULATOR ===== */
-    function updateCalc() {
-      const qty = Math.max(MIN_ORDER, parseInt(document.getElementById('qtyInput').value) || MIN_ORDER);
-      const price = PRICE_PER_PCS;
-      const total = price * qty;
-      
-      document.getElementById('pricePerPcs').textContent = 'Rp ' + price.toLocaleString('id-ID');
-      document.getElementById('qtyDisplay').textContent = qty.toLocaleString('id-ID') + ' pcs';
-      document.getElementById('totalPrice').textContent = 'Rp ' + total.toLocaleString('id-ID');
-
-      const msg = encodeURIComponent(
-        `Halo Fardhan_Store\n\nSaya ingin memesan:\n\n` +
-        `Jenis Tas : Oval 30\n` +
-        `Ukuran : 30 × 40 cm\n` +
-        `Bahan : 70 GSM\n` +
-        `Warna : ${selectedColor}\n` +
-        `Jumlah : ${qty} pcs\n\n` +
-        `Harga per pcs : Rp ${price.toLocaleString('id-ID')}\n` +
-        `Total estimasi : Rp ${total.toLocaleString('id-ID')}\n\n` +
-        `Mohon penawaran terbaik.\n` +
-        `Terima kasih.`
-      );
-      document.getElementById('waOrderLink').href = 'https://wa.me/6283173742530?text=' + msg;
-    }
-
-    window.changeQty = function(delta) {
-      const inp = document.getElementById('qtyInput');
-      let v = (parseInt(inp.value) || MIN_ORDER) + delta;
-      if (v < MIN_ORDER) v = MIN_ORDER;
-      inp.value = v;
-      updateCalc();
-    };
-
     document.getElementById('qtyInput').addEventListener('input', function() {
       let v = parseInt(this.value);
       if (isNaN(v) || v < MIN_ORDER) this.value = MIN_ORDER;
       updateCalc();
     });
 
-    /* ===== INIT ===== */
     updateCalc();
   });
+
+  // Expose fungsi ke global agar inline onclick bisa bekerja
+  window.showPasswordPopup = showPasswordPopup;
+  window.closePasswordPopup = closePasswordPopup;
+  window.verifyPassword = verifyPassword;
+  window.openAdminPanel = openAdminPanel;
+  window.closeAdminPanel = closeAdminPanel;
+  window.saveChanges = saveChanges;
+  window.selectColor = selectColor;
+  window.changeQty = changeQty;
+  window.handleImageSelect = handleImageSelect;
+  window.removeImage = removeImage;
   </script>
 </body>
 </html>

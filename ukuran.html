@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Katalog Ukuran Tas Spunbond - fardhan_storee</title>
+  <title>Katalog Ukuran Tas Spunbond - ryanti_shopp</title>
   <meta name="description" content="Katalog lengkap ukuran tas spunbond dari Oval, TLS, Box Bag, Goodie Bag, dan Tote Bag. Tersedia 3 pilihan GSM dan berbagai jenis handle.">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,8 +23,6 @@
             'border-soft': '#e5e7eb',
             'surface': '#f9fafb',
             'surface-alt': '#f3f4f6',
-            shopee: '#EE4D2D',
-            'shopee-dark': '#D73211',
             'whatsapp': '#25D366'
           },
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
@@ -51,10 +49,6 @@
     .wa-float{animation:waPulse 2s ease-in-out infinite}
     @keyframes waPulse{0%,100%{box-shadow:0 4px 14px rgba(37,211,102,.4)}50%{box-shadow:0 4px 24px rgba(37,211,102,.6)}}
     
-    .shopee-bar{transition:all .4s cubic-bezier(.4,0,.2,1)}
-    .shopee-bar.bar-hidden{transform:translateY(-100%);opacity:0;pointer-events:none}
-    .shopee-bar-glow{box-shadow:0 2px 12px rgba(238,77,45,.25)}
-    
     .size-card{transition:all .3s ease;border:2px solid #f0f0f0;cursor:pointer;position:relative}
     .size-card:hover{border-color:#c8a45a;box-shadow:0 4px 20px rgba(0,0,0,.06);transform:translateY(-4px)}
     .size-card .card-badge{position:absolute;top:-8px;right:12px;background:#1e3a5f;color:#fff;font-size:8px;font-weight:700;padding:2px 10px;border-radius:10px;text-transform:uppercase;letter-spacing:.05em}
@@ -70,38 +64,342 @@
     .tabs-scroll::-webkit-scrollbar{display:none}
     
     .gsm-badge{display:inline-block;padding:2px 12px;border-radius:12px;font-size:10px;font-weight:700}
+    .gsm-65{background:#dbeafe;color:#1e40af}
     .gsm-70{background:#e0f2fe;color:#0369a1}
     .gsm-75{background:#fef3c7;color:#92400e}
     .gsm-100{background:#d1fae5;color:#065f46}
+
+    .admin-toggle {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 999;
+      background: #1e3a5f;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(30,58,95,.4);
+      transition: all .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .admin-toggle:hover { transform: scale(1.1); }
+    .admin-toggle.active { background: #ef4444; }
+    
+    .admin-panel {
+      position: fixed;
+      top: 0;
+      right: -450px;
+      width: 450px;
+      height: 100vh;
+      background: white;
+      z-index: 1000;
+      box-shadow: -4px 0 30px rgba(0,0,0,.15);
+      transition: right .4s cubic-bezier(.4,0,.2,1);
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .admin-panel.open { right: 0; }
+    .admin-panel .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #f0f0f0;
+      margin-bottom: 20px;
+    }
+    .admin-panel .panel-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e3a5f;
+    }
+    .admin-panel .panel-header .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #6b7280;
+      padding: 0 10px;
+    }
+    .admin-panel .panel-header .close-btn:hover { color: #ef4444; }
+    
+    .admin-item {
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #e5e7eb;
+      transition: all .2s ease;
+    }
+    .admin-item:hover { border-color: #c8a45a; }
+    .admin-item .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .admin-item .item-header h4 {
+      font-weight: 600;
+      font-size: 14px;
+      color: #111827;
+    }
+    .admin-item .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .admin-item .form-row .full { grid-column: 1 / -1; }
+    .admin-item label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6b7280;
+      display: block;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .admin-item input, .admin-item select {
+      width: 100%;
+      padding: 6px 10px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 13px;
+      transition: all .2s ease;
+      background: white;
+    }
+    .admin-item input:focus, .admin-item select:focus {
+      border-color: #1e3a5f;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(30,58,95,.08);
+    }
+    
+    .admin-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #f0f0f0;
+    }
+    .admin-actions button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .admin-actions .btn-save {
+      background: #c8a45a;
+      color: #1e3a5f;
+    }
+    .admin-actions .btn-save:hover { background: #d4b76a; }
+    
+    .toast-notification {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 2000;
+      background: #10b981;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 14px;
+      box-shadow: 0 4px 14px rgba(16,185,129,.3);
+      transform: translateX(120%);
+      transition: transform .4s ease;
+    }
+    .toast-notification.show { transform: translateX(0); }
+    .toast-notification.error { background: #ef4444; box-shadow: 0 4px 14px rgba(239,68,68,.3); }
+    
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.3);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease;
+    }
+    .overlay.show { opacity: 1; pointer-events: all; }
+
+    .password-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 1001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.5);
+      backdrop-filter: blur(4px);
+    }
+    .password-popup.show { display: flex; }
+    .password-popup .popup-box {
+      background: white;
+      padding: 40px;
+      border-radius: 24px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      animation: modalIn .3s ease;
+    }
+    @keyframes modalIn {
+      from { transform: scale(.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .password-popup .popup-box h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e3a5f;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .password-popup .popup-box p {
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .password-popup .popup-box .lock-icon {
+      width: 60px;
+      height: 60px;
+      background: #1e3a5f;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .password-popup .popup-box .lock-icon i {
+      font-size: 26px;
+      color: #c8a45a;
+    }
+    .password-popup .popup-box input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      transition: all .2s ease;
+    }
+    .password-popup .popup-box input:focus {
+      border-color: #1e3a5f;
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(30,58,95,.08);
+    }
+    .password-popup .popup-box .popup-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .password-popup .popup-box .popup-actions button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .password-popup .popup-box .popup-actions .btn-confirm {
+      background: #1e3a5f;
+      color: white;
+    }
+    .password-popup .popup-box .popup-actions .btn-confirm:hover { background: #152c4a; }
+    .password-popup .popup-box .popup-actions .btn-confirm:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+    .password-popup .popup-box .popup-actions .btn-cancel {
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+    .password-popup .popup-box .popup-actions .btn-cancel:hover { background: #e5e7eb; }
+    .password-popup .popup-box .error-msg {
+      color: #ef4444;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+    .password-popup .popup-box .error-msg.show { display: block; }
+    
+    @media (max-width: 640px) {
+      .admin-panel { width: 100%; right: -100%; }
+      .admin-item .form-row { grid-template-columns: 1fr; }
+      .admin-toggle { bottom: 70px; right: 15px; width: 44px; height: 44px; font-size: 16px; }
+      .password-popup .popup-box { padding: 24px; }
+      .password-popup .popup-box .popup-actions { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
 
   <div class="scroll-progress" id="scrollProgress"></div>
 
-  <!-- Shopee Bar -->
-  <div id="shopeeBar" class="shopee-bar shopee-bar-glow fixed top-0 left-0 w-full z-[60] bg-shopee">
-    <div class="max-w-7xl mx-auto px-4 lg:px-8 h-[44px] flex items-center justify-between">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="white" fill-opacity="0.2"/><path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="white"/><circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/><circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/></svg>
-        <p class="text-white text-xs sm:text-sm font-bold truncate">Belanja Langsung di Toko Shopee Kami!</p>
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-notification"></div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay" onclick="closeAdminPanel()"></div>
+
+  <!-- Password Popup -->
+  <div class="password-popup" id="passwordPopup">
+    <div class="popup-box">
+      <div class="lock-icon">
+        <i class="fas fa-lock"></i>
       </div>
-      <div class="flex items-center gap-2">
-        <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-white text-shopee text-xs font-bold px-3 py-1.5 rounded-md hover:bg-gray-50 transition-colors whitespace-nowrap">
-          <i class="fas fa-store text-[10px]"></i><span class="hidden sm:inline">Kunjungi Toko</span><span class="sm:hidden">Buka</span>
-        </a>
-        <button id="closeShopeeBar" class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-white/20 transition-colors flex-shrink-0"><i class="fas fa-xmark text-white/80 text-sm"></i></button>
+      <h2>Verifikasi Admin</h2>
+      <p>Masukkan password untuk mengelola katalog</p>
+      <input type="password" id="adminPassword" placeholder="Masukkan password admin" onkeydown="if(event.key==='Enter') verifyPassword()">
+      <div class="popup-actions">
+        <button class="btn-cancel" onclick="closePasswordPopup()">Batal</button>
+        <button class="btn-confirm" id="verifyBtn" onclick="verifyPassword()">
+          <i class="fas fa-check mr-1"></i>Verifikasi
+        </button>
       </div>
+      <div class="error-msg" id="loginError">❌ Password salah! Coba lagi.</div>
     </div>
   </div>
 
+  <!-- Admin Toggle Button -->
+  <button class="admin-toggle" id="adminToggle" onclick="showPasswordPopup()" title="Kelola Data (Admin Only)">
+    <i class="fas fa-pen"></i>
+  </button>
+
+  <!-- Admin Panel -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="panel-header">
+      <h2><i class="fas fa-edit text-accent mr-2"></i>Edit Katalog</h2>
+      <button class="close-btn" onclick="closeAdminPanel()"><i class="fas fa-times"></i></button>
+    </div>
+    
+    <div id="adminList">
+      <!-- Items akan di-render oleh JS -->
+    </div>
+    
+    <div class="admin-actions">
+      <button class="btn-save" onclick="saveChanges()"><i class="fas fa-save mr-1"></i>Simpan Perubahan</button>
+    </div>
+    <p class="text-[10px] text-muted mt-3 text-center">Perubahan akan tersimpan di browser Anda (localStorage)</p>
+  </div>
+
   <!-- Header -->
-  <header id="mainHeader" class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-lg" style="top:44px;border-bottom:1px solid rgba(0,0,0,.05)">
+  <header id="mainHeader" class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-lg top-0 border-b border-border-soft">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
       <div class="flex items-center justify-between h-[68px]">
         <a href="index.html" class="flex items-center gap-2.5 group">
           <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300"><i class="fas fa-bag-shopping text-white text-sm"></i></div>
-          <span class="text-lg font-bold text-primary tracking-tight">fardhan<span class="text-accent">_storee</span></span>
+          <span class="text-lg font-bold text-primary tracking-tight">ryanti<span class="text-accent">_shopp</span></span>
         </a>
         <nav class="hidden lg:flex items-center gap-6">
           <a href="index.html" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Beranda</a>
@@ -111,7 +409,7 @@
           <a href="index.html#kontak" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Kontak</a>
         </nav>
         <div class="flex items-center gap-2">
-          <a href="https://wa.me/6283173742530" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-whatsapp text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"><i class="fab fa-whatsapp"></i> Chat</a>
+          <a href="https://wa.me/6285221692902" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-whatsapp text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"><i class="fab fa-whatsapp"></i> Chat</a>
           <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-alt transition-colors"><i class="fas fa-bars text-dark text-lg" id="menuIcon"></i></button>
         </div>
       </div>
@@ -123,12 +421,12 @@
         <a href="ukuran.html" class="block py-2.5 px-3 text-sm font-medium text-primary bg-primary/5 rounded-lg transition-colors">Katalog Ukuran</a>
         <a href="index.html#tentang" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Tentang</a>
         <a href="index.html#kontak" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Kontak</a>
-        <a href="https://wa.me/6283173742530" target="_blank" class="flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-5 py-3 rounded-xl w-full mt-2"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
+        <a href="https://wa.me/6285221692902" target="_blank" class="flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-5 py-3 rounded-xl w-full mt-2"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
       </div>
     </div>
   </header>
 
-  <main style="padding-top:calc(68px + 44px)">
+  <main style="padding-top:68px">
 
     <!-- Hero -->
     <section class="hero-gradient text-white py-12 md:py-16">
@@ -137,11 +435,11 @@
           <div>
             <span class="text-accent text-xs font-bold uppercase tracking-[0.2em]">Katalog Lengkap</span>
             <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight mt-1">Semua Ukuran <span class="text-accent">Tas Spunbond</span></h1>
-            <p class="text-white/70 text-sm mt-2 max-w-2xl">Berbagai varian ukuran dari Oval, TLS, Box Bag, Goodie Bag, dan Tote Bag. Klik kartu untuk melihat detail lengkap setiap ukuran.</p>
+            <p class="text-white/70 text-sm mt-2 max-w-2xl">Berbagai varian ukuran dari Oval dan TLS. Klik kartu untuk melihat detail lengkap setiap ukuran.</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-ruler-combined text-accent"></i> 28+ Ukuran</span>
-            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-layer-group text-accent"></i> 3 GSM</span>
+            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-ruler-combined text-accent"></i> <span id="totalSizes">7</span> Ukuran</span>
+            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-layer-group text-accent"></i> 65 - 70 GSM</span>
             <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-palette text-accent"></i> 15+ Warna</span>
           </div>
         </div>
@@ -158,32 +456,17 @@
             <button class="category-tab active rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('all')">
               <div class="tab-icon w-10 h-10 bg-primary rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-th-large text-white text-sm"></i></div>
               <h3 class="text-[11px] font-bold text-dark">Semua</h3>
-              <p class="text-[9px] text-muted mt-0.5">28 ukuran</p>
+              <p class="text-[9px] text-muted mt-0.5" id="countAll">7 ukuran</p>
             </button>
             <button class="category-tab rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('oval')">
               <div class="tab-icon w-10 h-10 bg-surface-alt rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-circle text-muted"></i></div>
               <h3 class="text-[11px] font-bold text-dark">Oval</h3>
-              <p class="text-[9px] text-muted mt-0.5">4 ukuran</p>
+              <p class="text-[9px] text-muted mt-0.5" id="countOval">0 ukuran</p>
             </button>
             <button class="category-tab rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('tls')">
               <div class="tab-icon w-10 h-10 bg-surface-alt rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-bag-shopping text-muted"></i></div>
               <h3 class="text-[11px] font-bold text-dark">TLS</h3>
-              <p class="text-[9px] text-muted mt-0.5">9 ukuran</p>
-            </button>
-            <button class="category-tab rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('box')">
-              <div class="tab-icon w-10 h-10 bg-surface-alt rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-box text-muted"></i></div>
-              <h3 class="text-[11px] font-bold text-dark">Box Bag</h3>
-              <p class="text-[9px] text-muted mt-0.5">4 ukuran</p>
-            </button>
-            <button class="category-tab rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('goodiebag')">
-              <div class="tab-icon w-10 h-10 bg-surface-alt rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-gift text-muted"></i></div>
-              <h3 class="text-[11px] font-bold text-dark">Goodie Bag</h3>
-              <p class="text-[9px] text-muted mt-0.5">6 ukuran</p>
-            </button>
-            <button class="category-tab rounded-xl p-3 text-center min-w-[130px] lg:min-w-0 flex-shrink-0" onclick="filterCategory('totebag')">
-              <div class="tab-icon w-10 h-10 bg-surface-alt rounded-xl flex items-center justify-center mx-auto mb-1.5"><i class="fas fa-basket-shopping text-muted"></i></div>
-              <h3 class="text-[11px] font-bold text-dark">Tote Bag</h3>
-              <p class="text-[9px] text-muted mt-0.5">5 ukuran</p>
+              <p class="text-[9px] text-muted mt-0.5" id="countTls">0 ukuran</p>
             </button>
           </div>
         </div>
@@ -197,7 +480,7 @@
         <div class="mt-12 bg-accent/5 border border-accent/15 rounded-2xl p-6 text-center">
           <h3 class="text-sm font-bold text-dark mb-2">Butuh Ukuran Lain?</h3>
           <p class="text-sm text-muted">Kami juga melayani pembuatan tas spunbond dengan ukuran custom sesuai kebutuhan Anda.</p>
-          <a href="https://wa.me/6283173742530" target="_blank" class="inline-flex items-center gap-2 bg-whatsapp text-white font-semibold px-6 py-2.5 rounded-lg mt-3 hover:bg-opacity-90 transition-colors text-sm"><i class="fab fa-whatsapp"></i> Konsultasi Custom</a>
+          <a href="https://wa.me/6285221692902" target="_blank" class="inline-flex items-center gap-2 bg-whatsapp text-white font-semibold px-6 py-2.5 rounded-lg mt-3 hover:bg-opacity-90 transition-colors text-sm"><i class="fab fa-whatsapp"></i> Konsultasi Custom</a>
         </div>
       </div>
     </section>
@@ -207,10 +490,7 @@
       <div class="max-w-3xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">Butuh <span class="text-accent">Penawaran</span> Khusus?</h2>
         <p class="text-white/70 text-base mb-6">Dapatkan harga terbaik untuk pesanan dalam jumlah besar</p>
-        <div class="flex flex-wrap justify-center gap-3">
-          <a href="https://wa.me/6283173742530" target="_blank" class="inline-flex items-center gap-2 bg-accent text-primary font-bold px-7 py-3.5 rounded-xl hover:bg-opacity-90 transition-all text-sm shadow-lg shadow-accent/20"><i class="fab fa-whatsapp text-lg"></i>Hubungi WhatsApp</a>
-          <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-shopee text-white font-bold px-7 py-3.5 rounded-xl hover:bg-shopee-dark transition-all text-sm"><i class="fas fa-bag-shopping"></i>Belanja di Shopee</a>
-        </div>
+        <a href="https://wa.me/6285221692902" target="_blank" class="inline-flex items-center gap-2 bg-accent text-primary font-bold px-7 py-3.5 rounded-xl hover:bg-opacity-90 transition-all text-sm shadow-lg shadow-accent/20"><i class="fab fa-whatsapp text-lg"></i>Hubungi WhatsApp</a>
       </div>
     </section>
   </main>
@@ -220,7 +500,7 @@
     <div class="max-w-7xl mx-auto px-4 lg:px-8 py-12">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
-          <a href="index.html" class="flex items-center gap-2.5 mb-4"><span class="text-lg font-bold">fardhan<span class="text-accent">_storee</span></span></a>
+          <a href="index.html" class="flex items-center gap-2.5 mb-4"><span class="text-lg font-bold">ryanti<span class="text-accent">_shopp</span></span></a>
           <p class="text-gray-400 text-sm leading-relaxed">Spesialis tas spunbond custom berkualitas untuk souvenir, promosi, dan kebutuhan event.</p>
         </div>
         <div>
@@ -235,28 +515,26 @@
         <div>
           <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-white">Produk</h4>
           <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="oval20.html" class="hover:text-accent transition-colors">Oval 20</a></li>
+            <li><a href="oval25.html" class="hover:text-accent transition-colors">Oval 25</a></li>
+            <li><a href="tls20.html" class="hover:text-accent transition-colors">TLS 20</a></li>
             <li><a href="tls25.html" class="hover:text-accent transition-colors">TLS 25</a></li>
             <li><a href="tls30.html" class="hover:text-accent transition-colors">TLS 30</a></li>
-            <li><a href="tls35.html" class="hover:text-accent transition-colors">TLS 35</a></li>
             <li><a href="tls38.html" class="hover:text-accent transition-colors">TLS 38</a></li>
-            <li><a href="tls40.html" class="hover:text-accent transition-colors">TLS 40</a></li>
-            <li><a href="tls45.html" class="hover:text-accent transition-colors">TLS 45</a></li>
-            <li><a href="tls50.html" class="hover:text-accent transition-colors">TLS 50</a></li>
-            <li><a href="tls60.html" class="hover:text-accent transition-colors">TLS 60</a></li>
           </ul>
         </div>
         <div>
           <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-white">Kontak</h4>
           <ul class="space-y-2 text-sm text-gray-400">
-            <li class="flex items-start gap-2"><i class="fas fa-phone text-accent text-xs mt-1"></i>+62 831-7374-2530</li>
+            <li class="flex items-start gap-2"><i class="fas fa-user text-accent text-xs mt-1"></i>Hendar Sulistiana</li>
+            <li class="flex items-start gap-2"><i class="fas fa-phone text-accent text-xs mt-1"></i>+62 852-2169-2902</li>
             <li class="flex items-start gap-2"><i class="fas fa-envelope text-accent text-xs mt-1"></i>fardanapriansyah10@gmail.com</li>
           </ul>
         </div>
       </div>
       <div class="border-t border-white/5 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
-        <p>&copy; 2025 fardhan_storee. All rights reserved.</p>
+        <p>&copy; 2025 ryanti_shopp. All rights reserved.</p>
         <div class="flex gap-4 mt-2 sm:mt-0">
-          <a href="https://shopee.co.id/fardhan_storee" target="_blank" class="hover:text-accent transition-colors"><i class="fas fa-bag-shopping"></i> Shopee</a>
           <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-instagram"></i></a>
           <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-whatsapp"></i></a>
         </div>
@@ -264,34 +542,317 @@
     </div>
   </footer>
 
-  <!-- Floating Buttons -->
-  <a href="https://wa.me/6283173742530" target="_blank" class="wa-float fixed bottom-6 left-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform"><i class="fab fa-whatsapp text-2xl"></i></a>
-  <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="fixed bottom-6 right-6 bg-shopee text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform" style="box-shadow:0 4px 14px rgba(238,77,45,.4)"><i class="fas fa-bag-shopping text-xl"></i></a>
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/6285221692902" target="_blank" class="wa-float fixed bottom-6 left-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform"><i class="fab fa-whatsapp text-2xl"></i></a>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+  // ============================================================
+  // KONFIGURASI ADMIN
+  // ============================================================
+  const ADMIN_PASSWORD = 'admin123';
+  let isLoggedIn = false;
+
+  function showPasswordPopup() {
+    if (isLoggedIn) {
+      openAdminPanel();
+      return;
+    }
+    document.getElementById('passwordPopup').classList.add('show');
+    document.getElementById('adminPassword').value = '';
+    document.getElementById('adminPassword').focus();
+    document.getElementById('loginError').classList.remove('show');
+  }
+
+  function closePasswordPopup() {
+    document.getElementById('passwordPopup').classList.remove('show');
+    document.getElementById('loginError').classList.remove('show');
+  }
+
+  function verifyPassword() {
+    const input = document.getElementById('adminPassword');
+    const btn = document.getElementById('verifyBtn');
+    const error = document.getElementById('loginError');
+    const password = input.value.trim();
+
+    if (!password) {
+      error.textContent = '⚠️ Masukkan password terlebih dahulu!';
+      error.classList.add('show');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Memeriksa...';
+
+    setTimeout(() => {
+      if (password === ADMIN_PASSWORD) {
+        isLoggedIn = true;
+        closePasswordPopup();
+        openAdminPanel();
+        showToast('✅ Login berhasil! Selamat datang Admin.', 'success');
+        input.value = '';
+      } else {
+        error.textContent = '❌ Password salah! Coba lagi.';
+        error.classList.add('show');
+        input.value = '';
+        input.focus();
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-check mr-1"></i>Verifikasi';
+    }, 800);
+  }
+
+  function openAdminPanel() {
+    if (!isLoggedIn) return;
+    document.getElementById('adminPanel').classList.add('open');
+    document.getElementById('overlay').classList.add('show');
+    document.getElementById('adminToggle').classList.add('active');
+    renderAdminPanel();
+  }
+
+  function closeAdminPanel() {
+    document.getElementById('adminPanel').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+    document.getElementById('adminToggle').classList.remove('active');
+    isLoggedIn = false; 
+  }
+
+  // ============================================================
+  // DATA MANAGEMENT
+  // ============================================================
+  const DEFAULT_SIZES = [
+    { id: 1, name: 'Oval 20', size: '20 × 26 cm', page: 'oval20.html', img: 'oval20.png', gsm: ['70'], category: 'oval', desc: 'Ukuran kecil untuk souvenir & goodie bag.', price: 600 },
+    { id: 2, name: 'Oval 25', size: '25 × 35 cm', page: 'oval25.html', img: 'oval25.png', gsm: ['70'], category: 'oval', desc: 'Ukuran standar untuk berbagai kebutuhan.', price: 900 },
+    { id: 3, name: 'Oval 30', size: '30 × 40 cm', page: 'oval30.html', img: 'oval30.png', gsm: ['70'], category: 'oval', desc: 'Ukuran sedang untuk berbagai kebutuhan.', price: 1300 },
+    { id: 4, name: 'TLS 20', size: '20 × 25 × 8 cm', page: 'tls20.html', img: 'tls20.png', gsm: ['65'], category: 'tls', desc: 'Tas Spunbond Goodiebag 65 GSM Tebal Sablon Custom – Lipat Samping', price: 1500 },
+    { id: 5, name: 'TLS 25', size: '25 × 35 × 8 cm', page: 'tls25.html', img: 'tls25.png', gsm: ['70'], category: 'tls', desc: 'Ukuran standar serbaguna untuk berbagai kebutuhan.', price: 1190 },
+    { id: 6, name: 'TLS 30', size: '30 × 40 × 8 cm', page: 'tls30.html', img: 'tls30.png', gsm: ['70'], category: 'tls', desc: 'Ukuran sedang cocok untuk seminar dan event.', price: 1425 },
+    { id: 7, name: 'TLS 38', size: '38 × 45 × 8 cm', page: 'tls38.html', img: 'tls38.png', gsm: ['70'], category: 'tls', desc: 'Ukuran premium untuk presentasi dan seminar.', price: 2050 }
+  ];
+
+  let sizes = [];
+  let currentFilter = 'all';
+
+  function loadData() {
+    // Selalu mulai dari data default agar struktur (page, id, category) mutlak benar
+    sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
+
+    // Cek localStorage untuk menimpa data default dengan data edit-an
+    const stored = localStorage.getItem('fardhan_sizes');
+    if (stored) {
+      try {
+        const storedSizes = JSON.parse(stored);
+        
+        // Lakukan mapping berdasarkan 'page' agar tidak salah arah halaman
+        sizes.forEach((defSize, index) => {
+          const storedItem = storedSizes.find(s => s.page === defSize.page);
+          if (storedItem) {
+            sizes[index].name = storedItem.name || defSize.name;
+            sizes[index].size = storedItem.size || defSize.size;
+            sizes[index].desc = storedItem.desc || defSize.desc;
+            sizes[index].img = storedItem.img !== undefined ? storedItem.img : defSize.img;
+            sizes[index].price = storedItem.price || defSize.price;
+          }
+        });
+      } catch (e) {}
+    }
+
+    // Sinkronisasi dengan data dari halaman detail masing-masing produk (sangat penting!)
+    sizes.forEach((s, index) => {
+      const pageName = s.page.replace('.html', '');
+      const productKey = `fardhan_product_${pageName}`;
+      const storedProduct = localStorage.getItem(productKey);
+      if (storedProduct) {
+        try {
+          const pData = JSON.parse(storedProduct);
+          if (pData.name) sizes[index].name = pData.name;
+          if (pData.size) sizes[index].size = pData.size;
+          if (pData.desc) sizes[index].desc = pData.desc;
+          if (pData.img !== undefined) sizes[index].img = pData.img;
+          if (pData.price) sizes[index].price = pData.price;
+        } catch(e) {}
+      }
+    });
+
+    localStorage.setItem('fardhan_sizes', JSON.stringify(sizes));
+    updateCounts();
+  }
+
+  function saveData() {
+    localStorage.setItem('fardhan_sizes', JSON.stringify(sizes));
+    
+    sizes.forEach(s => {
+      const pageName = s.page.replace('.html', '');
+      const productKey = `fardhan_product_${pageName}`;
+      const storedProduct = localStorage.getItem(productKey);
+      let pData = {};
+      if (storedProduct) {
+        try { pData = JSON.parse(storedProduct); } catch(e) {}
+      }
+      pData.name = s.name;
+      pData.size = s.size;
+      pData.desc = s.desc;
+      pData.img = s.img;
+      pData.price = s.price;
+      localStorage.setItem(productKey, JSON.stringify(pData));
+    });
+  }
+
+  function renderSizes(filter = 'all') {
+    const container = document.getElementById('sizeGridContainer');
+    const filtered = filter === 'all' ? sizes : sizes.filter(s => s.category === filter);
+    
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="col-span-full text-center py-10">
+        <i class="fas fa-box-open text-4xl text-muted/30 mb-3"></i>
+        <p class="text-muted">Belum ada produk dalam kategori ini.</p>
+      </div>`;
+      return;
+    }
+
+    let html = '';
+    filtered.forEach((s, i) => {
+      const delay = i * 50;
+      const hasImage = s.img && s.img !== '';
+      const priceText = s.price ? `Rp ${s.price.toLocaleString('id-ID')}` : '';
+      
+      html += `
+        <a href="${s.page}" class="block group" data-aos="fade-up" data-aos-delay="${delay}">
+          <div class="size-card bg-white rounded-2xl overflow-hidden p-5 text-center relative">
+            <div class="card-badge">${s.gsm.join(' | ')} GSM</div>
+            <div class="w-24 h-24 mx-auto bg-surface rounded-xl flex items-center justify-center mb-3 group-hover:bg-primary/5 transition-colors">
+              ${hasImage ? `
+                <img src="${s.img}" alt="${s.name}" class="max-h-16 object-contain" onerror="this.style.display='none'; document.getElementById('noImg-${s.id}').style.display='flex';">
+                <div id="noImg-${s.id}" class="text-gray-400 flex-col items-center" style="display:none;">
+                  <i class="fas fa-image text-2xl opacity-20"></i>
+                  <span class="text-[8px] mt-1">No Image</span>
+                </div>
+              ` : `
+                <div class="text-gray-400 flex flex-col items-center">
+                  <i class="fas fa-image text-2xl opacity-20"></i>
+                  <span class="text-[8px] mt-1">No Image</span>
+                </div>
+              `}
+            </div>
+            <h3 class="text-lg font-extrabold text-dark">${s.name}</h3>
+            <p class="text-sm text-muted">${s.size}</p>
+            <div class="flex flex-wrap justify-center gap-1.5 mt-2">
+              ${s.gsm.map(g => `<span class="gsm-badge gsm-${g}">${g} GSM</span>`).join('')}
+            </div>
+            ${priceText ? `<p class="text-base font-bold text-primary mt-2">${priceText}</p>` : ''}
+            <p class="text-xs text-muted mt-2 line-clamp-2">${s.desc}</p>
+            <div class="mt-3 inline-flex items-center gap-1 text-accent font-semibold text-sm group-hover:gap-2 transition-all">
+              Lihat Detail <i class="fas fa-arrow-right text-xs"></i>
+            </div>
+          </div>
+        </a>
+      `;
+    });
+    container.innerHTML = html;
+    if (typeof AOS !== 'undefined') AOS.refresh();
+  }
+
+  function renderAdminPanel() {
+    if (!isLoggedIn) return;
+    
+    const container = document.getElementById('adminList');
+    let html = '';
+    sizes.forEach((s, index) => {
+      html += `
+        <div class="admin-item" data-index="${index}">
+          <div class="item-header">
+            <h4>${s.name}</h4>
+          </div>
+          <div class="form-row">
+            <div class="full">
+              <label>Nama Produk</label>
+              <input type="text" value="${s.name}" onchange="updateItem(${index}, 'name', this.value)">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="full">
+              <label>Ukuran</label>
+              <input type="text" value="${s.size}" onchange="updateItem(${index}, 'size', this.value)">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="full">
+              <label>Harga (Rp)</label>
+              <input type="number" value="${s.price || 0}" onchange="updateItem(${index}, 'price', parseInt(this.value) || 0)">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="full">
+              <label>Detail / Deskripsi</label>
+              <input type="text" value="${s.desc}" onchange="updateItem(${index}, 'desc', this.value)">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="full">
+              <label>Gambar (URL / Path / Kosongkan jika hilang)</label>
+              <input type="text" value="${s.img}" onchange="updateItem(${index}, 'img', this.value)" placeholder="contoh: tas.png">
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  window.updateItem = function(index, field, value) {
+    sizes[index][field] = value;
+  };
+
+  window.saveChanges = function() {
+    saveData();
+    renderSizes(currentFilter);
+    showToast('✅ Perubahan berhasil disimpan!', 'success');
+  };
+
+  window.filterCategory = function(type) {
+    currentFilter = type;
+    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.category-tab').forEach(t => {
+      const btnType = t.textContent.toLowerCase().trim();
+      if (type === 'all' && btnType === 'semua') {
+        t.classList.add('active');
+      } else if (btnType === type) {
+        t.classList.add('active');
+      }
+    });
+    renderSizes(type);
+  };
+
+  function updateCounts() {
+    const cats = { all: sizes.length, oval: 0, tls: 0 };
+    sizes.forEach(s => {
+      if (cats.hasOwnProperty(s.category)) cats[s.category]++;
+    });
+    document.getElementById('totalSizes').textContent = cats.all;
+    document.getElementById('countAll').textContent = cats.all + ' ukuran';
+    document.getElementById('countOval').textContent = cats.oval + ' ukuran';
+    document.getElementById('countTls').textContent = cats.tls + ' ukuran';
+  }
+
+  function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = 'toast-notification ' + (type === 'error' ? 'error' : '');
+    setTimeout(() => toast.classList.add('show'), 10);
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     AOS.init({ duration: 600, once: true, offset: 60 });
 
-    /* ===== SHOPEE BAR ===== */
-    const shopeeBar = document.getElementById('shopeeBar');
-    if (localStorage.getItem('shopeeBarDismissed') === 'true' && localStorage.getItem('shopeeBarDismissedAt') && (Date.now() - parseInt(localStorage.getItem('shopeeBarDismissedAt')) < 86400000)) {
-      shopeeBar.classList.add('bar-hidden');
-    }
-    document.getElementById('closeShopeeBar').addEventListener('click', function() {
-      shopeeBar.classList.add('bar-hidden');
-      localStorage.setItem('shopeeBarDismissed', 'true');
-      localStorage.setItem('shopeeBarDismissedAt', Date.now().toString());
-    });
-
-    /* ===== SCROLL ===== */
     window.addEventListener('scroll', function() {
-      const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight;
+      const s = window.scrollY;
+      const d = document.documentElement.scrollHeight - window.innerHeight;
       document.getElementById('scrollProgress').style.width = (s / d * 100) + '%';
       document.getElementById('mainHeader').classList.toggle('header-scrolled', s > 20);
     });
 
-    /* ===== MOBILE MENU ===== */
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     const menuIcon = document.getElementById('menuIcon');
@@ -301,96 +862,14 @@
       menuIcon.className = open ? 'fas fa-bars text-dark text-lg' : 'fas fa-xmark text-dark text-lg';
     });
 
-    /* ===== DATA UKURAN ===== */
-    const SIZES = [
-      // ===== OVAL =====
-      { name: 'Oval 20', size: '20 × 26 cm', page: 'oval20.html', img: 'oval20.png', gsm: ['70'], category: 'oval', desc: 'Ukuran kecil untuk souvenir dan goodie bag.' },
-      { name: 'Oval 25', size: '25 × 30 cm', page: 'oval25.html', img: 'oval25.png', gsm: ['70'], category: 'oval', desc: 'Ukuran sedang untuk berbagai kebutuhan.' },
-      { name: 'Oval 30', size: '30 × 35 cm', page: 'oval30.html', img: 'oval30.png', gsm: ['70'], category: 'oval', desc: 'Ukuran besar untuk membawa barang lebih banyak.' },
-
-      // ===== TLS =====
-      { name: 'TLS 25', size: '25 × 35 × 8 cm', page: 'tls25.html', img: 'tls25.png', gsm: ['70', '75', '100'], category: 'tls', desc: 'Ukuran standar serbaguna untuk berbagai kebutuhan.' },
-      { name: 'TLS 30', size: '30 × 40 × 10 cm', page: 'tls30.html', img: 'tls30.png', gsm: ['70', '75', '100'], category: 'tls', desc: 'Ukuran sedang cocok untuk seminar dan event.' },
-      { name: 'TLS 38', size: '38 × 45 × 8 cm', page: 'tls38.html', img: 'tls38.png', gsm: ['70', '75', '100'], category: 'tls', desc: 'Ukuran premium untuk presentasi dan seminar.' },
-
-      // ===== BOX BAG =====
-      { name: 'Box S', size: '20 × 20 × 10 cm', page: 'boxs.html', img: 'tas3.png', gsm: ['70', '75', '100'], category: 'box', desc: 'Ukuran kecil untuk souvenir dan hadiah.' },
-      { name: 'Box M', size: '25 × 25 × 12 cm', page: 'boxm.html', img: 'tas3.png', gsm: ['70', '75', '100'], category: 'box', desc: 'Ukuran sedang untuk berbagai kebutuhan.' },
-      { name: 'Box L', size: '30 × 30 × 15 cm', page: 'boxl.html', img: 'tas3.png', gsm: ['70', '75', '100'], category: 'box', desc: 'Ukuran besar untuk membawa barang lebih banyak.' },
-      { name: 'Box XL', size: '35 × 35 × 20 cm', page: 'boxxl.html', img: 'tas3.png', gsm: ['70', '75', '100'], category: 'box', desc: 'Ukuran jumbo untuk kebutuhan besar.' },
-
-      // ===== GOODIE BAG =====
-      { name: 'Goodie Mini', size: '20 × 25 cm', page: 'goodiemini.html', img: 'goodiebag1.png', gsm: ['70', '75', '100'], category: 'goodiebag', desc: 'Ukuran kecil untuk souvenir.' },
-      { name: 'Goodie Kecil', size: '25 × 30 cm', page: 'goodiekecil.html', img: 'goodiebag1.png', gsm: ['70', '75', '100'], category: 'goodiebag', desc: 'Ukuran standar untuk goodie bag.' },
-      { name: 'Goodie Sedang', size: '30 × 35 cm', page: 'goodiesedang.html', img: 'goodiebag1.png', gsm: ['70', '75', '100'], category: 'goodiebag', desc: 'Ukuran sedang untuk berbagai kebutuhan.' },
-      { name: 'Goodie Besar', size: '35 × 40 cm', page: 'goodiebesar.html', img: 'goodiebag1.png', gsm: ['70', '75', '100'], category: 'goodiebag', desc: 'Ukuran besar untuk membawa banyak barang.' },
-      { name: 'Goodie Jumbo', size: '40 × 45 cm', page: 'goodiejumbo.html', img: 'goodiebag1.png', gsm: ['70', '75', '100'], category: 'goodiebag', desc: 'Ukuran jumbo untuk kebutuhan besar.' },
-      { name: 'Goodie Super Jumbo', size: '50 × 55 cm', page: 'goodiesuper.html', img: 'goodiebag1.png', gsm: ['70', '75', '100'], category: 'goodiebag', desc: 'Ukuran super jumbo.' },
-
-      // ===== TOTE BAG =====
-      { name: 'Tote Mini', size: '25 × 30 cm', page: 'totemini.html', img: 'totebag3.png', gsm: ['70', '75', '100'], category: 'totebag', desc: 'Ukuran kecil untuk belanja ringan.' },
-      { name: 'Tote Standar', size: '30 × 35 cm', page: 'totestandar.html', img: 'totebag3.png', gsm: ['70', '75', '100'], category: 'totebag', desc: 'Ukuran standar serbaguna.' },
-      { name: 'Tote Medium', size: '35 × 40 cm', page: 'totemedium.html', img: 'totebag3.png', gsm: ['70', '75', '100'], category: 'totebag', desc: 'Ukuran sedang untuk berbagai kebutuhan.' },
-      { name: 'Tote Premium', size: '40 × 45 cm', page: 'totepremium.html', img: 'totebag3.png', gsm: ['70', '75', '100'], category: 'totebag', desc: 'Ukuran premium untuk belanja besar.' },
-      { name: 'Tote Jumbo', size: '45 × 50 cm', page: 'totejumbo.html', img: 'totebag3.png', gsm: ['70', '75', '100'], category: 'totebag', desc: 'Ukuran jumbo untuk kebutuhan besar.' }
-    ];
-
-    /* ===== RENDER CARDS ===== */
-    function renderSizes(filter = 'all') {
-      const container = document.getElementById('sizeGridContainer');
-      let html = '';
-      const filtered = filter === 'all' ? SIZES : SIZES.filter(s => s.category === filter);
-      
-      if (filtered.length === 0) {
-        html = `<div class="col-span-full text-center py-10">
-          <i class="fas fa-box-open text-4xl text-muted/30 mb-3"></i>
-          <p class="text-muted">Belum ada produk dalam kategori ini.</p>
-        </div>`;
-      } else {
-        filtered.forEach((s, i) => {
-          const delay = i * 50;
-          html += `
-            <a href="${s.page}" class="block group" data-aos="fade-up" data-aos-delay="${delay}">
-              <div class="size-card bg-white rounded-2xl overflow-hidden p-5 text-center relative">
-                <div class="card-badge">${s.gsm.join(' | ')} GSM</div>
-                <div class="w-24 h-24 mx-auto bg-surface rounded-xl flex items-center justify-center mb-3 group-hover:bg-primary/5 transition-colors">
-                  <img src="${s.img}" alt="${s.name}" class="max-h-16 object-contain">
-                </div>
-                <h3 class="text-lg font-extrabold text-dark">${s.name}</h3>
-                <p class="text-sm text-muted">${s.size}</p>
-                <div class="flex flex-wrap justify-center gap-1.5 mt-2">
-                  ${s.gsm.map(g => `<span class="gsm-badge gsm-${g}">${g} GSM</span>`).join('')}
-                </div>
-                <p class="text-xs text-muted mt-2 line-clamp-2">${s.desc}</p>
-                <div class="mt-3 inline-flex items-center gap-1 text-accent font-semibold text-sm group-hover:gap-2 transition-all">
-                  Lihat Detail <i class="fas fa-arrow-right text-xs"></i>
-                </div>
-              </div>
-            </a>
-          `;
-        });
-      }
-      container.innerHTML = html;
-      AOS.refresh();
-    }
-
-    /* ===== FILTER ===== */
-    window.filterCategory = function(type) {
-      document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.category-tab').forEach(t => {
-        const btnType = t.textContent.toLowerCase().trim();
-        if (type === 'all' && btnType === 'semua') {
-          t.classList.add('active');
-        } else if (btnType === type) {
-          t.classList.add('active');
-        }
-      });
-      renderSizes(type);
-    };
-
-    /* ===== INIT ===== */
-    renderSizes('all');
+    loadData();
+    renderSizes();
   });
+
+  window.showPasswordPopup = showPasswordPopup;
+  window.closePasswordPopup = closePasswordPopup;
+  window.verifyPassword = verifyPassword;
+  window.closeAdminPanel = closeAdminPanel;
   </script>
 </body>
 </html>

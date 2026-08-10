@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tassouvenir — Tas Sablon Kustom Premium</title>
+  <title>ryanti_shopp — Tas Sablon Kustom Premium</title>
   <meta name="description" content="Produsen tas spunbond custom berkualitas untuk souvenir, promosi, dan event. Tersedia berbagai ukuran, motif, dan warna. Pesan sekarang!" />
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -21,8 +21,6 @@
             'border-soft': '#e5e7eb',
             'surface': '#f9fafb',
             'surface-alt': '#f3f4f6',
-            shopee: '#EE4D2D',
-            'shopee-dark': '#D73211'
           },
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -46,46 +44,6 @@
       backdrop-filter: blur(12px);
       background: rgba(255,255,255,0.92);
     }
-
-    /* Shopee bar */
-    .shopee-bar {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .shopee-bar.bar-hidden {
-      transform: translateY(-100%);
-      opacity: 0;
-      pointer-events: none;
-    }
-    .shopee-bar-glow {
-      box-shadow: 0 2px 12px rgba(238,77,45,0.25);
-    }
-    @keyframes shopeeSlideIn {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .shopee-bar-enter {
-      animation: shopeeSlideIn 0.5s ease-out;
-    }
-
-    /* Shimmer on shopee bar text */
-    @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-    .shopee-shimmer {
-      background: linear-gradient(90deg, #fff 30%, #ffd6cc 50%, #fff 70%);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 3s ease-in-out infinite;
-    }
-
-    /* Header shift when bar visible */
-    .header-with-bar { top: 44px; }
-    .header-no-bar { top: 0; }
-    .hero-with-bar { padding-top: calc(72px + 44px); }
-    .hero-no-bar { padding-top: 72px; }
 
     /* Hero background */
     .hero-bg {
@@ -288,37 +246,8 @@
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress" id="scrollProgress" style="width:0%"></div>
 
-  <!-- ===================== SHOPEE TOP BAR ===================== -->
-  <div id="shopeeBar" class="shopee-bar shopee-bar-enter shopee-bar-glow fixed top-0 left-0 w-full z-[60] bg-shopee">
-    <div class="max-w-7xl mx-auto px-4 lg:px-8 h-[44px] flex items-center justify-between">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="6" fill="white" fill-opacity="0.2"/>
-          <path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="white"/>
-          <circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/>
-          <circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/>
-        </svg>
-        <p class="shopee-shimmer text-xs sm:text-sm font-bold whitespace-nowrap">
-          Belanja Langsung di Toko Shopee Kami!
-        </p>
-      </div>
-      <div class="flex items-center gap-3">
-        <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener"
-           class="inline-flex items-center gap-1.5 bg-white text-shopee text-xs font-bold px-3.5 py-1.5 rounded-md hover:bg-gray-50 transition-colors whitespace-nowrap">
-          <i class="fas fa-store text-[11px]"></i>
-          <span class="hidden sm:inline">Kunjungi Toko</span>
-          <span class="sm:hidden">Buka</span>
-          <i class="fas fa-arrow-right text-[9px]"></i>
-        </a>
-        <button id="closeShopeeBar" class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-white/20 transition-colors flex-shrink-0" aria-label="Tutup">
-          <i class="fas fa-xmark text-white/80 text-sm"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- ===================== HEADER ===================== -->
-  <header id="mainHeader" class="header-with-bar fixed w-full z-50 transition-all duration-300" style="background:rgba(255,255,255,0.95); backdrop-filter:blur(12px);">
+  <header id="mainHeader" class="fixed w-full z-50 transition-all duration-300" style="background:rgba(255,255,255,0.95); backdrop-filter:blur(12px);">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="flex items-center justify-between h-[72px]">
         <!-- Logo -->
@@ -326,7 +255,7 @@
           <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
             <i class="fas fa-bag-shopping text-white text-sm"></i>
           </div>
-          <span class="text-xl font-bold text-primary tracking-tight">fardhan<span class="text-accent">_storee</span></span>
+          <span class="text-xl font-bold text-primary tracking-tight">ryanti<span class="text-accent">_shopp</span></span>
         </a>
 
         <!-- Desktop Nav -->
@@ -339,14 +268,9 @@
           <a href="#kontak" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Kontak</a>
         </nav>
 
-        <!-- CTA + Shopee + Mobile Toggle -->
+        <!-- CTA + Mobile Toggle -->
         <div class="flex items-center gap-3">
-          <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener"
-             class="hidden md:inline-flex items-center gap-2 bg-shopee text-white text-sm font-medium px-4 py-2.5 rounded-lg hover:bg-shopee-dark transition-colors">
-            <i class="fas fa-bag-shopping text-xs"></i>
-            <span>Shopee</span>
-          </a>
-          <a href="https://wa.me/6283173742530" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#152c4a] transition-colors">
+          <a href="https://wa.me/6285221692902" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#152c4a] transition-colors">
             <i class="fab fa-whatsapp text-base"></i>
             <span>Chat Kami</span>
           </a>
@@ -360,10 +284,6 @@
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-border-soft">
       <div class="max-w-7xl mx-auto px-6 py-4 space-y-1">
-        <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener"
-           class="flex items-center justify-center gap-2 bg-shopee text-white text-sm font-semibold px-5 py-3 rounded-xl w-full mb-2">
-          <i class="fas fa-bag-shopping text-sm"></i> Belanja di Shopee
-        </a>
         <a href="#home" class="block py-2.5 px-3 text-sm font-medium text-dark hover:bg-surface rounded-lg transition-colors">Beranda</a>
         <a href="#produk" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Produk</a>
         <a href="#layanan" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Layanan</a>
@@ -371,7 +291,7 @@
         <a href="#testimoni" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Testimoni</a>
         <a href="#kontak" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Kontak</a>
         <div class="pt-3 border-t border-border-soft">
-          <a href="https://wa.me/6283173742530" target="_blank" class="flex items-center justify-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg w-full">
+          <a href="https://wa.me/6285221692902" target="_blank" class="flex items-center justify-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg w-full">
             <i class="fab fa-whatsapp"></i> Chat via WhatsApp
           </a>
         </div>
@@ -388,7 +308,7 @@
   </div>
 
   <!-- ===================== HERO ===================== -->
-  <section id="home" class="hero-bg hero-with-bar">
+  <section id="home" class="hero-bg pt-[72px]">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 lg:py-36 relative z-10">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <!-- Text -->
@@ -408,21 +328,11 @@
           </p>
 
           <div class="flex flex-wrap gap-3">
-            <a href="#produk" class="inline-flex items-center gap-2 bg-accent text-primary font-semibold px-7 py-3.5 rounded-lg hover:bg-[#d4b76a] transition-all duration-300 shadow-lg shadow-accent/20">
+            <a href="ukuran.html" class="inline-flex items-center gap-2 bg-accent text-primary font-semibold px-7 py-3.5 rounded-lg hover:bg-[#d4b76a] transition-all duration-300 shadow-lg shadow-accent/20">
               <i class="fas fa-grid-2 text-sm"></i>
               Lihat Katalog
             </a>
-            <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener"
-               class="inline-flex items-center gap-2 bg-shopee text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-shopee-dark transition-all duration-300 shadow-lg shadow-shopee/25">
-              <svg class="w-5 h-5" viewBox="0 0 32 32" fill="none">
-                <rect width="32" height="32" rx="6" fill="white" fill-opacity="0.2"/>
-                <path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="white"/>
-                <circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/>
-                <circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/>
-              </svg>
-              Belanja di Shopee
-            </a>
-            <a href="https://wa.me/6283173742530" target="_blank" class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium px-7 py-3.5 rounded-lg hover:bg-white/20 transition-all duration-300">
+            <a href="https://wa.me/6285221692902" target="_blank" class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium px-7 py-3.5 rounded-lg hover:bg-white/20 transition-all duration-300">
               <i class="fab fa-whatsapp text-lg"></i>
               Konsultasi Gratis
             </a>
@@ -568,26 +478,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Shopee CTA di bawah produk -->
-      <div class="mt-12 text-center" data-aos="fade-up">
-        <div class="inline-flex flex-col sm:flex-row items-center gap-3 bg-shopee/5 border border-shopee/15 rounded-2xl px-8 py-5">
-          <svg class="w-8 h-8 flex-shrink-0" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="6" fill="#EE4D2D" fill-opacity="0.1"/>
-            <path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="#EE4D2D"/>
-            <circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/>
-            <circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/>
-          </svg>
-          <div class="text-left">
-            <p class="text-sm font-bold text-dark">Ingin belanja langsung?</p>
-            <p class="text-xs text-muted">Temukan produk lengkap kami di toko Shopee resmi</p>
-          </div>
-          <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener"
-             class="inline-flex items-center gap-2 bg-shopee text-white text-sm font-bold px-6 py-2.5 rounded-lg hover:bg-shopee-dark transition-colors whitespace-nowrap mt-1 sm:mt-0">
-            <i class="fas fa-external-link-alt text-xs"></i> Buka Toko Shopee
-          </a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -683,13 +573,13 @@
     </div>
   </section>
 
-    <!-- ===================== TENTANG KAMI ===================== -->
+  <!-- ===================== TENTANG KAMI ===================== -->
   <section id="tentang" class="py-20 md:py-28 bg-surface">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div data-aos="fade-right">
           <div class="about-img-wrap max-w-md mx-auto lg:mx-0">
-            <img src="tas.jpeg" alt="Tentang fardhan_storee" class="rounded-2xl shadow-xl w-full object-cover aspect-[4/3]">
+            <img src="tas.jpeg" alt="Tentang ryanti_shopp" class="rounded-2xl shadow-xl w-full object-cover aspect-[4/3]">
           </div>
           <!-- Tambahan badge di bawah gambar -->
           <div class="flex items-center justify-center gap-4 mt-4">
@@ -712,7 +602,7 @@
           <span class="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-3 block">Tentang Kami</span>
           <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight mb-6">Lebih dari 8 Tahun <span class="text-primary">Pengalaman</span></h2>
           <p class="text-muted leading-relaxed mb-4">
-            Berawal dari usaha kecil di Bandung pada tahun 2018, fardhan_storee kini telah dipercaya oleh ribuan pelanggan dari berbagai kalangan — mulai dari perusahaan besar, instansi pemerintah, sekolah, hingga komunitas lokal.
+            Berawal dari usaha kecil di Bandung pada tahun 2018, ryanti_shopp kini telah dipercaya oleh ribuan pelanggan dari berbagai kalangan — mulai dari perusahaan besar, instansi pemerintah, sekolah, hingga komunitas lokal.
           </p>
           <p class="text-muted leading-relaxed mb-8">
             Kami percaya bahwa setiap tas yang kami buat bukan sekadar wadah, melainkan representasi dari brand dan identitas acara Anda. Oleh karena itu, kami mengutamakan kualitas di setiap jahitan dan setiap goresan sablon.
@@ -862,14 +752,9 @@
         Konsultasikan kebutuhan Anda sekarang. Gratis, tanpa komitmen.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="https://wa.me/6283173742530" target="_blank" class="inline-flex items-center gap-2.5 bg-accent text-primary font-bold px-8 py-4 rounded-xl hover:bg-[#d4b76a] transition-all shadow-lg shadow-accent/25">
+        <a href="https://wa.me/6285221692902" target="_blank" class="inline-flex items-center gap-2.5 bg-accent text-primary font-bold px-8 py-4 rounded-xl hover:bg-[#d4b76a] transition-all shadow-lg shadow-accent/25">
           <i class="fab fa-whatsapp text-xl"></i>
           Hubungi via WhatsApp
-        </a>
-        <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener"
-           class="inline-flex items-center gap-2.5 bg-shopee text-white font-bold px-8 py-4 rounded-xl hover:bg-shopee-dark transition-all shadow-lg shadow-shopee/25">
-          <i class="fas fa-bag-shopping text-lg"></i>
-          Belanja di Shopee
         </a>
         <a href="#kontak" class="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium px-8 py-4 rounded-xl hover:bg-white/20 transition-all">
           <i class="fas fa-envelope text-base"></i>
@@ -891,7 +776,7 @@
       <div class="grid lg:grid-cols-5 gap-8 lg:gap-12">
         <div class="lg:col-span-3" data-aos="fade-right">
           <form id="contactForm" class="bg-surface rounded-2xl p-8 md:p-10">
-            <input type="hidden" name="_subject" value="Pesan Baru dari Website fardhan_storee">
+            <input type="hidden" name="_subject" value="Pesan Baru dari Website ryanti_shopp">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
 
@@ -942,6 +827,16 @@
 
               <div class="flex items-start gap-4">
                 <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-user text-accent text-sm"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-dark">Pemilik</h4>
+                  <p class="text-sm text-muted mt-0.5">Hendar Sulistiana</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <i class="fas fa-phone text-accent text-sm"></i>
                 </div>
                 <div>
@@ -969,16 +864,6 @@
                   <p class="text-sm text-muted mt-0.5">+62 831-7374-2530</p>
                 </div>
               </div>
-
-              <div class="flex items-start gap-4">
-                <div class="w-10 h-10 bg-shopee/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-bag-shopping text-shopee text-sm"></i>
-                </div>
-                <div>
-                  <h4 class="text-sm font-semibold text-dark">Toko Shopee</h4>
-                  <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="text-sm text-shopee hover:underline mt-0.5 block">Kunjungi toko kami →</a>
-                </div>
-              </div>
             </div>
 
             <div class="mt-8 pt-6 border-t border-border-soft">
@@ -995,10 +880,6 @@
                 </a>
                 <a href="#" class="w-10 h-10 bg-white border border-border-soft rounded-xl flex items-center justify-center text-muted hover:text-primary hover:border-primary/20 hover:bg-primary/5 transition-all">
                   <i class="fab fa-youtube text-sm"></i>
-                </a>
-                <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener"
-                   class="w-10 h-10 bg-shopee/10 border border-shopee/20 rounded-xl flex items-center justify-center text-shopee hover:bg-shopee hover:text-white transition-all">
-                  <i class="fas fa-bag-shopping text-sm"></i>
                 </a>
               </div>
             </div>
@@ -1017,10 +898,10 @@
             <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
               <i class="fas fa-bag-shopping text-white text-sm"></i>
             </div>
-            <span class="text-xl font-bold tracking-tight">fardhan<span class="text-accent">_storee</span></span>
+            <span class="text-xl font-bold tracking-tight">ryanti<span class="text-accent">_shopp</span></span>
           </a>
           <p class="text-gray-400 text-sm leading-relaxed mb-5">Spesialis pembuatan tas custom dan sablon berkualitas untuk berbagai kebutuhan souvenir dan promosi Anda.</p>
-          <p class="text-gray-500 text-xs">&copy; 2025 fardhan_storee. All rights reserved.</p>
+          <p class="text-gray-500 text-xs">&copy; 2025 ryanti_shopp. All rights reserved.</p>
         </div>
 
         <div>
@@ -1035,13 +916,8 @@
         </div>
 
         <div>
-          <h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Marketplace</h4>
+          <h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Produk</h4>
           <ul class="space-y-3">
-            <li>
-              <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="text-shopee text-sm hover:text-[#ff6b4a] transition-colors flex items-center gap-2">
-                <i class="fas fa-bag-shopping text-xs"></i> Toko Shopee Resmi
-              </a>
-            </li>
             <li><a href="ukuran.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Tas Spunbond</a></li>
             <li><a href="ukuran.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Totebag Custom</a></li>
             <li><a href="ukuran.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Tas Oval</a></li>
@@ -1053,12 +929,16 @@
           <h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Kontak</h4>
           <ul class="space-y-3">
             <li class="flex items-start gap-2.5">
+              <i class="fas fa-user text-accent text-xs mt-1.5 flex-shrink-0"></i>
+              <span class="text-gray-400 text-sm leading-relaxed">Hendar Sulistiana</span>
+            </li>
+            <li class="flex items-start gap-2.5">
               <i class="fas fa-map-marker-alt text-accent text-xs mt-1.5 flex-shrink-0"></i>
               <span class="text-gray-400 text-sm leading-relaxed">Kiaracondong, Sukapura, Jl. Salak Gang Jambu RT05/RW01 No.49</span>
             </li>
             <li class="flex items-center gap-2.5">
               <i class="fas fa-phone text-accent text-xs flex-shrink-0"></i>
-              <span class="text-gray-400 text-sm">+62 831-7374-2530</span>
+              <span class="text-gray-400 text-sm">+62 852-2169-2902</span>
             </li>
             <li class="flex items-center gap-2.5">
               <i class="fas fa-envelope text-accent text-xs flex-shrink-0"></i>
@@ -1076,22 +956,14 @@
           <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
           <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-tiktok text-sm"></i></a>
           <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-youtube text-sm"></i></a>
-          <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener" class="text-shopee hover:text-[#ff6b4a] transition-colors"><i class="fas fa-bag-shopping text-sm"></i></a>
         </div>
       </div>
     </div>
   </footer>
 
   <!-- Floating WA -->
-  <a href="https://wa.me/6283173742530" target="_blank" class="wa-float fixed bottom-6 left-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform">
+  <a href="https://wa.me/6285221692902" target="_blank" class="wa-float fixed bottom-6 left-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform">
     <i class="fab fa-whatsapp text-2xl"></i>
-  </a>
-
-  <!-- Floating Shopee Button -->
-  <a href="https://shopee.co.id/fardhan_storee" target="_blank" rel="noopener"
-     class="fixed bottom-6 right-6 bg-shopee text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform"
-     style="box-shadow: 0 4px 14px rgba(238,77,45,0.4);">
-    <i class="fas fa-bag-shopping text-xl"></i>
   </a>
 
   <!-- ===================== SCRIPTS ===================== -->
@@ -1106,42 +978,6 @@
       offset: 80,
       easing: 'ease-out-cubic'
     });
-
-    // ========== Shopee Bar Logic ==========
-    const shopeeBar = document.getElementById('shopeeBar');
-    const mainHeader = document.getElementById('mainHeader');
-    const heroSection = document.getElementById('home');
-    const BAR_HEIGHT = 44;
-
-    const barDismissed = localStorage.getItem('shopeeBarDismissed');
-    const dismissExpiry = localStorage.getItem('shopeeBarDismissedAt');
-    const now = Date.now();
-
-    let shouldShowBar = true;
-    if (barDismissed === 'true' && dismissExpiry) {
-      const elapsed = now - parseInt(dismissExpiry);
-      if (elapsed < 24 * 60 * 60 * 1000) {
-        shouldShowBar = false;
-      }
-    }
-
-    if (!shouldShowBar) {
-      hideShopeeBar();
-    }
-
-    document.getElementById('closeShopeeBar').addEventListener('click', function () {
-      hideShopeeBar();
-      localStorage.setItem('shopeeBarDismissed', 'true');
-      localStorage.setItem('shopeeBarDismissedAt', now.toString());
-    });
-
-    function hideShopeeBar() {
-      shopeeBar.classList.add('bar-hidden');
-      mainHeader.classList.remove('header-with-bar');
-      mainHeader.classList.add('header-no-bar');
-      heroSection.classList.remove('hero-with-bar');
-      heroSection.classList.add('hero-no-bar');
-    }
 
     // ========== Scroll Progress Bar ==========
     const progressBar = document.getElementById('scrollProgress');
@@ -1330,8 +1166,7 @@
         e.preventDefault();
         const target = document.querySelector(targetId);
         if (target) {
-          const barOffset = shouldShowBar ? BAR_HEIGHT : 0;
-          const top = target.getBoundingClientRect().top + window.scrollY - 80 - barOffset;
+          const top = target.getBoundingClientRect().top + window.scrollY - 80;
           window.scrollTo({ top: top, behavior: 'smooth' });
         }
       });

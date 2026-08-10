@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Tas Spunbond 3D - fardhan_storee</title>
+  <title>Custom Tas Spunbond 2D - ryanti_shopp</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -17,7 +17,6 @@
             muted: '#6b7280',
             'border-soft': '#e5e7eb',
             'surface': '#f9fafb',
-            shopee: '#EE4D2D'
           },
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
         }
@@ -39,16 +38,6 @@
     .wa-float{animation:waPulse 2s ease-in-out infinite}
     @keyframes waPulse{0%,100%{box-shadow:0 4px 14px rgba(37,211,102,.4)}50%{box-shadow:0 4px 24px rgba(37,211,102,.6)}}
     
-    .shopee-bar{transition:all .4s cubic-bezier(.4,0,.2,1)}
-    .shopee-bar.bar-hidden{transform:translateY(-100%);opacity:0;pointer-events:none}
-    .shopee-bar-glow{box-shadow:0 2px 12px rgba(238,77,45,.25)}
-    @keyframes shopeeSlideIn{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
-    .shopee-bar-enter{animation:shopeeSlideIn .5s ease-out}
-    .shopee-shimmer{background:linear-gradient(90deg,#fff 30%,#ffd6cc 50%,#fff 70%);background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s ease-in-out infinite}
-    @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
-    .header-with-bar{top:44px}.header-no-bar{top:0}
-    .hero-with-bar{padding-top:calc(72px + 44px)}.hero-no-bar{padding-top:72px}
-    
     .color-sw{transition:all .25s ease;cursor:pointer;border:2.5px solid transparent}
     .color-sw:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
     .color-sw.active{border-color:#1e3a5f;transform:translateY(-2px);box-shadow:0 4px 12px rgba(30,58,95,.15)}
@@ -62,6 +51,10 @@
     .pos-btn{transition:all .2s ease;cursor:pointer;border:2px solid #f0f0f0}
     .pos-btn:hover{border-color:#c8a45a}
     .pos-btn.active{border-color:#1e3a5f;background:#1e3a5f;color:#fff}
+    
+    .shape-btn{transition:all .2s ease;cursor:pointer;border:2px solid #f0f0f0}
+    .shape-btn:hover{border-color:#c8a45a}
+    .shape-btn.active{border-color:#1e3a5f;background:#1e3a5f;color:#fff}
     
     .form-input{border:1.5px solid #e5e7eb;transition:all .25s ease;background:#fff}
     .form-input:focus{border-color:#1e3a5f;box-shadow:0 0 0 3px rgba(30,58,95,.08);outline:none}
@@ -86,17 +79,29 @@
     .faq-chevron{transition:transform .3s ease}
     .section-divider{height:1px;background:linear-gradient(90deg,transparent,#e5e7eb,transparent)}
     
-    #three-container {
+    #bag-preview {
       width: 100%;
-      height: 520px;
-      background: linear-gradient(180deg, #f0f2f5 0%, #dce1e8 100%);
+      height: 420px;
+      background: #f0f2f5;
       border-radius: 20px;
       overflow: hidden;
       position: relative;
-      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    #three-container:active { cursor: grabbing; }
-    #three-container canvas { display: block; width: 100% !important; height: 100% !important; }
+    
+    #bag-preview svg {
+      width: 85%;
+      height: 85%;
+      max-width: 500px;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.12));
+      transition: all 0.4s ease;
+    }
+    
+    #bag-preview .bag-body {
+      transition: fill 0.4s ease;
+    }
     
     .controls-hint {
       position: absolute;
@@ -120,58 +125,21 @@
     .controls-hint:hover { opacity: 1; }
     .controls-hint i { font-size: 14px; }
     
-    #loadingOverlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0.85);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      border-radius: 20px;
-      transition: opacity 0.6s;
-    }
-    #loadingOverlay.hidden { opacity: 0; pointer-events: none; }
-    .loader {
-      width: 48px;
-      height: 48px;
-      border: 4px solid #e5e7eb;
-      border-top-color: #1e3a5f;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    
-    @media (max-width: 768px) { #three-container { height: 350px; } }
-    @media (max-width: 480px) { #three-container { height: 280px; } }
+    @media (max-width: 768px) { #bag-preview { height: 300px; } }
+    @media (max-width: 480px) { #bag-preview { height: 240px; } }
   </style>
 </head>
 <body>
 
 <div class="scroll-progress" id="scrollProgress" style="width:0%"></div>
 
-<!-- Shopee Bar -->
-<div id="shopeeBar" class="shopee-bar shopee-bar-enter shopee-bar-glow fixed top-0 left-0 w-full z-[60] bg-shopee">
-  <div class="max-w-7xl mx-auto px-4 lg:px-8 h-[44px] flex items-center justify-between">
-    <div class="flex items-center gap-2.5 min-w-0">
-      <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="white" fill-opacity="0.2"/><path d="M7.5 11.5C7.5 9 9.5 7 12 7h8c2.5 0 4.5 2 4.5 4.5v2c0 1-.3 1.8-.8 2.5L22 20c-.3.4-.8.7-1.3.8l-1.7.4c-.8.2-1.2 1-.8 1.7l.3.6c.2.4 0 .9-.4 1.1l-.4.2c-.5.2-1-.1-1.1-.6l-.6-2.2c-.2-.7-.9-1.2-1.6-1.2h-1.2c-.7 0-1.4.5-1.6 1.2l-.6 2.2c-.1.5-.6.8-1.1.6l-.4-.2c-.4-.2-.6-.7-.4-1.1l.3-.6c.4-.7 0-1.5-.8-1.7l-1.7-.4c-.5-.1-1-.4-1.3-.8l-1.7-4C7.8 15.3 7.5 14.5 7.5 13.5v-2z" fill="white"/><circle cx="13" cy="13" r="1.2" fill="#EE4D2D"/><circle cx="19" cy="13" r="1.2" fill="#EE4D2D"/></svg>
-      <p class="shopee-shimmer text-xs sm:text-sm font-bold whitespace-nowrap">Belanja Langsung di Toko Shopee Kami!</p>
-    </div>
-    <div class="flex items-center gap-3">
-      <a href="https://shopee.co.id/fardhan_storeetarget="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-white text-shopee text-xs font-bold px-3.5 py-1.5 rounded-md hover:bg-gray-50 transition-colors whitespace-nowrap"><i class="fas fa-store text-[11px]"></i><span class="hidden sm:inline">Kunjungi Toko</span><span class="sm:hidden">Buka</span><i class="fas fa-arrow-right text-[9px]"></i></a>
-      <button id="closeShopeeBar" class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-white/20 transition-colors flex-shrink-0"><i class="fas fa-xmark text-white/80 text-sm"></i></button>
-    </div>
-  </div>
-</div>
-
 <!-- Header -->
-<header id="mainHeader" class="header-with-bar fixed w-full z-50 transition-all duration-300" style="background:rgba(255,255,255,.95);backdrop-filter:blur(12px)">
+<header id="mainHeader" class="fixed w-full z-50 transition-all duration-300 top-0" style="background:rgba(255,255,255,.95);backdrop-filter:blur(12px)">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="flex items-center justify-between h-[72px]">
       <a href="index.html" class="flex items-center gap-2.5 group">
         <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300"><i class="fas fa-bag-shopping text-white text-sm"></i></div>
-        <span class="text-xl font-bold text-primary tracking-tight">fardhan<span class="text-accent">-storee</span></span>
+        <span class="text-xl font-bold text-primary tracking-tight">ryanti<span class="text-accent">_shopp</span></span>
       </a>
       <nav class="hidden lg:flex items-center gap-8">
         <a href="index.html" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Beranda</a>
@@ -181,7 +149,6 @@
         <a href="index.html#kontak" class="nav-link text-sm font-medium text-muted hover:text-primary transition-colors">Kontak</a>
       </nav>
       <div class="flex items-center gap-3">
-        <a href="https://shopee.co.id/fardhan_storeetarget="_blank" rel="noopener" class="hidden md:inline-flex items-center gap-2 bg-shopee text-white text-sm font-medium px-4 py-2.5 rounded-lg hover:bg-[#D73211] transition-colors"><i class="fas fa-bag-shopping text-xs"></i><span>Shopee</span></a>
         <a href="https://wa.me/6285221692902" target="_blank" class="hidden md:inline-flex items-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#152c4a] transition-colors"><i class="fab fa-whatsapp text-base"></i><span>Chat Kami</span></a>
         <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-alt transition-colors"><i class="fas fa-bars text-dark text-lg" id="menuIcon"></i></button>
       </div>
@@ -189,12 +156,12 @@
   </div>
   <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-border-soft">
     <div class="max-w-7xl mx-auto px-6 py-4 space-y-1">
-      <a href="https://shopee.co.id/fardhan_storeetarget="_blank" rel="noopener" class="flex items-center justify-center gap-2 bg-shopee text-white text-sm font-semibold px-5 py-3 rounded-xl w-full mb-2"><i class="fas fa-bag-shopping text-sm"></i> Belanja di Shopee</a>
       <a href="index.html" class="block py-2.5 px-3 text-sm font-medium text-dark hover:bg-surface rounded-lg transition-colors">Beranda</a>
       <a href="index.html#produk" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Produk</a>
       <a href="index.html#layanan" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Layanan</a>
       <a href="index.html#tentang" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Tentang</a>
       <a href="index.html#kontak" class="block py-2.5 px-3 text-sm font-medium text-muted hover:bg-surface rounded-lg transition-colors">Kontak</a>
+      <a href="https://wa.me/6285221692902" target="_blank" class="flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-5 py-3 rounded-xl w-full mt-2"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
     </div>
   </div>
 </header>
@@ -207,10 +174,10 @@
   </div>
 </div>
 
-<main class="hero-with-bar">
+<main>
 
 <!-- Breadcrumb -->
-<div class="bg-surface border-b border-border-soft">
+<div class="bg-surface border-b border-border-soft pt-[72px]">
   <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4">
     <nav aria-label="Breadcrumb">
       <ol class="flex items-center gap-2 text-xs">
@@ -218,7 +185,7 @@
         <li><i class="fas fa-chevron-right text-[9px] text-gray-300"></i></li>
         <li><a href="index.html#produk" class="text-muted hover:text-primary transition-colors">Produk</a></li>
         <li><i class="fas fa-chevron-right text-[9px] text-gray-300"></i></li>
-        <li class="text-primary font-semibold">Custom Tas 3D</li>
+        <li class="text-primary font-semibold">Custom Tas 2D</li>
       </ol>
     </nav>
   </div>
@@ -230,13 +197,13 @@
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
       <div>
         <span class="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-2 block">Buat Desain Sendiri</span>
-        <h1 class="text-2xl md:text-3xl font-extrabold text-dark tracking-tight">Custom Tas <span class="text-primary">Spunbond 3D</span></h1>
-        <p class="text-muted text-sm mt-2 max-w-xl leading-relaxed">Upload desain, pilih warna & ukuran, lihat hasil 3D real-time yang bisa diputar 360°!</p>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-dark tracking-tight">Custom Tas <span class="text-primary">Spunbond 2D</span></h1>
+        <p class="text-muted text-sm mt-2 max-w-xl leading-relaxed">Pilih bentuk oval dengan tali lipat samping, warna, ukuran, dan upload desain untuk preview real-time.</p>
       </div>
       <div class="flex items-center gap-3 flex-shrink-0">
         <div class="flex items-center gap-1"><i class="fas fa-star text-amber-400 text-xs"></i><i class="fas fa-star text-amber-400 text-xs"></i><i class="fas fa-star text-amber-400 text-xs"></i><i class="fas fa-star text-amber-400 text-xs"></i><i class="fas fa-star text-amber-400 text-xs"></i><span class="text-xs text-muted ml-1.5">4.9</span></div>
         <div class="h-4 w-px bg-border-soft"></div>
-        <span class="text-xs font-semibold text-green-600 flex items-center gap-1"><i class="fas fa-circle text-[5px]"></i>3D Real-time</span>
+        <span class="text-xs font-semibold text-green-600 flex items-center gap-1"><i class="fas fa-circle text-[5px]"></i>Preview Real-time</span>
       </div>
     </div>
   </div>
@@ -247,18 +214,60 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="grid lg:grid-cols-5 gap-8 lg:gap-10">
 
-      <!-- KIRI: 3D Preview -->
+      <!-- KIRI: Preview -->
       <div class="lg:col-span-3 space-y-6">
 
-        <!-- 3D Container -->
-        <div id="three-container">
-          <div id="loadingOverlay">
-            <div class="loader"></div>
-            <p class="text-sm text-muted mt-4 font-medium">Memuat tas 3D...</p>
-          </div>
+        <!-- Preview Container -->
+        <div id="bag-preview">
+          <svg id="bagSvg" viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shadow -->
+            <ellipse id="shadowEl" cx="250" cy="385" rx="150" ry="15" fill="rgba(0,0,0,0.08)"/>
+            
+            <!-- Tas Body - TALI LIPAT SAMPING (Model Oval) -->
+            <g id="bagGroup">
+              <!-- Body utama oval -->
+              <rect id="bagBody" x="80" y="60" width="340" height="260" rx="60" ry="60" fill="#2196F3" class="bag-body"/>
+              
+              <!-- Lipatan samping kiri (tali lipat samping) -->
+              <rect id="sideFoldL" x="65" y="80" width="20" height="220" rx="8" fill="rgba(0,0,0,0.08)"/>
+              <rect x="68" y="85" width="14" height="210" rx="6" fill="rgba(0,0,0,0.04)"/>
+              
+              <!-- Lipatan samping kanan (tali lipat samping) -->
+              <rect id="sideFoldR" x="415" y="80" width="20" height="220" rx="8" fill="rgba(0,0,0,0.08)"/>
+              <rect x="418" y="85" width="14" height="210" rx="6" fill="rgba(0,0,0,0.04)"/>
+              
+              <!-- Lipatan bawah -->
+              <rect id="bottomFold" x="90" y="310" width="320" height="10" rx="4" fill="rgba(0,0,0,0.06)"/>
+              
+              <!-- Lipatan atas -->
+              <rect id="topFold" x="90" y="62" width="320" height="10" rx="4" fill="rgba(0,0,0,0.05)"/>
+              
+              <!-- Tali utama kiri (model lipat samping) -->
+              <path id="handleL" d="M130 60 Q130 5 170 5 Q210 5 210 15" stroke="rgba(0,0,0,0.2)" stroke-width="8" fill="none" stroke-linecap="round"/>
+              <path id="handleLInner" d="M133 60 Q133 8 170 8 Q207 8 207 15" stroke="rgba(0,0,0,0.08)" stroke-width="4" fill="none" stroke-linecap="round"/>
+              
+              <!-- Tali utama kanan (model lipat samping) -->
+              <path id="handleR" d="M370 60 Q370 5 330 5 Q290 5 290 15" stroke="rgba(0,0,0,0.2)" stroke-width="8" fill="none" stroke-linecap="round"/>
+              <path id="handleRInner" d="M367 60 Q367 8 330 8 Q293 8 293 15" stroke="rgba(0,0,0,0.08)" stroke-width="4" fill="none" stroke-linecap="round"/>
+              
+              <!-- Detail jahitan dekoratif -->
+              <rect x="95" y="75" width="310" height="230" rx="50" ry="50" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="1.5" stroke-dasharray="5,5"/>
+              
+              <!-- Design Area -->
+              <foreignObject id="designArea" x="150" y="115" width="200" height="145">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;border:2px dashed #d1d5db;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.3);">
+                  <span style="font-size:11px;color:#9ca3af;font-weight:500;">Upload desain</span>
+                </div>
+              </foreignObject>
+              
+              <!-- Detail tambahan - tekstur bahan -->
+              <rect x="85" y="65" width="330" height="250" rx="58" ry="58" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+            </g>
+          </svg>
+          
           <div class="controls-hint">
-            <i class="fas fa-mouse-pointer"></i>
-            <span>Seret untuk memutar 360°</span>
+            <i class="fas fa-eye"></i>
+            <span>Preview 2D - Tali Lipat Samping</span>
             <i class="fas fa-arrows-spin ml-1"></i>
           </div>
         </div>
@@ -270,10 +279,39 @@
             <span id="colorNamePreview" class="text-sm font-bold text-dark">Biru</span>
           </div>
           <div class="w-px h-6 bg-border-soft"></div>
+          <span id="shapeNamePreview" class="text-sm font-bold text-dark">Oval</span>
+          <div class="w-px h-6 bg-border-soft"></div>
           <span id="sizeNamePreview" class="text-sm font-bold text-dark">TLS 25 — 25 × 35 × 8 cm</span>
           <div class="w-px h-6 bg-border-soft"></div>
           <span id="designStatus" class="text-xs text-muted"><i class="fas fa-image mr-1"></i>Belum ada desain</span>
         </div>
+
+        <!-- 0. Pilih Bentuk Tas -->
+        <div>
+          <h3 class="text-sm font-bold text-dark mb-3 flex items-center gap-2">
+            <span class="w-6 h-6 bg-primary rounded-md flex items-center justify-center text-white text-[10px] font-bold">0</span>
+            Pilih Bentuk Tas
+          </h3>
+          <div class="grid grid-cols-3 gap-3" id="shapeGrid">
+            <button class="shape-btn rounded-xl py-3 text-center" data-shape="tls" onclick="selectShape('tls')">
+              <i class="fas fa-square text-base mb-1"></i>
+              <div class="text-[11px] font-semibold">TLS</div>
+              <div class="text-[8px] text-muted">Persegi</div>
+            </button>
+            <button class="shape-btn active rounded-xl py-3 text-center" data-shape="oval" onclick="selectShape('oval')">
+              <i class="fas fa-circle text-base mb-1"></i>
+              <div class="text-[11px] font-semibold">Oval</div>
+              <div class="text-[8px] text-muted">Bulat</div>
+            </button>
+            <button class="shape-btn rounded-xl py-3 text-center" data-shape="totebag" onclick="selectShape('totebag')">
+              <i class="fas fa-bag-shopping text-base mb-1"></i>
+              <div class="text-[11px] font-semibold">Tote Bag</div>
+              <div class="text-[8px] text-muted">Persegi Panjang</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
 
         <!-- 1. Pilih Warna -->
         <div>
@@ -322,7 +360,7 @@
         <div>
           <h3 class="text-sm font-bold text-dark mb-3 flex items-center gap-2">
             <span class="w-6 h-6 bg-primary rounded-md flex items-center justify-center text-white text-[10px] font-bold">3</span>
-            Upload Desain <span class="text-green-600 font-normal text-xs ml-1">✨ Langsung ke 3D!</span>
+            Upload Desain <span class="text-green-600 font-normal text-xs ml-1">✨ Langsung ke preview!</span>
           </h3>
           <div class="bg-surface rounded-2xl border border-border-soft overflow-hidden">
             <div class="relative aspect-[3/1] flex items-center justify-center" id="designArea">
@@ -333,7 +371,7 @@
                   </div>
                   <p class="text-sm font-bold text-dark mb-0.5">Upload Desain Anda</p>
                   <p class="text-[11px] text-muted">PNG, JPG — Max 10MB</p>
-                  <p class="text-[10px] text-accent mt-1">✨ Desain langsung muncul di tas 3D!</p>
+                  <p class="text-[10px] text-accent mt-1">✨ Desain langsung muncul di preview!</p>
                 </div>
               </div>
               <div id="uploadedPreview" class="absolute inset-4 flex items-center justify-center z-[5] hidden">
@@ -374,14 +412,31 @@
             </div>
           </div>
 
+          <!-- Pilihan Tali -->
+          <div class="bg-white border border-border-soft rounded-2xl p-5">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-muted mb-3"><i class="fas fa-handshake text-accent mr-1.5"></i>Jenis Tali</h4>
+            <div class="grid grid-cols-3 gap-2">
+              <button class="handle-opt-btn text-[10px] font-semibold py-2.5 rounded-lg border-2 border-border-soft text-muted hover:border-gray-300 transition-all" data-handle="standar" onclick="selectHandleOption('standar')">
+                <i class="fas fa-grip-lines text-xs mb-0.5 block"></i>
+                Standar
+              </button>
+              <button class="handle-opt-btn text-[10px] font-semibold py-2.5 rounded-lg border-2 border-primary bg-primary/5 text-primary transition-all" data-handle="lipat-samping" onclick="selectHandleOption('lipat-samping')">
+                <i class="fas fa-arrows-left-right text-xs mb-0.5 block"></i>
+                Lipat Samping
+              </button>
+              <button class="handle-opt-btn text-[10px] font-semibold py-2.5 rounded-lg border-2 border-border-soft text-muted hover:border-gray-300 transition-all" data-handle="lipat-bawah" onclick="selectHandleOption('lipat-bawah')">
+                <i class="fas fa-arrows-up-down text-xs mb-0.5 block"></i>
+                Lipat Bawah
+              </button>
+            </div>
+          </div>
+
           <!-- Jumlah Warna Sablon -->
           <div class="bg-white border border-border-soft rounded-2xl p-5">
             <h4 class="text-xs font-bold uppercase tracking-wider text-muted mb-3"><i class="fas fa-palette text-accent mr-1.5"></i>Jumlah Warna Sablon</h4>
-            <div class="grid grid-cols-4 gap-2">
-              <button onclick="selectColorCount(1)" class="cc-btn text-[11px] font-semibold py-2.5 rounded-lg border-2 border-primary bg-primary/5 text-primary transition-all">1 Warna</button>
-              <button onclick="selectColorCount(2)" class="cc-btn text-[11px] font-semibold py-2.5 rounded-lg border-2 border-border-soft text-muted hover:border-gray-300 transition-all">2 Warna</button>
-              <button onclick="selectColorCount(3)" class="cc-btn text-[11px] font-semibold py-2.5 rounded-lg border-2 border-border-soft text-muted hover:border-gray-300 transition-all">3 Warna</button>
-              <button onclick="selectColorCount(4)" class="cc-btn text-[11px] font-semibold py-2.5 rounded-lg border-2 border-border-soft text-muted hover:border-gray-300 transition-all">4+ Warna</button>
+            <div class="grid grid-cols-1 gap-2">
+              <button class="text-[11px] font-semibold py-2.5 rounded-lg border-2 border-primary bg-primary/5 text-primary transition-all">1 Warna</button>
+              <p class="text-[10px] text-muted text-center">Untuk custom dengan 2 warna atau lebih, silakan hubungi kami via WhatsApp</p>
             </div>
           </div>
 
@@ -460,13 +515,13 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="text-center mb-10">
       <span class="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-2 block">Keunggulan</span>
-      <h2 class="text-2xl md:text-3xl font-extrabold text-dark tracking-tight">Mengapa Custom di <span class="text-primary">fardhan_storeetarget</span>?</h2>
+      <h2 class="text-2xl md:text-3xl font-extrabold text-dark tracking-tight">Mengapa Custom di <span class="text-primary">ryanti_shopp</span>?</h2>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       <div class="benefit-card rounded-2xl p-6 text-center bg-white">
-        <div class="w-14 h-14 bg-primary/8 rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-cube text-primary text-xl"></i></div>
-        <h3 class="text-sm font-bold text-dark mb-1.5">Preview 3D</h3>
-        <p class="text-xs text-muted leading-relaxed">Lihat desain Anda dalam 3D real-time, putar 360° untuk melihat dari semua sudut.</p>
+        <div class="w-14 h-14 bg-primary/8 rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-image text-primary text-xl"></i></div>
+        <h3 class="text-sm font-bold text-dark mb-1.5">Preview Real-time</h3>
+        <p class="text-xs text-muted leading-relaxed">Lihat desain Anda secara langsung dengan perubahan warna dan ukuran yang instan.</p>
       </div>
       <div class="benefit-card rounded-2xl p-6 text-center bg-white">
         <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-paint-roller text-accent text-xl"></i></div>
@@ -500,7 +555,7 @@
           <span class="text-sm font-semibold text-dark pr-4">Format file desain apa yang diterima?</span>
           <i class="fas fa-chevron-down text-muted text-xs faq-chevron flex-shrink-0"></i>
         </button>
-        <div class="faq-answer px-5 pb-5"><p class="text-sm text-muted leading-relaxed">Untuk preview 3D, kami menerima PNG dan JPG. Untuk produksi, kami juga menerima PDF, AI, CDR, EPS, dan SVG.</p></div>
+        <div class="faq-answer px-5 pb-5"><p class="text-sm text-muted leading-relaxed">Kami menerima PNG, JPG, PDF, AI, CDR, EPS, dan SVG.</p></div>
       </div>
       <div class="faq-item rounded-xl bg-surface overflow-hidden">
         <button class="w-full flex items-center justify-between p-5 text-left" onclick="this.closest('.faq-item').classList.toggle('open')">
@@ -532,10 +587,7 @@
   <div class="max-w-3xl mx-auto px-6">
     <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight mb-4 leading-tight">Masih Bingung<br>Dengan Desain Anda?</h2>
     <p class="text-white/60 text-base mb-8 max-w-lg mx-auto">Konsultasikan gratis sekarang. Tim kami siap membantu dari nol.</p>
-    <div class="flex flex-wrap justify-center gap-3">
-      <a href="https://wa.me/6285221692902" target="_blank" class="inline-flex items-center gap-2 bg-accent text-primary font-bold px-7 py-3.5 rounded-xl hover:bg-[#d4b76a] transition-all shadow-lg shadow-accent/20 text-sm"><i class="fab fa-whatsapp text-lg"></i>Konsultasi Gratis</a>
-      <a href="https://shopee.co.id/fardhan_storeetarget="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-shopee text-white font-bold px-7 py-3.5 rounded-xl hover:bg-[#D73211] transition-all shadow-lg shadow-shopee/20 text-sm"><i class="fas fa-bag-shopping text-sm"></i>Belanja di Shopee</a>
-    </div>
+    <a href="https://wa.me/6285221692902" target="_blank" class="inline-flex items-center gap-2 bg-accent text-primary font-bold px-7 py-3.5 rounded-xl hover:bg-[#d4b76a] transition-all shadow-lg shadow-accent/20 text-sm"><i class="fab fa-whatsapp text-lg"></i>Konsultasi Gratis</a>
   </div>
 </section>
 </main>
@@ -545,13 +597,13 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
       <div>
-        <a href="index.html" class="flex items-center gap-2.5 mb-5"><div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center"><i class="fas fa-bag-shopping text-white text-sm"></i></div><span class="text-xl font-bold tracking-tight">Tas<span class="text-accent">Souvenir</span></span></a>
+        <a href="index.html" class="flex items-center gap-2.5 mb-5"><div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center"><i class="fas fa-bag-shopping text-white text-sm"></i></div><span class="text-xl font-bold tracking-tight">ryanti<span class="text-accent">_shopp</span></span></a>
         <p class="text-gray-400 text-sm leading-relaxed mb-5">Spesialis pembuatan tas custom dan sablon berkualitas untuk berbagai kebutuhan souvenir dan promosi.</p>
-        <p class="text-gray-500 text-xs">&copy; 2025 fardhan_storeetarget. All rights reserved.</p>
+        <p class="text-gray-500 text-xs">&copy; 2025 ryanti_shopp. All rights reserved.</p>
       </div>
       <div><h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Navigasi</h4><ul class="space-y-3"><li><a href="index.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Beranda</a></li><li><a href="index.html#produk" class="text-gray-400 text-sm hover:text-accent transition-colors">Produk</a></li><li><a href="index.html#layanan" class="text-gray-400 text-sm hover:text-accent transition-colors">Layanan</a></li><li><a href="index.html#tentang" class="text-gray-400 text-sm hover:text-accent transition-colors">Tentang Kami</a></li><li><a href="index.html#kontak" class="text-gray-400 text-sm hover:text-accent transition-colors">Kontak</a></li></ul></div>
-      <div><h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Produk</h4><ul class="space-y-3"><li><a href="warnatas.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Pilihan Warna</a></li><li><a href="ukuran.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Pilihan Ukuran</a></li><li><a href="custom.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Custom Tas 3D</a></li><li><a href="ukuran.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Goodie Bag</a></li><li><a href="ukuran.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Tas Box</a></li></ul></div>
-      <div><h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Kontak</h4><ul class="space-y-3"><li class="flex items-start gap-2.5"><i class="fas fa-map-marker-alt text-accent text-xs mt-1.5 flex-shrink-0"></i><span class="text-gray-400 text-sm leading-relaxed">Kiaracondong, Sukapura, Jl. Salak Gang Jambu RT05/RW01 No.49</span></li><li class="flex items-center gap-2.5"><i class="fas fa-phone text-accent text-xs flex-shrink-0"></i><span class="text-gray-400 text-sm">+62 852-2169-2902</span></li><li class="flex items-center gap-2.5"><i class="fas fa-envelope text-accent text-xs flex-shrink-0"></i><span class="text-gray-400 text-sm">fardanapriansyah10@gmail.com</span></li></ul></div>
+      <div><h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Produk</h4><ul class="space-y-3"><li><a href="ukuran.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Pilihan Ukuran</a></li><li><a href="custom.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Custom Tas 2D</a></li><li><a href="ukuran.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Goodie Bag</a></li><li><a href="ukuran.html" class="text-gray-400 text-sm hover:text-accent transition-colors">Tas Box</a></li></ul></div>
+      <div><h4 class="text-sm font-bold uppercase tracking-wider mb-5 text-white">Kontak</h4><ul class="space-y-3"><li class="flex items-center gap-2.5"><i class="fas fa-user text-accent text-xs flex-shrink-0"></i><span class="text-gray-400 text-sm">Hendar Sulistiana</span></li><li class="flex items-start gap-2.5"><i class="fas fa-map-marker-alt text-accent text-xs mt-1.5 flex-shrink-0"></i><span class="text-gray-400 text-sm leading-relaxed">Kiaracondong, Sukapura, Jl. Salak Gang Jambu RT05/RW01 No.49</span></li><li class="flex items-center gap-2.5"><i class="fas fa-phone text-accent text-xs flex-shrink-0"></i><span class="text-gray-400 text-sm">+62 852-2169-2902</span></li><li class="flex items-center gap-2.5"><i class="fas fa-envelope text-accent text-xs flex-shrink-0"></i><span class="text-gray-400 text-sm">fardanapriansyah10@gmail.com</span></li></ul></div>
     </div>
   </div>
   <div class="border-t border-white/5">
@@ -561,23 +613,17 @@
         <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-instagram text-sm"></i></a>
         <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
         <a href="#" class="text-gray-500 hover:text-accent transition-colors"><i class="fab fa-tiktok text-sm"></i></a>
-        <a href="https://shopee.co.id/fardhan_storeetarget="_blank" class="text-shopee hover:text-[#ff6b4a] transition-colors"><i class="fas fa-bag-shopping text-sm"></i></a>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- Floating Buttons -->
+<!-- Floating WhatsApp Button -->
 <a href="https://wa.me/6285221692902" target="_blank" class="wa-float fixed bottom-6 left-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform"><i class="fab fa-whatsapp text-2xl"></i></a>
-<a href="https://shopee.co.id/fardhan_storeetarget="_blank rel="noopener" class="fixed bottom-6 right-6 bg-shopee text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:scale-110 transition-transform" style="box-shadow:0 4px 14px rgba(238,77,45,.4)"><i class="fas fa-bag-shopping text-xl"></i></a>
-
-<!-- Three.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
 <script>
 // ============================================================
-// 3D TAS SPUNBOND REALISTIC - 360° ROTATE
+// 2D TAS SPUNBOND - TALI LIPAT SAMPING
 // ============================================================
 
 (function() {
@@ -586,10 +632,11 @@
   // ---------- STATE ----------
   var selectedColor = '#2196F3';
   var selectedColorName = 'Biru';
+  var selectedShape = 'oval';
+  var selectedHandleOption = 'lipat-samping';
   var selectedSize = null;
   var selectedSizeName = 'TLS 25 — 25 × 35 × 8 cm';
   var selectedPos = 'depan';
-  var colorCount = 1;
   var handleExtra = 0;
   var uploadedFile = null;
   var hasDesign = false;
@@ -615,313 +662,174 @@
     {name:'TLS 60',size:'60 × 70 × 20 cm',base:9000}
   ];
 
-  // ---------- THREE.JS ----------
-  var container = document.getElementById('three-container');
-  var loadingOverlay = document.getElementById('loadingOverlay');
-
-  var scene, camera, renderer, controls;
-  var bagGroup;
-  var designMesh;
-  var isInitialized = false;
-
-  function init3D() {
-    var width = container.clientWidth;
-    var height = container.clientHeight;
-
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf0f2f5);
-
-    camera = new THREE.PerspectiveCamera(32, width / height, 0.1, 20);
-    camera.position.set(4.2, 2.8, 6.8);
-    camera.lookAt(0, 0.3, 0);
-
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
-    container.appendChild(renderer.domElement);
-
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.08;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 2.0;
-    controls.minDistance = 3;
-    controls.maxDistance = 12;
-    controls.target.set(0, 0.3, 0);
-    controls.update();
-
-    // LIGHTS
-    var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-
-    var mainLight = new THREE.DirectionalLight(0xffffff, 1.0);
-    mainLight.position.set(6, 10, 8);
-    mainLight.castShadow = true;
-    mainLight.shadow.mapSize.width = 1024;
-    mainLight.shadow.mapSize.height = 1024;
-    scene.add(mainLight);
-
-    var fillLight = new THREE.DirectionalLight(0x8ecae6, 0.4);
-    fillLight.position.set(-5, 4, -6);
-    scene.add(fillLight);
-
-    var rimLight = new THREE.DirectionalLight(0xffd6a5, 0.3);
-    rimLight.position.set(-3, 2, 7);
-    scene.add(rimLight);
-
-    var hemiLight = new THREE.HemisphereLight(0x87ceeb, 0x3a3a3a, 0.4);
-    scene.add(hemiLight);
-
-    buildBag();
-
-    isInitialized = true;
-    loadingOverlay.classList.add('hidden');
-
-    window.addEventListener('resize', onResize);
-    animate();
-
-    var idleTimer;
-    renderer.domElement.addEventListener('pointerdown', function() {
-      controls.autoRotate = false;
-      clearTimeout(idleTimer);
-    });
-    renderer.domElement.addEventListener('pointerup', function() {
-      idleTimer = setTimeout(function() {
-        controls.autoRotate = true;
-      }, 4000);
-    });
-    setTimeout(function() {
-      controls.autoRotate = true;
-    }, 2000);
-
-    console.log('✅ 3D Tas Realistic initialized');
+  // ===== UPDATE SHAPE =====
+  function updateShape(shape) {
+    selectedShape = shape;
+    var bagBody = document.getElementById('bagBody');
+    var sideFoldL = document.getElementById('sideFoldL');
+    var sideFoldR = document.getElementById('sideFoldR');
+    
+    if (shape === 'oval') {
+      bagBody.setAttribute('rx', '60');
+      bagBody.setAttribute('ry', '60');
+      bagBody.setAttribute('x', '80');
+      bagBody.setAttribute('y', '60');
+      bagBody.setAttribute('width', '340');
+      bagBody.setAttribute('height', '260');
+      sideFoldL.setAttribute('y', '80');
+      sideFoldL.setAttribute('height', '220');
+      sideFoldR.setAttribute('y', '80');
+      sideFoldR.setAttribute('height', '220');
+    } else if (shape === 'totebag') {
+      bagBody.setAttribute('rx', '10');
+      bagBody.setAttribute('ry', '10');
+      bagBody.setAttribute('x', '70');
+      bagBody.setAttribute('y', '50');
+      bagBody.setAttribute('width', '360');
+      bagBody.setAttribute('height', '280');
+      sideFoldL.setAttribute('y', '70');
+      sideFoldL.setAttribute('height', '240');
+      sideFoldR.setAttribute('y', '70');
+      sideFoldR.setAttribute('height', '240');
+    } else { // tls
+      bagBody.setAttribute('rx', '15');
+      bagBody.setAttribute('ry', '15');
+      bagBody.setAttribute('x', '75');
+      bagBody.setAttribute('y', '55');
+      bagBody.setAttribute('width', '350');
+      bagBody.setAttribute('height', '270');
+      sideFoldL.setAttribute('y', '75');
+      sideFoldL.setAttribute('height', '230');
+      sideFoldR.setAttribute('y', '75');
+      sideFoldR.setAttribute('height', '230');
+    }
+    
+    document.getElementById('shapeNamePreview').textContent = shape.toUpperCase();
+    updateDesignPosition();
   }
 
-  // ===== BUILD REALISTIC BAG =====
-  function buildBag() {
-    if (bagGroup) {
-      scene.remove(bagGroup);
+  // ===== UPDATE HANDLE OPTION =====
+  function updateHandleOption(option) {
+    selectedHandleOption = option;
+    var sideFoldL = document.getElementById('sideFoldL');
+    var sideFoldR = document.getElementById('sideFoldR');
+    var bottomFold = document.getElementById('bottomFold');
+    var handleL = document.getElementById('handleL');
+    var handleR = document.getElementById('handleR');
+    
+    // Reset semua
+    sideFoldL.style.display = 'block';
+    sideFoldR.style.display = 'block';
+    bottomFold.style.display = 'block';
+    handleL.style.display = 'block';
+    handleR.style.display = 'block';
+    
+    if (option === 'lipat-samping') {
+      bottomFold.style.display = 'none';
+      // Tali lipat samping - lebih lebar dan jelas
+      handleL.setAttribute('d', 'M130 60 Q130 5 170 5 Q210 5 210 15');
+      handleL.setAttribute('stroke-width', '8');
+      handleR.setAttribute('d', 'M370 60 Q370 5 330 5 Q290 5 290 15');
+      handleR.setAttribute('stroke-width', '8');
+      // Tampilkan inner handle
+      document.getElementById('handleLInner').style.display = 'block';
+      document.getElementById('handleRInner').style.display = 'block';
+    } else if (option === 'lipat-bawah') {
+      sideFoldL.style.display = 'none';
+      sideFoldR.style.display = 'none';
+      handleL.setAttribute('d', 'M140 60 Q140 10 175 10 Q210 10 210 20');
+      handleL.setAttribute('stroke-width', '6');
+      handleR.setAttribute('d', 'M360 60 Q360 10 325 10 Q290 10 290 20');
+      handleR.setAttribute('stroke-width', '6');
+      document.getElementById('handleLInner').style.display = 'none';
+      document.getElementById('handleRInner').style.display = 'none';
+    } else { // standar
+      handleL.setAttribute('d', 'M145 60 Q145 15 180 15 Q215 15 215 25');
+      handleL.setAttribute('stroke-width', '6');
+      handleR.setAttribute('d', 'M355 60 Q355 15 320 15 Q285 15 285 25');
+      handleR.setAttribute('stroke-width', '6');
+      document.getElementById('handleLInner').style.display = 'none';
+      document.getElementById('handleRInner').style.display = 'none';
     }
-
-    bagGroup = new THREE.Group();
-
-    var color = new THREE.Color(selectedColor);
-    var darkColor = new THREE.Color(selectedColor).multiplyScalar(0.65);
-    var lightColor = new THREE.Color(selectedColor).multiplyScalar(1.15);
-
-    // ---- MAIN BODY (Box dengan rounded feel) ----
-    var bodyMat = new THREE.MeshPhysicalMaterial({
-      color: color,
-      roughness: 0.6,
-      metalness: 0.02,
-      clearcoat: 0.05,
-      clearcoatRoughness: 0.3,
-      side: THREE.DoubleSide,
-    });
-
-    var bodyGeo = new THREE.BoxGeometry(2.6, 1.8, 0.8);
-    var body = new THREE.Mesh(bodyGeo, bodyMat);
-    body.position.y = 0.5;
-    body.castShadow = true;
-    body.receiveShadow = true;
-    bagGroup.add(body);
-
-    // ---- GUSSET (Sisi lipatan) ----
-    var gussetMat = new THREE.MeshPhysicalMaterial({
-      color: darkColor,
-      roughness: 0.8,
-      metalness: 0,
-      side: THREE.DoubleSide,
-    });
-
-    // Gusset kiri
-    var gussetL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.6, 0.6), gussetMat);
-    gussetL.position.set(-1.26, 0.5, 0);
-    bagGroup.add(gussetL);
-
-    // Gusset kanan
-    var gussetR = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.6, 0.6), gussetMat);
-    gussetR.position.set(1.26, 0.5, 0);
-    bagGroup.add(gussetR);
-
-    // ---- LIPATAN BAWAH ----
-    var foldMat = new THREE.MeshPhysicalMaterial({
-      color: darkColor,
-      roughness: 0.9,
-      metalness: 0,
-    });
-    var foldBottom = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.06, 0.5), foldMat);
-    foldBottom.position.set(0, -0.35, 0);
-    bagGroup.add(foldBottom);
-
-    // ---- LIPATAN ATAS ----
-    var foldTop = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.06, 0.5), foldMat);
-    foldTop.position.set(0, 1.35, 0);
-    bagGroup.add(foldTop);
-
-    // ---- TALI (lebih realistik) ----
-    var handleMat = new THREE.MeshPhysicalMaterial({
-      color: darkColor,
-      roughness: 0.8,
-      metalness: 0,
-    });
-
-    // Tali kiri
-    var ptsL = [];
-    for (var t = 0; t <= 1; t += 0.05) {
-      var angle = t * Math.PI;
-      var x = -0.6 + 1.2 * t;
-      var y = 1.2 + 1.0 * Math.sin(angle) * 0.8;
-      var z = 0.1 * Math.sin(angle * 2);
-      ptsL.push(new THREE.Vector3(x, y, z));
-    }
-    var curveL = new THREE.CatmullRomCurve3(ptsL);
-    var handleL = new THREE.Mesh(new THREE.TubeGeometry(curveL, 20, 0.045, 8, false), handleMat);
-    handleL.castShadow = true;
-    bagGroup.add(handleL);
-
-    // Tali kanan
-    var ptsR = ptsL.map(function(p) {
-      return new THREE.Vector3(p.x, p.y, -p.z);
-    });
-    var curveR = new THREE.CatmullRomCurve3(ptsR);
-    var handleR = new THREE.Mesh(new THREE.TubeGeometry(curveR, 20, 0.045, 8, false), handleMat);
-    handleR.castShadow = true;
-    bagGroup.add(handleR);
-
-    // ---- DESIGN MESH (depan) ----
-    var designGeo = new THREE.PlaneGeometry(2.0, 1.4);
-    var designMat = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff,
-      roughness: 0.3,
-      metalness: 0,
-      transparent: true,
-      opacity: 0,
-      side: THREE.DoubleSide,
-      map: null,
-    });
-    designMesh = new THREE.Mesh(designGeo, designMat);
-    designMesh.position.set(0, 0.5, 0.41);
-    designMesh.renderOrder = 1;
-    bagGroup.add(designMesh);
-
-    // ---- JAHITAN DEKORASI ----
-    var stitchMat = new THREE.MeshPhysicalMaterial({
-      color: darkColor,
-      transparent: true,
-      opacity: 0.12,
-      roughness: 1,
-    });
-
-    var stitchPositions = [
-      {x: 0, y: 1.05, z: 0.41},
-      {x: 0, y: -0.05, z: 0.41},
-      {x: -1.0, y: 0.5, z: 0.41},
-      {x: 1.0, y: 0.5, z: 0.41},
-    ];
-
-    stitchPositions.forEach(function(pos) {
-      var isVertical = Math.abs(pos.x) > 0.5;
-      var stitch = new THREE.Mesh(
-        new THREE.BoxGeometry(isVertical ? 0.02 : 2.2, isVertical ? 1.2 : 0.02, 0.01),
-        stitchMat
-      );
-      stitch.position.set(pos.x, pos.y, pos.z);
-      bagGroup.add(stitch);
-    });
-
-    scene.add(bagGroup);
   }
 
-  // ===== UPDATE FUNCTIONS =====
+  // ===== UPDATE DESIGN POSITION =====
+  function updateDesignPosition() {
+    var designArea = document.getElementById('designArea');
+    
+    if (selectedShape === 'oval') {
+      designArea.setAttribute('x', '160');
+      designArea.setAttribute('y', '115');
+      designArea.setAttribute('width', '180');
+      designArea.setAttribute('height', '140');
+    } else if (selectedShape === 'totebag') {
+      designArea.setAttribute('x', '145');
+      designArea.setAttribute('y', '100');
+      designArea.setAttribute('width', '210');
+      designArea.setAttribute('height', '160');
+    } else { // tls
+      designArea.setAttribute('x', '150');
+      designArea.setAttribute('y', '110');
+      designArea.setAttribute('width', '200');
+      designArea.setAttribute('height', '150');
+    }
+  }
+
+  // ===== UPDATE COLOR =====
   function updateColor(colorHex) {
     selectedColor = colorHex;
-    var color = new THREE.Color(colorHex);
-    var darkColor = new THREE.Color(colorHex).multiplyScalar(0.65);
-
-    bagGroup.children.forEach(function(child) {
-      if (child.isMesh && child.material && child !== designMesh) {
-        var mats = Array.isArray(child.material) ? child.material : [child.material];
-        mats.forEach(function(mat) {
-          if (mat.color && !mat.map) {
-            if (child.position.y > 1.0 && child.geometry.type === 'TubeGeometry') {
-              mat.color.set(darkColor);
-            } else if (child.position.x < -0.5 || child.position.x > 0.5) {
-              if (child.geometry.parameters && child.geometry.parameters.width < 0.1) {
-                mat.color.set(darkColor);
-              } else {
-                mat.color.set(color);
-              }
-            } else {
-              mat.color.set(color);
-            }
-          }
-        });
-      }
-    });
-
+    var body = document.getElementById('bagBody');
+    if (body) {
+      body.setAttribute('fill', colorHex);
+    }
     document.getElementById('colorDotPreview').style.backgroundColor = colorHex;
     document.getElementById('colorNamePreview').textContent = selectedColorName;
   }
 
+  // ===== UPDATE DESIGN =====
   function updateDesign(imgDataUrl) {
-    if (!designMesh) return;
-
-    var textureLoader = new THREE.TextureLoader();
-    var texture = textureLoader.load(imgDataUrl, function(tex) {
-      tex.encoding = THREE.sRGBEncoding;
-      tex.needsUpdate = true;
-      
-      designMesh.material.map = tex;
-      designMesh.material.opacity = 1.0;
-      designMesh.material.transparent = false;
-      designMesh.material.color.set(0xffffff);
-      designMesh.material.needsUpdate = true;
+    var designArea = document.getElementById('designArea');
+    if (designArea) {
+      var div = designArea.querySelector('div');
+      if (div) {
+        div.innerHTML = '';
+        var img = document.createElement('img');
+        img.src = imgDataUrl;
+        img.style.cssText = 'width:100%;height:100%;object-fit:contain;border-radius:6px;';
+        div.appendChild(img);
+        div.style.border = '2px solid #c8a45a';
+        div.style.borderStyle = 'solid';
+        div.style.background = 'transparent';
+        div.style.display = 'flex';
+        div.style.alignItems = 'center';
+        div.style.justifyContent = 'center';
+      }
       
       hasDesign = true;
-      document.getElementById('designStatus').innerHTML = '<i class="fas fa-check-circle text-green-500 mr-1"></i>Desain 3D terpasang ✅';
+      document.getElementById('designStatus').innerHTML = '<i class="fas fa-check-circle text-green-500 mr-1"></i>Desain terpasang ✅';
       document.getElementById('designStatus').className = 'text-xs text-green-600 ml-2 font-medium';
       
-      showToast('✅ Desain berhasil diterapkan ke tas 3D!', 'success');
-    });
-  }
-
-  function onResize() {
-    if (!container) return;
-    var width = container.clientWidth;
-    var height = container.clientHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
-  }
-
-  function initWhenReady() {
-    if (document.getElementById('three-container').offsetWidth > 0) {
-      init3D();
-    } else {
-      setTimeout(initWhenReady, 200);
+      showToast('✅ Desain berhasil diterapkan!', 'success');
     }
   }
 
-  if (document.readyState === 'complete') {
-    setTimeout(initWhenReady, 100);
-  } else {
-    window.addEventListener('load', function() {
-      setTimeout(initWhenReady, 200);
-    });
-  }
-
   // ===== EXPOSE FUNCTIONS =====
+  window.selectShape = function(shape) {
+    document.querySelectorAll('.shape-btn').forEach(function(el) {
+      el.classList.toggle('active', el.getAttribute('data-shape') === shape);
+    });
+    updateShape(shape);
+  };
+
+  window.selectHandleOption = function(option) {
+    document.querySelectorAll('.handle-opt-btn').forEach(function(el) {
+      var isActive = el.getAttribute('data-handle') === option;
+      el.className = 'handle-opt-btn text-[10px] font-semibold py-2.5 rounded-lg border-2 transition-all ' + 
+        (isActive ? 'border-primary bg-primary/5 text-primary' : 'border-border-soft text-muted hover:border-gray-300');
+    });
+    updateHandleOption(option);
+  };
+
   window.pickColor = function(idx) {
     var color = COLORS[idx];
     selectedColorName = color.name;
@@ -970,15 +878,6 @@
     updateEstimate();
   };
 
-  window.selectColorCount = function(n) {
-    colorCount = n;
-    document.querySelectorAll('.cc-btn').forEach(function(el, i) {
-      el.className = 'cc-btn text-[11px] font-semibold py-2.5 rounded-lg border-2 transition-all ' + 
-        (i === n - 1 ? 'border-primary bg-primary/5 text-primary' : 'border-border-soft text-muted hover:border-gray-300');
-    });
-    updateEstimate();
-  };
-
   window.selectHandle = function(type) {
     handleExtra = type === 'kur' ? 1500 : 0;
     document.getElementById('handleSpunbond').className = 'handle-btn text-[11px] font-semibold py-2.5 rounded-xl border-2 transition-all ' + 
@@ -1011,7 +910,7 @@
     }
     
     if (!file.type.startsWith('image/')) {
-      showToast('⚠️ Hanya file gambar (PNG/JPG) yang bisa dipreview 3D', 'error');
+      showToast('⚠️ Hanya file gambar (PNG/JPG) yang bisa dipreview', 'error');
       return;
     }
     
@@ -1040,10 +939,17 @@
     document.getElementById('fileInfo').classList.add('hidden');
     document.getElementById('uploadedImg').src = '';
     
-    if (designMesh) {
-      designMesh.material.map = null;
-      designMesh.material.opacity = 0;
-      designMesh.material.needsUpdate = true;
+    var designArea = document.getElementById('designArea');
+    if (designArea) {
+      var div = designArea.querySelector('div');
+      if (div) {
+        div.innerHTML = '<span style="font-size:11px;color:#9ca3af;font-weight:500;">Upload desain</span>';
+        div.style.border = '2px dashed #d1d5db';
+        div.style.background = 'rgba(255,255,255,0.3)';
+        div.style.display = 'flex';
+        div.style.alignItems = 'center';
+        div.style.justifyContent = 'center';
+      }
     }
     
     document.getElementById('designStatus').innerHTML = '<i class="fas fa-image mr-1"></i>Belum ada desain';
@@ -1058,8 +964,7 @@
     var tier = qty >= 1000 ? 3 : qty >= 500 ? 2 : qty >= 300 ? 1 : 0;
     var mult = [1, 0.85, 0.74, 0.63][tier];
     var posExtra = selectedPos === 'dua-sisi' ? 1500 : 0;
-    var colorExtra = (colorCount - 1) * 1000;
-    var price = Math.round(base * mult) + posExtra + colorExtra + handleExtra;
+    var price = Math.round(base * mult) + posExtra + handleExtra;
     document.getElementById('estPrice').textContent = 'Rp ' + price.toLocaleString('id-ID') + '/pcs';
     document.getElementById('estQty').textContent = qty.toLocaleString('id-ID') + ' pcs';
     document.getElementById('estTotal').textContent = 'Rp ' + (price * qty).toLocaleString('id-ID');
@@ -1078,6 +983,12 @@
     var needDesign = document.getElementById('needDesign').checked;
     var qty = parseInt(document.getElementById('qtyInput').value) || 100;
     
+    var handleOptionNames = {
+      'standar': 'Standar',
+      'lipat-samping': 'Lipat Samping',
+      'lipat-bawah': 'Lipat Bawah'
+    };
+    
     var sizeDisplay = selectedSizeName;
     if (document.getElementById('customSizeCheck').checked) {
       var cp = parseInt(document.getElementById('customP').value) || 0;
@@ -1089,16 +1000,20 @@
     
     var fileInfo = uploadedFile ? '✅ ' + uploadedFile.name + ' (' + (uploadedFile.size / 1024).toFixed(1) + ' KB)' : '❌ Tidak ada file';
     
+    var shapeNames = { 'tls': 'TLS (Persegi)', 'oval': 'Oval (Bulat)', 'totebag': 'Tote Bag' };
+    
     var msg = 
-      'Halo fardhan_storeetarget, saya ingin memesan TAS CUSTOM 3D:\n\n' +
+      'Halo ryanti_shopp, saya ingin memesan TAS CUSTOM 2D:\n\n' +
       '📋 *DETAIL PESANAN*\n' +
       '━━━━━━━━━━━━━━━━━━━━━\n' +
+      '📐 *Bentuk Tas:* ' + shapeNames[selectedShape] + '\n' +
       '🎨 *Warna Tas:* ' + selectedColorName + '\n' +
       '📏 *Ukuran:* ' + sizeDisplay + '\n' +
+      '🔗 *Jenis Tali:* ' + handleOptionNames[selectedHandleOption] + '\n' +
       '🖨️ *Posisi Sablon:* ' + (selectedPos === 'depan' ? 'Depan' : selectedPos === 'belakang' ? 'Belakang' : 'Dua Sisi') + '\n' +
-      '🎯 *Jumlah Warna Sablon:* ' + colorCount + ' warna\n' +
+      '🎯 *Jumlah Warna Sablon:* 1 warna\n' +
       '📦 *Jumlah Pesanan:* ' + qty.toLocaleString('id-ID') + ' pcs\n' +
-      '🔗 *Tali:* ' + (handleExtra > 0 ? 'Tali Kur (+Rp 1.500/pcs)' : 'Tali Spunbond') + '\n' +
+      '🔗 *Material Tali:* ' + (handleExtra > 0 ? 'Tali Kur (+Rp 1.500/pcs)' : 'Tali Spunbond') + '\n' +
       '📎 *File Desain:* ' + fileInfo + '\n' +
       (needDesign ? '🎨 *Butuh Bantuan Desain:* ✅ Ya\n' : '') +
       (notes ? '📝 *Catatan:* ' + notes + '\n' : '') +
@@ -1184,34 +1099,6 @@
     });
   }
 
-  // ===== SHOPEE BAR =====
-  (function() {
-    var bar = document.getElementById('shopeeBar');
-    var header = document.getElementById('mainHeader');
-    var main = document.querySelector('main');
-    var dismissed = localStorage.getItem('shopeeBarDismissed') === 'true' && 
-                    localStorage.getItem('shopeeBarDismissedAt') && 
-                    (Date.now() - parseInt(localStorage.getItem('shopeeBarDismissedAt')) < 86400000);
-    
-    if (dismissed) {
-      bar.classList.add('bar-hidden');
-      header.classList.remove('header-with-bar');
-      header.classList.add('header-no-bar');
-      main.classList.remove('hero-with-bar');
-      main.classList.add('hero-no-bar');
-    }
-    
-    document.getElementById('closeShopeeBar').addEventListener('click', function() {
-      bar.classList.add('bar-hidden');
-      header.classList.remove('header-with-bar');
-      header.classList.add('header-no-bar');
-      main.classList.remove('hero-with-bar');
-      main.classList.add('hero-no-bar');
-      localStorage.setItem('shopeeBarDismissed', 'true');
-      localStorage.setItem('shopeeBarDismissedAt', Date.now().toString());
-    });
-  })();
-
   // ===== SCROLL =====
   window.addEventListener('scroll', function() {
     var scroll = window.scrollY;
@@ -1264,12 +1151,14 @@
   renderColors();
   renderSizes();
   pickSize(1);
+  updateShape('oval');
+  updateHandleOption('lipat-samping');
   updateEstimate();
 
-  console.log('✅ 3D Custom Tas Spunbond Realistic - READY!');
+  console.log('✅ 2D Custom Tas Spunbond - Tali Lipat Samping');
+  console.log('📐 Bentuk default: Oval dengan tali lipat samping');
   console.log('🎨 Klik warna untuk mengubah warna tas');
-  console.log('📤 Upload gambar untuk live preview 3D');
-  console.log('🔄 Seret untuk memutar tas 360°');
+  console.log('📤 Upload gambar untuk preview desain');
 
 })();
 </script>
