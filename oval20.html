@@ -52,8 +52,7 @@
     .price-table tbody tr.highlight td{background:#f5edda;font-weight:600}
     .tabs-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
     .tabs-scroll::-webkit-scrollbar{display:none}
-    .gsm-badge{display:inline-block;padding:2px 12px;border-radius:12px;font-size:10px;font-weight:700}
-    .gsm-70{background:#e0f2fe;color:#0369a1}
+    .gsm-badge{display:inline-block;padding:2px 12px;border-radius:12px;font-size:10px;font-weight:700;background:#e0f2fe;color:#0369a1}
     
     .color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
     .color-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;border-radius:8px;cursor:pointer;transition:all .2s ease;border:2px solid transparent}
@@ -68,6 +67,137 @@
     .qty-wrapper .qty-btn:last-child{border-left:1.5px solid #e5e7eb}
     .qty-wrapper .form-input{border:none;border-radius:0;text-align:center;width:80px;height:40px}
 
+    /* Image Slider */
+    .slider-track {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+    }
+    .slider-track .slide-item {
+      width: 100%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .slider-track img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+    }
+    .slider-track video {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+    }
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      color: #1e3a5f;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    .slider-nav:hover { background: white; transform: translateY(-50%) scale(1.1); }
+    .slider-nav.prev { left: 10px; }
+    .slider-nav.next { right: 10px; }
+    .slider-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+    .slider-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(30, 58, 95, 0.3);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .slider-dot.active {
+      background: #1e3a5f;
+      width: 20px;
+      border-radius: 4px;
+    }
+
+    /* Thumbnail Gallery (Mirip Shopee) */
+    .thumbnail-container {
+      display: flex;
+      gap: 8px;
+      padding: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .thumbnail-container::-webkit-scrollbar { display: none; }
+    .thumbnail-item {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid #e5e7eb;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      background: #fff;
+      position: relative;
+    }
+    .thumbnail-item img,
+    .thumbnail-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .thumbnail-item:hover {
+      border-color: #c8a45a;
+    }
+    .thumbnail-item.active {
+      border-color: #1e3a5f;
+      box-shadow: 0 0 0 1px #1e3a5f;
+    }
+    .thumbnail-item .video-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      font-size: 8px;
+      padding: 1px 4px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .thumbnail-item .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.2);
+      color: white;
+      font-size: 20px;
+      pointer-events: none;
+    }
+
+    /* Admin Edit Button */
     .admin-edit-btn {
       position: fixed;
       bottom: 80px;
@@ -168,13 +298,61 @@
       background: white;
     }
     .image-upload-area:hover { border-color: #c8a45a; }
-    .image-upload-area .preview-img {
-      max-height: 150px;
-      max-width: 100%;
-      border-radius: 8px;
+    
+    .admin-media-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
       margin-bottom: 10px;
-      object-fit: contain;
     }
+    .admin-media-item {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .admin-media-item img,
+    .admin-media-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+    }
+    .admin-media-item .media-type-badge {
+      position: absolute;
+      bottom: 2px;
+      left: 2px;
+      background: rgba(30,58,95,0.9);
+      color: white;
+      font-size: 8px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .admin-media-item .media-type-badge.video {
+      background: rgba(220,38,38,0.9);
+    }
+    .admin-media-item .remove-btn {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #dc2626;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 5;
+    }
+    
     .image-upload-area .file-input-wrapper {
       display: flex;
       gap: 8px;
@@ -189,17 +367,20 @@
       font-weight: 600;
       cursor: pointer;
       transition: all .2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
     .image-upload-area .file-btn.primary {
       background: #1e3a5f;
       color: white;
     }
     .image-upload-area .file-btn.primary:hover { background: #152c4a; }
-    .image-upload-area .file-btn.danger {
-      background: #fee2e2;
-      color: #dc2626;
+    .image-upload-area .file-btn.video {
+      background: #dc2626;
+      color: white;
     }
-    .image-upload-area .file-btn.danger:hover { background: #fecaca; }
+    .image-upload-area .file-btn.video:hover { background: #b91c1c; }
     .image-upload-area .file-name {
       font-size: 12px;
       color: #6b7280;
@@ -405,14 +586,14 @@
       <h2><i class="fas fa-edit text-accent mr-2"></i>Edit Produk</h2>
       <button class="close-btn" onclick="closeAdminPanel()"><i class="fas fa-times"></i></button>
     </div>
-    <p class="text-xs text-muted mb-4">Edit gambar, ukuran, nama, harga, dan deskripsi produk.</p>
+    <p class="text-xs text-muted mb-4">Edit gambar/video, ukuran, nama, harga, GSM, dan deskripsi produk.</p>
     
     <div id="adminList"></div>
     
     <div class="admin-actions">
       <button class="btn-save" onclick="saveChanges()"><i class="fas fa-save mr-1"></i>Simpan</button>
     </div>
-    <p class="text-[10px] text-muted mt-3 text-center">Perubahan akan tersimpan di browser Anda (localStorage)</p>
+    <p class="text-[10px] text-muted mt-3 text-center">Perubahan disimpan di IndexedDB browser. Mendukung file besar (Maks 20MB per file).</p>
   </div>
 
   <!-- Header -->
@@ -459,7 +640,7 @@
           </div>
           <div class="flex flex-wrap gap-2">
             <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-ruler-combined text-accent"></i> <span id="heroSize">20 × 26 cm</span></span>
-            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-layer-group text-accent"></i> 70 GSM</span>
+            <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/10"><i class="fas fa-layer-group text-accent"></i> <span id="heroGsm">70 GSM</span></span>
           </div>
         </div>
       </div>
@@ -486,13 +667,23 @@
           <!-- LEFT: Preview + Detail -->
           <div class="lg:col-span-3">
 
-            <!-- Image -->
-            <div class="bg-white rounded-2xl p-8 flex items-center justify-center mb-6 border border-border-soft shadow-sm min-h-[280px]" id="productImageContainer">
-              <img id="productImage" src="oval20.png" alt="Oval 20" class="max-h-[280px] object-contain drop-shadow-lg">
-              <div id="noImagePlaceholder" class="hidden text-gray-400 flex-col items-center select-none">
-                <i class="fas fa-image text-5xl mb-3 opacity-20"></i>
-                <p class="text-sm font-medium opacity-50">Gambar Belum Diatur</p>
+            <!-- Image Slider -->
+            <div class="bg-white rounded-2xl p-8 mb-3 border border-border-soft shadow-sm relative overflow-hidden" id="productImageContainer" style="min-height:280px;">
+              <div class="slider-track" id="sliderTrack">
+                <!-- Media injected by JS -->
               </div>
+              <div id="noImagePlaceholder" class="hidden text-gray-400 flex-col items-center justify-center select-none absolute inset-0">
+                <i class="fas fa-image text-5xl mb-3 opacity-20"></i>
+                <p class="text-sm font-medium opacity-50">Gambar/Video Belum Diatur</p>
+              </div>
+              <button class="slider-nav prev hidden" id="sliderPrev" onclick="slidePrev()"><i class="fas fa-chevron-left"></i></button>
+              <button class="slider-nav next hidden" id="sliderNext" onclick="slideNext()"><i class="fas fa-chevron-right"></i></button>
+              <div class="slider-dots" id="sliderDots"></div>
+            </div>
+            
+            <!-- Thumbnail Gallery -->
+            <div id="thumbnailContainer" class="thumbnail-container mb-6 hidden">
+              <!-- Thumbnails injected by JS -->
             </div>
 
             <!-- Detail Grid -->
@@ -503,7 +694,7 @@
               <div class="p-5 grid sm:grid-cols-2 gap-4 text-sm">
                 <div><span class="text-muted text-xs uppercase tracking-wider block">Nama</span><span class="font-semibold text-dark" id="specName">Oval 20</span></div>
                 <div><span class="text-muted text-xs uppercase tracking-wider block">Ukuran</span><span class="font-semibold text-dark" id="specSize">20 × 26 cm</span></div>
-                <div><span class="text-muted text-xs uppercase tracking-wider block">GSM</span><span class="font-semibold text-dark flex gap-1.5 mt-0.5"><span class="gsm-badge gsm-70">70 GSM</span></span></div>
+                <div><span class="text-muted text-xs uppercase tracking-wider block">GSM</span><span class="font-semibold text-dark flex gap-1.5 mt-0.5"><span class="gsm-badge" id="specGsmBadge">70 GSM</span></span></div>
                 <div><span class="text-muted text-xs uppercase tracking-wider block">Area Sablon</span><span class="font-semibold text-dark">16 × 20 cm</span></div>
                 <div><span class="text-muted text-xs uppercase tracking-wider block">Min. Order</span><span class="font-semibold text-dark">10 pcs</span></div>
                 <div><span class="text-muted text-xs uppercase tracking-wider block">Estimasi Produksi</span><span class="font-semibold text-dark">1 - 2 Hari Kerja</span></div>
@@ -527,7 +718,7 @@
                     <div class="color-item" data-color="Abu" onclick="selectColor(this)"><span class="color-circle" style="background:#6b7280"></span><span class="color-name">Abu</span></div>
                     <div class="color-item" data-color="Maroon" onclick="selectColor(this)"><span class="color-circle" style="background:#991b1b"></span><span class="color-name">Maroon</span></div>
                     <div class="color-item" data-color="Biru Tua" onclick="selectColor(this)"><span class="color-circle" style="background:#1e40af"></span><span class="color-name">Biru Tua</span></div>
-                    <div class="color-item" data-color="Hijau Muda" onclick="selectColor(this)"><span class="color-circle" style="background:#4ade80"></span><span class="color-name">Hijau Muda</span></div>
+                    <div class="color-item" data-color="Hijau Mudo" onclick="selectColor(this)"><span class="color-circle" style="background:#4ade80"></span><span class="color-name">Hijau Mudo</span></div>
                     <div class="color-item" data-color="Moka" onclick="selectColor(this)"><span class="color-circle" style="background:#a67c52"></span><span class="color-name">Moka</span></div>
                     <div class="color-item" data-color="Mix Warna" onclick="selectColor(this)"><span class="color-circle" style="background:linear-gradient(135deg,#dc2626,#fcd34d,#2563eb,#16a34a)"></span><span class="color-name">Mix Warna</span></div>
                   </div>
@@ -552,7 +743,7 @@
                   </thead>
                   <tbody>
                     <tr class="highlight">
-                      <td class="font-bold text-left">70 GSM</td>
+                      <td class="font-bold text-left" id="tableGsm">70 GSM</td>
                       <td id="tablePrice">Rp 600</td>
                       <td>10 pcs</td>
                     </tr>
@@ -580,7 +771,7 @@
                   </div>
                   <div>
                     <label class="block text-[11px] font-semibold text-muted uppercase tracking-wider mb-1">GSM</label>
-                    <div class="bg-primary/10 border border-primary rounded-lg py-2.5 text-center text-xs font-bold text-primary">70 GSM</div>
+                    <div class="bg-primary/10 border border-primary rounded-lg py-2.5 text-center text-xs font-bold text-primary" id="calcGsm">70 GSM</div>
                   </div>
                   <div>
                     <label class="block text-[11px] font-semibold text-muted uppercase tracking-wider mb-1">Jumlah Order</label>
@@ -702,28 +893,87 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
   // ============================================================
-  // SISTEM ADMIN EDIT UNTUK HALAMAN PRODUK
+  // SISTEM STORAGE INDEXEDDB (Sinkronisasi Penuh)
   // ============================================================
+  const DB_NAME = 'RyantiShoppDB';
+  const DB_VERSION = 1;
+  const STORE_NAME = 'products';
 
+  function openDatabase() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onupgradeneeded = function(event) {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+          db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+        }
+      };
+      request.onsuccess = (event) => resolve(event.target.result);
+      request.onerror = (event) => reject('IndexedDB error: ' + event.target.errorCode);
+    });
+  }
+
+  async function saveProductData(id, data) {
+    try {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        store.put({ id: id, data: data });
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject('Error menyimpan data');
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function loadProductData(id) {
+    try {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readonly');
+        const store = tx.objectStore(STORE_NAME);
+        const request = store.get(id);
+        request.onsuccess = (event) => {
+          const result = event.target.result;
+          if (result) resolve(result.data);
+          else resolve(null);
+        };
+        request.onerror = () => reject('Error memuat data');
+      });
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+
+  // ============================================================
+  // KONFIGURASI ADMIN
+  // ============================================================
   const ADMIN_PASSWORD = 'admin123';
-  let isLoggedIn = false; // Hanya disimpan di memori sementara, tidak disimpan di localStorage
+  let isLoggedIn = false;
 
   // Data produk yang bisa diedit
   let productData = {
     name: 'Oval 20',
     size: '20 × 26 cm',
-    img: 'oval20.png',
+    media: [{ type: 'image', src: 'oval20.png' }],
     desc: 'Ukuran kecil untuk souvenir & goodie bag',
+    gsm: 70,
     price: 600
   };
 
-  let tempImageData = null;
-  let tempImageName = '';
-  let imageRemoved = false; 
+  let tempMedia = [];
+  let existingMedia = [];
+  let removedMediaIndices = [];
+  let currentSliderIndex = 0;
 
-  // ===== TAMPILKAN POPUP PASSWORD =====
   function showPasswordPopup() {
-    // Selalu tampilkan popup password setiap kali tombol edit diklik
+    if (isLoggedIn) {
+      openAdminPanel();
+      return;
+    }
     document.getElementById('passwordPopup').classList.add('show');
     document.getElementById('adminPassword').value = '';
     document.getElementById('adminPassword').focus();
@@ -752,7 +1002,7 @@
 
     setTimeout(() => {
       if (password === ADMIN_PASSWORD) {
-        isLoggedIn = true; // Set status login di memori
+        isLoggedIn = true;
         closePasswordPopup();
         openAdminPanel();
         showToast('✅ Login berhasil!', 'success');
@@ -768,55 +1018,45 @@
     }, 800);
   }
 
-  // ===== BUKA ADMIN PANEL =====
   function openAdminPanel() {
-    if (!isLoggedIn) {
-      showPasswordPopup();
-      return;
-    }
-    const panel = document.getElementById('adminPanel');
-    const overlay = document.getElementById('overlay');
-    
-    panel.classList.add('open');
-    overlay.classList.add('show');
+    if (!isLoggedIn) return;
+    document.getElementById('adminPanel').classList.add('open');
+    document.getElementById('overlay').classList.add('show');
     renderAdminPanel();
   }
 
   function closeAdminPanel() {
     document.getElementById('adminPanel').classList.remove('open');
     document.getElementById('overlay').classList.remove('show');
-    // Saat panel ditutup, reset status login agar harus memasukkan password lagi saat dibuka kembali
     isLoggedIn = false; 
   }
 
   function renderAdminPanel() {
     if (!isLoggedIn) return;
     
-    imageRemoved = false;
-    tempImageData = null;
+    tempMedia = [];
+    existingMedia = [...(productData.media || [])];
+    removedMediaIndices = [];
     
     const container = document.getElementById('adminList');
-    const currentImg = productData.img || '';
-    const isBase64 = currentImg.startsWith('data:image');
     
     container.innerHTML = `
       <div class="admin-item">
         <div class="form-row">
-          <label>Gambar Produk</label>
+          <label>Gambar & Video Produk</label>
           <div class="image-upload-area">
-            <div id="imagePreviewContainer">
-              ${currentImg ? `<img id="editImagePreview" src="${currentImg}" alt="Preview" class="preview-img">` : '<p style="color:#9ca3af;font-size:13px;padding:10px 0;">Belum ada gambar</p>'}
-            </div>
-            <div class="file-input-wrapper">
+            <div id="mediaPreviewContainer" class="admin-media-grid"></div>
+            <div class="file-input-wrapper" style="margin-top:10px;">
               <button class="file-btn primary" onclick="document.getElementById('fileInput').click()">
-                <i class="fas fa-folder-open mr-1"></i>Pilih Gambar
+                <i class="fas fa-image mr-1"></i>Tambah Gambar
               </button>
-              <button class="file-btn danger" onclick="removeImage()">
-                <i class="fas fa-trash mr-1"></i>Hapus
+              <button class="file-btn video" onclick="document.getElementById('videoInput').click()">
+                <i class="fas fa-video mr-1"></i>Tambah Video
               </button>
             </div>
-            <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleImageSelect(event)">
-            <div class="file-name" id="fileNameDisplay">${isBase64 ? 'Gambar dari file' : (currentImg || 'Tidak ada gambar')}</div>
+            <input type="file" id="fileInput" accept="image/*" multiple style="display:none" onchange="handleImageSelect(event)">
+            <input type="file" id="videoInput" accept="video/mp4,video/webm,video/ogg,.mp4,.webm,.mov" style="display:none" onchange="handleVideoSelect(event)">
+            <div class="file-name">Klik tombol di atas untuk menambah gambar/video (Maks 20MB per file)</div>
           </div>
         </div>
 
@@ -829,6 +1069,10 @@
           <input type="text" id="editSize" value="${productData.size}" placeholder="Contoh: 20 × 26 cm">
         </div>
         <div class="form-row" style="margin-top:10px;">
+          <label>GSM / Gramasi (angka saja)</label>
+          <input type="number" id="editGsm" value="${productData.gsm}" min="1" step="1" placeholder="Contoh: 70" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        </div>
+        <div class="form-row" style="margin-top:10px;">
           <label>Harga (Rp)</label>
           <input type="number" id="editPrice" value="${productData.price}" placeholder="Contoh: 600">
         </div>
@@ -838,84 +1082,262 @@
         </div>
       </div>
     `;
+    renderAdminMedia();
+  }
+
+  function renderAdminMedia() {
+    const container = document.getElementById('mediaPreviewContainer');
+    if (!container) return;
+
+    let html = '';
+    let hasMedia = false;
+    
+    existingMedia.forEach((m, index) => {
+      if (!removedMediaIndices.includes(index)) {
+        if (m.type === 'video') {
+          html += `<div class="admin-media-item"><video src="${m.src}" muted></video><span class="media-type-badge video"><i class="fas fa-video"></i></span><button type="button" class="remove-btn" onclick="removeExistingMedia(${index})"><i class="fas fa-times"></i></button></div>`;
+        } else {
+          html += `<div class="admin-media-item"><img src="${m.src}"><span class="media-type-badge">IMG</span><button type="button" class="remove-btn" onclick="removeExistingMedia(${index})"><i class="fas fa-times"></i></button></div>`;
+        }
+        hasMedia = true;
+      }
+    });
+    
+    tempMedia.forEach((m, index) => {
+      if (m.type === 'video') {
+        html += `<div class="admin-media-item"><video src="${m.src}" muted></video><span class="media-type-badge video"><i class="fas fa-video"></i></span><button type="button" class="remove-btn" onclick="removeTempMedia(${index})"><i class="fas fa-times"></i></button></div>`;
+      } else {
+        html += `<div class="admin-media-item"><img src="${m.src}"><span class="media-type-badge">IMG</span><button type="button" class="remove-btn" onclick="removeTempMedia(${index})"><i class="fas fa-times"></i></button></div>`;
+      }
+      hasMedia = true;
+    });
+    
+    if (!hasMedia) {
+      html = '<p style="color:#9ca3af;font-size:13px;padding:20px 0; width:100%; text-align:center;">Belum ada gambar/video</p>';
+    }
+    
+    container.innerHTML = html;
   }
 
   function handleImageSelect(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      tempImageData = e.target.result;
-      tempImageName = file.name;
-      imageRemoved = false; 
-      
-      const previewContainer = document.getElementById('imagePreviewContainer');
-      previewContainer.innerHTML = `<img id="editImagePreview" src="${tempImageData}" alt="Preview" class="preview-img">`;
-      document.getElementById('fileNameDisplay').textContent = `📎 ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
-      showToast('✅ Gambar berhasil dipilih!', 'success');
-    };
-    reader.readAsDataURL(file);
-  }
-
-  function removeImage() {
-    tempImageData = null;
-    tempImageName = '';
-    imageRemoved = true; 
-    document.getElementById('fileInput').value = '';
+    let processed = 0;
+    let skipped = 0;
+    const totalFiles = files.length;
     
-    const previewContainer = document.getElementById('imagePreviewContainer');
-    previewContainer.innerHTML = '<p style="color:#dc2626;font-size:13px;padding:10px 0;font-weight:600;">🗑️ Gambar akan dihapus saat disimpan</p>';
-    document.getElementById('fileNameDisplay').textContent = 'Tidak ada gambar';
-    showToast('🗑️ Gambar dihapus, jangan lupa klik Simpan', 'info');
+    Array.from(files).forEach(file => {
+      if (file.size > 20 * 1024 * 1024) {
+        skipped++;
+        processed++;
+        checkComplete();
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        tempMedia.push({ type: 'image', src: e.target.result });
+        processed++;
+        renderAdminMedia();
+        checkComplete();
+      };
+      reader.readAsDataURL(file);
+    });
+    
+    function checkComplete() {
+      if (processed === totalFiles) {
+        let msg = `${totalFiles - skipped} gambar ditambahkan`;
+        if (skipped > 0) msg += `, ${skipped} dilewati (>20MB)`;
+        showToast(`✅ ${msg}!`, 'success');
+        if (skipped > 0) {
+          setTimeout(() => showToast(`⚠️ ${skipped} gambar dilewati karena > 20MB`, 'error'), 500);
+        }
+        event.target.value = '';
+      }
+    }
   }
 
-  function saveChanges() {
+  function handleVideoSelect(event) {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    let processed = 0;
+    let skipped = 0;
+    const totalFiles = files.length;
+    
+    Array.from(files).forEach(file => {
+      if (file.size > 20 * 1024 * 1024) {
+        skipped++;
+        processed++;
+        checkComplete();
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        tempMedia.push({ type: 'video', src: e.target.result });
+        processed++;
+        renderAdminMedia();
+        checkComplete();
+      };
+      reader.readAsDataURL(file);
+    });
+    
+    function checkComplete() {
+      if (processed === totalFiles) {
+        let msg = `${totalFiles - skipped} video ditambahkan`;
+        if (skipped > 0) msg += `, ${skipped} dilewati (>20MB)`;
+        showToast(`✅ ${msg}!`, 'success');
+        if (skipped > 0) {
+          setTimeout(() => showToast(`⚠️ ${skipped} video dilewati karena > 20MB`, 'error'), 500);
+        }
+        event.target.value = '';
+      }
+    }
+  }
+
+  function removeExistingMedia(index) {
+    removedMediaIndices.push(index);
+    renderAdminMedia();
+    showToast('🗑️ Media ditandai untuk dihapus. Klik Simpan untuk menerapkan.', 'info');
+  }
+
+  function removeTempMedia(index) {
+    tempMedia.splice(index, 1);
+    renderAdminMedia();
+  }
+
+  async function saveChanges() {
     const name = document.getElementById('editName').value.trim() || productData.name;
     const size = document.getElementById('editSize').value.trim() || productData.size;
     const desc = document.getElementById('editDesc').value.trim() || productData.desc;
     const price = parseInt(document.getElementById('editPrice').value) || 0;
-
-    let img = productData.img; 
     
-    if (tempImageData) {
-      img = tempImageData;
-    } else if (imageRemoved) {
-      img = ''; // Kosongkan total
+    let gsm = parseInt(document.getElementById('editGsm').value);
+    if (isNaN(gsm) || gsm < 1) {
+      gsm = productData.gsm;
+      showToast('⚠️ GSM tidak valid, menggunakan nilai lama', 'error');
     }
+
+    const finalMedia = existingMedia.filter((_, index) => !removedMediaIndices.includes(index));
+    finalMedia.push(...tempMedia);
 
     productData.name = name;
     productData.size = size;
-    productData.img = img;
+    productData.media = finalMedia;
     productData.desc = desc;
+    productData.gsm = gsm;
     productData.price = price;
 
-    tempImageData = null;
-    tempImageName = '';
-    imageRemoved = false;
+    tempMedia = [];
+    removedMediaIndices = [];
+    currentSliderIndex = 0;
 
-    localStorage.setItem('fardhan_product_oval20', JSON.stringify(productData));
-    updateDisplay();
-    showToast('✅ Produk berhasil diperbarui!', 'success');
+    try {
+      // Simpan ke IndexedDB
+      await saveProductData('oval20', productData);
+      
+      // Backup ke localStorage agar kompatibel dengan versi lama
+      try {
+        const lsData = { ...productData, img: productData.media.filter(m => m.type === 'image').map(m => m.src) };
+        localStorage.setItem('fardhan_product_oval20', JSON.stringify(lsData));
+      } catch(e) {}
+      
+      updateDisplay();
+      showToast('✅ Produk berhasil diperbarui!', 'success');
+    } catch (e) {
+      showToast('❌ Gagal menyimpan. Browser mungkin tidak mendukung penyimpanan besar.', 'error');
+    }
+  }
+
+  // ===== SLIDER LOGIC =====
+  function updateSlider() {
+    const track = document.getElementById('sliderTrack');
+    const dotsContainer = document.getElementById('sliderDots');
+    const thumbContainer = document.getElementById('thumbnailContainer');
+    const placeholder = document.getElementById('noImagePlaceholder');
+    const prevBtn = document.getElementById('sliderPrev');
+    const nextBtn = document.getElementById('sliderNext');
+    
+    const media = productData.media || [];
+    
+    // Pause semua video dulu
+    const allVideos = track.querySelectorAll('video');
+    allVideos.forEach(v => { v.pause(); v.currentTime = 0; });
+    
+    if (media.length === 0) {
+      track.innerHTML = '';
+      placeholder.style.display = 'flex';
+      prevBtn.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+      dotsContainer.innerHTML = '';
+      thumbContainer.innerHTML = '';
+      thumbContainer.classList.add('hidden');
+      return;
+    }
+    
+    placeholder.style.display = 'none';
+    
+    track.innerHTML = media.map((m, i) => {
+      if (m.type === 'video') {
+        return `<div class="slide-item"><video src="${m.src}" controls ${i === currentSliderIndex ? 'autoplay' : ''} playsinline></video></div>`;
+      } else {
+        return `<div class="slide-item"><img src="${m.src}" alt="${productData.name} ${i+1}"></div>`;
+      }
+    }).join('');
+    
+    dotsContainer.innerHTML = media.map((_, i) => 
+      `<div class="slider-dot ${i === currentSliderIndex ? 'active' : ''}" onclick="slideTo(${i})"></div>`
+    ).join('');
+    
+    thumbContainer.innerHTML = media.map((m, i) => {
+      if (m.type === 'video') {
+        return `<div class="thumbnail-item ${i === currentSliderIndex ? 'active' : ''}" onclick="slideTo(${i})">
+           <video src="${m.src}" muted></video>
+           <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+           <div class="video-badge"><i class="fas fa-video"></i> VIDEO</div>
+         </div>`;
+      } else {
+        return `<div class="thumbnail-item ${i === currentSliderIndex ? 'active' : ''}" onclick="slideTo(${i})">
+           <img src="${m.src}" alt="Thumbnail ${i+1}">
+         </div>`;
+      }
+    }).join('');
+    
+    if (media.length > 1) {
+      prevBtn.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+      thumbContainer.classList.remove('hidden');
+    } else {
+      prevBtn.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+      thumbContainer.classList.add('hidden');
+    }
+    
+    track.style.transform = `translateX(-${currentSliderIndex * 100}%)`;
+  }
+
+  function slidePrev() {
+    const media = productData.media || [];
+    if (media.length === 0) return;
+    currentSliderIndex = (currentSliderIndex - 1 + media.length) % media.length;
+    updateSlider();
+  }
+
+  function slideNext() {
+    const media = productData.media || [];
+    if (media.length === 0) return;
+    currentSliderIndex = (currentSliderIndex + 1) % media.length;
+    updateSlider();
+  }
+
+  function slideTo(index) {
+    currentSliderIndex = index;
+    updateSlider();
   }
 
   function updateDisplay() {
-    const imgElement = document.getElementById('productImage');
-    const placeholderElement = document.getElementById('noImagePlaceholder');
-    
-    // Cek gambar
-    if (productData.img && productData.img !== '') {
-      imgElement.src = productData.img;
-      imgElement.style.display = 'block';
-      imgElement.alt = productData.name;
-      placeholderElement.style.display = 'none';
-    } else {
-      imgElement.src = '';
-      imgElement.style.display = 'none';
-      placeholderElement.style.display = 'flex'; 
-    }
-
-    // Update teks biasa (Cari angka di nama produk dan beri warna accent tanpa menduplikatinya)
     const nameText = productData.name;
     const match = nameText.match(/\d+/);
     if (match) {
@@ -927,17 +1349,23 @@
 
     document.getElementById('productSubtitle').textContent = `${productData.size} • ${productData.desc}`;
     document.getElementById('heroSize').textContent = productData.size;
+    document.getElementById('heroGsm').textContent = `${productData.gsm} GSM`;
     document.getElementById('breadcrumbName').textContent = productData.name;
     document.getElementById('detailName').textContent = productData.name;
     document.getElementById('specName').textContent = productData.name;
     document.getElementById('specSize').textContent = productData.size;
+    document.getElementById('specGsmBadge').textContent = `${productData.gsm} GSM`;
     document.getElementById('priceName').textContent = productData.name;
+    document.getElementById('tableGsm').textContent = `${productData.gsm} GSM`;
     document.getElementById('calcSize').textContent = `${productData.name} — ${productData.size}`;
+    document.getElementById('calcGsm').textContent = `${productData.gsm} GSM`;
 
-    // Update harga di tabel
     document.getElementById('tablePrice').textContent = 'Rp ' + productData.price.toLocaleString('id-ID');
 
-    // Update kalkulator
+    if (currentSliderIndex >= (productData.media || []).length) {
+      currentSliderIndex = 0;
+    }
+    updateSlider();
     updateCalc();
   }
 
@@ -976,7 +1404,7 @@
       `Halo ryanti_shopp\n\nSaya ingin memesan:\n\n` +
       `Jenis Tas : ${productData.name}\n` +
       `Ukuran : ${productData.size}\n` +
-      `Bahan : 70 GSM\n` +
+      `Bahan : ${productData.gsm} GSM\n` +
       `Warna : ${document.getElementById('selectedColorLabel').textContent}\n` +
       `Jumlah : ${qty} pcs\n\n` +
       `Harga per pcs : Rp ${price.toLocaleString('id-ID')}\n` +
@@ -995,28 +1423,61 @@
     updateCalc();
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', async function() {
     AOS.init({ duration: 600, once: true, offset: 60 });
 
-    // Load data produk dari localStorage
-    const stored = localStorage.getItem('fardhan_product_oval20');
-    if (stored) {
-      try {
-        const data = JSON.parse(stored);
-        productData.name = data.name || productData.name;
-        productData.size = data.size || productData.size;
-        if (data.img !== undefined) {
-          productData.img = data.img;
+    // Load data dari IndexedDB
+    const storedData = await loadProductData('oval20');
+    if (storedData) {
+      productData.name = storedData.name || productData.name;
+      productData.size = storedData.size || productData.size;
+      
+      if (storedData.media && Array.isArray(storedData.media)) {
+        productData.media = storedData.media.filter(m => m && m.src);
+      } else if (storedData.img !== undefined) {
+        // Backward compatibility
+        if (Array.isArray(storedData.img)) {
+          productData.media = storedData.img.map(src => ({ type: 'image', src }));
+        } else if (storedData.img !== '') {
+          productData.media = [{ type: 'image', src: storedData.img }];
+        } else {
+          productData.media = [];
         }
-        productData.desc = data.desc || productData.desc;
-        productData.price = data.price || productData.price; 
-      } catch (e) {}
+      }
+      
+      productData.desc = storedData.desc || productData.desc;
+      productData.gsm = storedData.gsm || productData.gsm;
+      productData.price = storedData.price || productData.price; 
+    } else {
+      // Fallback ke localStorage lama jika tidak ada di IDB
+      const lsStored = localStorage.getItem('fardhan_product_oval20');
+      if (lsStored) {
+        try {
+          const data = JSON.parse(lsStored);
+          productData.name = data.name || productData.name;
+          productData.size = data.size || productData.size;
+          productData.desc = data.desc || productData.desc;
+          productData.gsm = data.gsm || productData.gsm;
+          productData.price = data.price || productData.price;
+          
+          if (data.img !== undefined) {
+            if (Array.isArray(data.img)) {
+              productData.media = data.img.map(src => ({ type: 'image', src }));
+            } else if (data.img !== '') {
+              productData.media = [{ type: 'image', src: data.img }];
+            } else {
+              productData.media = [];
+            }
+          }
+        } catch(e) {}
+      }
     }
 
     updateDisplay();
 
     window.addEventListener('scroll', function() {
-      const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight;
+      const s = window.scrollY;
+      const d = document.documentElement.scrollHeight - window.innerHeight;
       document.getElementById('scrollProgress').style.width = (s / d * 100) + '%';
       document.getElementById('mainHeader').classList.toggle('header-scrolled', s > 20);
     });
@@ -1039,7 +1500,7 @@
     updateCalc();
   });
 
-  // Expose fungsi ke global agar inline onclick bisa bekerja
+  // Expose fungsi ke global
   window.showPasswordPopup = showPasswordPopup;
   window.closePasswordPopup = closePasswordPopup;
   window.verifyPassword = verifyPassword;
@@ -1049,7 +1510,12 @@
   window.selectColor = selectColor;
   window.changeQty = changeQty;
   window.handleImageSelect = handleImageSelect;
-  window.removeImage = removeImage;
+  window.handleVideoSelect = handleVideoSelect;
+  window.removeExistingMedia = removeExistingMedia;
+  window.removeTempMedia = removeTempMedia;
+  window.slidePrev = slidePrev;
+  window.slideNext = slideNext;
+  window.slideTo = slideTo;
   </script>
 </body>
 </html>

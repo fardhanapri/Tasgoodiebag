@@ -63,11 +63,7 @@
     .tabs-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
     .tabs-scroll::-webkit-scrollbar{display:none}
     
-    .gsm-badge{display:inline-block;padding:2px 12px;border-radius:12px;font-size:10px;font-weight:700}
-    .gsm-65{background:#dbeafe;color:#1e40af}
-    .gsm-70{background:#e0f2fe;color:#0369a1}
-    .gsm-75{background:#fef3c7;color:#92400e}
-    .gsm-100{background:#d1fae5;color:#065f46}
+    .gsm-badge{display:inline-block;padding:2px 12px;border-radius:12px;font-size:10px;font-weight:700;background:#e0f2fe;color:#0369a1}
 
     .admin-toggle {
       position: fixed;
@@ -178,6 +174,101 @@
       outline: none;
       box-shadow: 0 0 0 3px rgba(30,58,95,.08);
     }
+
+    .image-upload-area {
+      border: 2px dashed #e5e7eb;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      transition: all .3s ease;
+      background: white;
+    }
+    .image-upload-area:hover { border-color: #c8a45a; }
+    .image-gallery-preview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    .image-gallery-preview .gallery-item {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background: #f3f4f6;
+    }
+    .image-gallery-preview .gallery-item img,
+    .image-gallery-preview .gallery-item video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .image-gallery-preview .gallery-item .media-type-badge {
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      background: rgba(30,58,95,0.9);
+      color: white;
+      font-size: 8px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .image-gallery-preview .gallery-item .media-type-badge.video {
+      background: rgba(220,38,38,0.9);
+    }
+    .image-gallery-preview .gallery-item .remove-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(239, 68, 68, 0.9);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+    .image-upload-area .file-input-wrapper {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .image-upload-area .file-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .image-upload-area .file-btn.primary {
+      background: #1e3a5f;
+      color: white;
+    }
+    .image-upload-area .file-btn.primary:hover { background: #152c4a; }
+    .image-upload-area .file-btn.video {
+      background: #dc2626;
+      color: white;
+    }
+    .image-upload-area .file-btn.video:hover { background: #b91c1c; }
+    .image-upload-area .file-btn.danger {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    .image-upload-area .file-btn.danger:hover { background: #fecaca; }
     
     .admin-actions {
       display: flex;
@@ -315,10 +406,6 @@
       color: white;
     }
     .password-popup .popup-box .popup-actions .btn-confirm:hover { background: #152c4a; }
-    .password-popup .popup-box .popup-actions .btn-confirm:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-    }
     .password-popup .popup-box .popup-actions .btn-cancel {
       background: #f3f4f6;
       color: #6b7280;
@@ -383,14 +470,12 @@
       <button class="close-btn" onclick="closeAdminPanel()"><i class="fas fa-times"></i></button>
     </div>
     
-    <div id="adminList">
-      <!-- Items akan di-render oleh JS -->
-    </div>
+    <div id="adminList"></div>
     
     <div class="admin-actions">
       <button class="btn-save" onclick="saveChanges()"><i class="fas fa-save mr-1"></i>Simpan Perubahan</button>
     </div>
-    <p class="text-[10px] text-muted mt-3 text-center">Perubahan akan tersimpan di browser Anda (localStorage)</p>
+    <p class="text-[10px] text-muted mt-3 text-center">Perubahan disimpan di IndexedDB browser. Mendukung file besar (Maks 20MB per file).</p>
   </div>
 
   <!-- Header -->
@@ -472,9 +557,7 @@
         </div>
 
         <!-- Size Cards Grid -->
-        <div id="sizeGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          <!-- Cards rendered by JS -->
-        </div>
+        <div id="sizeGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
 
         <!-- Info -->
         <div class="mt-12 bg-accent/5 border border-accent/15 rounded-2xl p-6 text-center">
@@ -547,6 +630,62 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+  // ============================================================
+  // SISTEM STORAGE INDEXEDDB & LOCALSTORAGE (HYBRID SYNC)
+  // ============================================================
+  const DB_NAME = 'RyantiShoppDB';
+  const DB_VERSION = 1;
+  const STORE_NAME = 'products';
+
+  function openDatabase() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onupgradeneeded = function(event) {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+          db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+        }
+      };
+      request.onsuccess = (event) => resolve(event.target.result);
+      request.onerror = (event) => reject('IndexedDB error: ' + event.target.errorCode);
+    });
+  }
+
+  async function saveProductData(id, data) {
+    try {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        store.put({ id: id, data: data });
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject('Error menyimpan data');
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function loadProductData(id) {
+    try {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readonly');
+        const store = tx.objectStore(STORE_NAME);
+        const request = store.get(id);
+        request.onsuccess = (event) => {
+          const result = event.target.result;
+          if (result) resolve(result.data);
+          else resolve(null);
+        };
+        request.onerror = () => reject('Error memuat data');
+      });
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+
   // ============================================================
   // KONFIGURASI ADMIN
   // ============================================================
@@ -621,81 +760,151 @@
   // DATA MANAGEMENT
   // ============================================================
   const DEFAULT_SIZES = [
-    { id: 1, name: 'Oval 20', size: '20 × 26 cm', page: 'oval20.html', img: 'oval20.png', gsm: ['70'], category: 'oval', desc: 'Ukuran kecil untuk souvenir & goodie bag.', price: 600 },
-    { id: 2, name: 'Oval 25', size: '25 × 35 cm', page: 'oval25.html', img: 'oval25.png', gsm: ['70'], category: 'oval', desc: 'Ukuran standar untuk berbagai kebutuhan.', price: 900 },
-    { id: 3, name: 'Oval 30', size: '30 × 40 cm', page: 'oval30.html', img: 'oval30.png', gsm: ['70'], category: 'oval', desc: 'Ukuran sedang untuk berbagai kebutuhan.', price: 1300 },
-    { id: 4, name: 'TLS 20', size: '20 × 25 × 8 cm', page: 'tls20.html', img: 'tls20.png', gsm: ['65'], category: 'tls', desc: 'Tas Spunbond Goodiebag 65 GSM Tebal Sablon Custom – Lipat Samping', price: 1500 },
-    { id: 5, name: 'TLS 25', size: '25 × 35 × 8 cm', page: 'tls25.html', img: 'tls25.png', gsm: ['70'], category: 'tls', desc: 'Ukuran standar serbaguna untuk berbagai kebutuhan.', price: 1190 },
-    { id: 6, name: 'TLS 30', size: '30 × 40 × 8 cm', page: 'tls30.html', img: 'tls30.png', gsm: ['70'], category: 'tls', desc: 'Ukuran sedang cocok untuk seminar dan event.', price: 1425 },
-    { id: 7, name: 'TLS 38', size: '38 × 45 × 8 cm', page: 'tls38.html', img: 'tls38.png', gsm: ['70'], category: 'tls', desc: 'Ukuran premium untuk presentasi dan seminar.', price: 2050 }
+    { id: 1, name: 'Oval 20', size: '20 × 26 cm', page: 'oval20.html', media: [{ type: 'image', src: 'oval20.png' }], gsm: '70', category: 'oval', desc: 'Ukuran kecil untuk souvenir & goodie bag.', price: 600 },
+    { id: 2, name: 'Oval 25', size: '25 × 35 cm', page: 'oval25.html', media: [{ type: 'image', src: 'oval25.png' }], gsm: '70', category: 'oval', desc: 'Ukuran standar untuk berbagai kebutuhan.', price: 900 },
+    { id: 3, name: 'Oval 30', size: '30 × 40 cm', page: 'oval30.html', media: [{ type: 'image', src: 'oval30.png' }], gsm: '70', category: 'oval', desc: 'Ukuran sedang untuk berbagai kebutuhan.', price: 1300 },
+    { id: 4, name: 'TLS 20', size: '20 × 25 × 8 cm', page: 'tls20.html', media: [{ type: 'image', src: 'tls20.png' }], gsm: '65', category: 'tls', desc: 'Tas Spunbond Goodiebag 65 GSM Tebal Sablon Custom – Lipat Samping', price: 1500 },
+    { id: 5, name: 'TLS 25', size: '25 × 35 × 8 cm', page: 'tls25.html', media: [{ type: 'image', src: 'tls25.png' }], gsm: '70', category: 'tls', desc: 'Ukuran standar serbaguna untuk berbagai kebutuhan.', price: 1190 },
+    { id: 6, name: 'TLS 30', size: '30 × 40 × 8 cm', page: 'tls30.html', media: [{ type: 'image', src: 'tls30.png' }], gsm: '70', category: 'tls', desc: 'Ukuran sedang cocok untuk seminar dan event.', price: 1425 },
+    { id: 7, name: 'TLS 38', size: '38 × 45 × 8 cm', page: 'tls38.html', media: [{ type: 'image', src: 'tls38.png' }], gsm: '70', category: 'tls', desc: 'Ukuran premium untuk presentasi dan seminar.', price: 2050 }
   ];
 
   let sizes = [];
   let currentFilter = 'all';
 
-  function loadData() {
-    // Selalu mulai dari data default agar struktur (page, id, category) mutlak benar
+  async function loadData() {
     sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
-    // Cek localStorage untuk menimpa data default dengan data edit-an
-    const stored = localStorage.getItem('fardhan_sizes');
-    if (stored) {
+    // 1. Load data edit-an katalog dari IndexedDB
+    const storedCatalogIDB = await loadProductData('catalog_sizes');
+    if (storedCatalogIDB) {
       try {
-        const storedSizes = JSON.parse(stored);
-        
-        // Lakukan mapping berdasarkan 'page' agar tidak salah arah halaman
         sizes.forEach((defSize, index) => {
-          const storedItem = storedSizes.find(s => s.page === defSize.page);
+          const storedItem = storedCatalogIDB.find(s => s.page === defSize.page);
           if (storedItem) {
             sizes[index].name = storedItem.name || defSize.name;
             sizes[index].size = storedItem.size || defSize.size;
             sizes[index].desc = storedItem.desc || defSize.desc;
-            sizes[index].img = storedItem.img !== undefined ? storedItem.img : defSize.img;
             sizes[index].price = storedItem.price || defSize.price;
+            if (storedItem.gsm) sizes[index].gsm = storedItem.gsm;
+            if (storedItem.media) sizes[index].media = storedItem.media;
           }
         });
       } catch (e) {}
     }
 
-    // Sinkronisasi dengan data dari halaman detail masing-masing produk (sangat penting!)
-    sizes.forEach((s, index) => {
-      const pageName = s.page.replace('.html', '');
-      const productKey = `fardhan_product_${pageName}`;
-      const storedProduct = localStorage.getItem(productKey);
-      if (storedProduct) {
-        try {
-          const pData = JSON.parse(storedProduct);
-          if (pData.name) sizes[index].name = pData.name;
-          if (pData.size) sizes[index].size = pData.size;
-          if (pData.desc) sizes[index].desc = pData.desc;
-          if (pData.img !== undefined) sizes[index].img = pData.img;
-          if (pData.price) sizes[index].price = pData.price;
-        } catch(e) {}
-      }
-    });
+    // 2. Load data edit-an katalog dari localStorage lama (Backup)
+    const storedCatalogLS = localStorage.getItem('fardhan_sizes');
+    if (storedCatalogLS) {
+      try {
+        const lsSizes = JSON.parse(storedCatalogLS);
+        sizes.forEach((defSize, index) => {
+          const storedItem = lsSizes.find(s => s.page === defSize.page);
+          if (storedItem) {
+            sizes[index].name = storedItem.name || defSize.name;
+            sizes[index].size = storedItem.size || defSize.size;
+            sizes[index].desc = storedItem.desc || defSize.desc;
+            sizes[index].price = storedItem.price || defSize.price;
+            if (storedItem.gsm) sizes[index].gsm = Array.isArray(storedItem.gsm) ? storedItem.gsm.join(' / ') : storedItem.gsm;
+            if (storedItem.img) {
+              sizes[index].media = Array.isArray(storedItem.img) ? storedItem.img.map(src => ({ type: 'image', src })) : [{ type: 'image', src: storedItem.img }];
+            }
+          }
+        });
+      } catch (e) {}
+    }
 
-    localStorage.setItem('fardhan_sizes', JSON.stringify(sizes));
+    // 3. Sinkronisasi dengan data dari halaman detail masing-masing produk (Baca dari IDB & LS)
+    for (let index = 0; index < sizes.length; index++) {
+      const s = sizes[index];
+      const pageName = s.page.replace('.html', '');
+      
+      let pData = null;
+
+      // Coba ambil dari IndexedDB (jika halaman detail sudah pakai IDB)
+      const idbData = await loadProductData(pageName);
+      if (idbData) pData = idbData;
+      
+      // Coba ambil dari localStorage (jika halaman detail masih pakai localStorage lama)
+      if (!pData) {
+        const lsData = localStorage.getItem(`fardhan_product_${pageName}`);
+        if (lsData) {
+          try { pData = JSON.parse(lsData); } catch(e) {}
+        }
+      }
+
+      if (pData) {
+        if (pData.name) sizes[index].name = pData.name;
+        if (pData.size) sizes[index].size = pData.size;
+        if (pData.desc) sizes[index].desc = pData.desc;
+        if (pData.price) sizes[index].price = pData.price;
+        
+        if (pData.gsm !== undefined) {
+          sizes[index].gsm = String(pData.gsm);
+        }
+        
+        if (pData.media && Array.isArray(pData.media)) {
+          sizes[index].media = pData.media;
+        } else if (pData.img !== undefined) {
+          if (Array.isArray(pData.img)) {
+            sizes[index].media = pData.img.map(src => ({ type: 'image', src }));
+          } else if (pData.img !== '') {
+            sizes[index].media = [{ type: 'image', src: pData.img }];
+          } else {
+            sizes[index].media = [];
+          }
+        }
+      }
+    }
+
     updateCounts();
   }
 
-  function saveData() {
-    localStorage.setItem('fardhan_sizes', JSON.stringify(sizes));
+  async function saveData() {
+    // 1. Simpan ke IndexedDB
+    await saveProductData('catalog_sizes', sizes);
     
-    sizes.forEach(s => {
+    // 2. Simpan juga ke localStorage (Agar kompatibel dengan file lama)
+    try {
+      // Kloning data untuk format localStorage lama (mengubah media jadi img)
+      const lsSizes = sizes.map(s => ({
+        ...s,
+        img: Array.isArray(s.media) ? s.media.filter(m => m.type === 'image').map(m => m.src) : []
+      }));
+      localStorage.setItem('fardhan_sizes', JSON.stringify(lsSizes));
+    } catch(e) {}
+    
+    // 3. Sinkronisasi balik ke masing-masing halaman produk (Kirim ke IDB dan LS)
+    for (let s of sizes) {
       const pageName = s.page.replace('.html', '');
-      const productKey = `fardhan_product_${pageName}`;
-      const storedProduct = localStorage.getItem(productKey);
-      let pData = {};
-      if (storedProduct) {
-        try { pData = JSON.parse(storedProduct); } catch(e) {}
-      }
-      pData.name = s.name;
-      pData.size = s.size;
-      pData.desc = s.desc;
-      pData.img = s.img;
-      pData.price = s.price;
-      localStorage.setItem(productKey, JSON.stringify(pData));
-    });
+      
+      // Kirim ke IndexedDB
+      let idbData = await loadProductData(pageName) || {};
+      idbData.name = s.name;
+      idbData.size = s.size;
+      idbData.desc = s.desc;
+      idbData.price = s.price;
+      idbData.gsm = s.gsm;
+      idbData.media = s.media;
+      await saveProductData(pageName, idbData);
+
+      // Kirim ke localStorage lama
+      try {
+        let lsData = {};
+        const existingLs = localStorage.getItem(`fardhan_product_${pageName}`);
+        if (existingLs) {
+          try { lsData = JSON.parse(existingLs); } catch(e) {}
+        }
+        lsData.name = s.name;
+        lsData.size = s.size;
+        lsData.desc = s.desc;
+        lsData.price = s.price;
+        lsData.gsm = s.gsm;
+        lsData.img = Array.isArray(s.media) ? s.media.filter(m => m.type === 'image').map(m => m.src) : [];
+        lsData.media = s.media;
+        localStorage.setItem(`fardhan_product_${pageName}`, JSON.stringify(lsData));
+      } catch(e) {}
+    }
   }
 
   function renderSizes(filter = 'all') {
@@ -713,16 +922,22 @@
     let html = '';
     filtered.forEach((s, i) => {
       const delay = i * 50;
-      const hasImage = s.img && s.img !== '';
+      
+      const mediaArray = Array.isArray(s.media) ? s.media : [];
+      const imageMedia = mediaArray.find(m => m.type === 'image');
+      const thumbnail = imageMedia ? imageMedia.src : '';
+      const hasImage = thumbnail !== '';
+      
       const priceText = s.price ? `Rp ${s.price.toLocaleString('id-ID')}` : '';
+      const gsmText = Array.isArray(s.gsm) ? s.gsm.join(' | ') : s.gsm;
       
       html += `
         <a href="${s.page}" class="block group" data-aos="fade-up" data-aos-delay="${delay}">
           <div class="size-card bg-white rounded-2xl overflow-hidden p-5 text-center relative">
-            <div class="card-badge">${s.gsm.join(' | ')} GSM</div>
+            <div class="card-badge">${gsmText} GSM</div>
             <div class="w-24 h-24 mx-auto bg-surface rounded-xl flex items-center justify-center mb-3 group-hover:bg-primary/5 transition-colors">
               ${hasImage ? `
-                <img src="${s.img}" alt="${s.name}" class="max-h-16 object-contain" onerror="this.style.display='none'; document.getElementById('noImg-${s.id}').style.display='flex';">
+                <img src="${thumbnail}" alt="${s.name}" class="max-h-16 object-contain" onerror="this.style.display='none'; document.getElementById('noImg-${s.id}').style.display='flex';">
                 <div id="noImg-${s.id}" class="text-gray-400 flex-col items-center" style="display:none;">
                   <i class="fas fa-image text-2xl opacity-20"></i>
                   <span class="text-[8px] mt-1">No Image</span>
@@ -737,7 +952,7 @@
             <h3 class="text-lg font-extrabold text-dark">${s.name}</h3>
             <p class="text-sm text-muted">${s.size}</p>
             <div class="flex flex-wrap justify-center gap-1.5 mt-2">
-              ${s.gsm.map(g => `<span class="gsm-badge gsm-${g}">${g} GSM</span>`).join('')}
+              <span class="gsm-badge">${gsmText} GSM</span>
             </div>
             ${priceText ? `<p class="text-base font-bold text-primary mt-2">${priceText}</p>` : ''}
             <p class="text-xs text-muted mt-2 line-clamp-2">${s.desc}</p>
@@ -752,16 +967,68 @@
     if (typeof AOS !== 'undefined') AOS.refresh();
   }
 
+  function renderMediaPreview(index) {
+    const previewContainer = document.getElementById(`mediaPreviewContainer-${index}`);
+    if (!previewContainer) return;
+
+    if (!Array.isArray(sizes[index].media)) {
+      sizes[index].media = [];
+    }
+
+    if (sizes[index].media.length > 0) {
+      previewContainer.innerHTML = sizes[index].media.map((m, mIndex) => `
+        <div class="gallery-item">
+          ${m.type === 'video' ? `
+            <video src="${m.src}" muted></video>
+            <span class="media-type-badge video"><i class="fas fa-video"></i></span>
+          ` : `
+            <img src="${m.src}">
+            <span class="media-type-badge">IMG</span>
+          `}
+          <button class="remove-btn" onclick="removeMedia(${index}, ${mIndex})"><i class="fas fa-times"></i></button>
+        </div>
+      `).join('');
+    } else {
+      previewContainer.innerHTML = '<p style="color:#9ca3af;font-size:13px;padding:10px 0; grid-column: 1 / -1;">Belum ada gambar/video</p>';
+    }
+  }
+
   function renderAdminPanel() {
     if (!isLoggedIn) return;
     
     const container = document.getElementById('adminList');
     let html = '';
     sizes.forEach((s, index) => {
+      if (!Array.isArray(s.media)) {
+        s.media = [];
+      }
+
       html += `
         <div class="admin-item" data-index="${index}">
           <div class="item-header">
             <h4>${s.name}</h4>
+          </div>
+          <div class="form-row">
+            <div class="full">
+              <label>Gambar & Video Produk</label>
+              <div class="image-upload-area">
+                <div id="mediaPreviewContainer-${index}" class="image-gallery-preview"></div>
+                <div class="file-input-wrapper">
+                  <button class="file-btn primary" onclick="document.getElementById('fileInput-${index}').click()">
+                    <i class="fas fa-image mr-1"></i>Tambah Gambar
+                  </button>
+                  <button class="file-btn video" onclick="document.getElementById('videoInput-${index}').click()">
+                    <i class="fas fa-video mr-1"></i>Tambah Video
+                  </button>
+                  <button class="file-btn danger" onclick="clearAllMedia(${index})">
+                    <i class="fas fa-trash mr-1"></i>Hapus Semua
+                  </button>
+                </div>
+                <input type="file" id="fileInput-${index}" accept="image/*" multiple style="display:none" onchange="handleImageSelect(event, ${index})">
+                <input type="file" id="videoInput-${index}" accept="video/*" multiple style="display:none" onchange="handleVideoSelect(event, ${index})">
+                <div class="file-name">Klik untuk menambahkan gambar/video (Maks 20MB per file)</div>
+              </div>
+            </div>
           </div>
           <div class="form-row">
             <div class="full">
@@ -777,6 +1044,12 @@
           </div>
           <div class="form-row">
             <div class="full">
+              <label>GSM (Angka saja, misal: 70)</label>
+              <input type="text" value="${Array.isArray(s.gsm) ? s.gsm.join(' / ') : s.gsm}" onchange="updateItem(${index}, 'gsm', this.value)">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="full">
               <label>Harga (Rp)</label>
               <input type="number" value="${s.price || 0}" onchange="updateItem(${index}, 'price', parseInt(this.value) || 0)">
             </div>
@@ -787,24 +1060,120 @@
               <input type="text" value="${s.desc}" onchange="updateItem(${index}, 'desc', this.value)">
             </div>
           </div>
-          <div class="form-row">
-            <div class="full">
-              <label>Gambar (URL / Path / Kosongkan jika hilang)</label>
-              <input type="text" value="${s.img}" onchange="updateItem(${index}, 'img', this.value)" placeholder="contoh: tas.png">
-            </div>
-          </div>
         </div>
       `;
     });
     container.innerHTML = html;
+
+    sizes.forEach((s, index) => {
+      renderMediaPreview(index);
+    });
+  }
+
+  function handleImageSelect(event, index) {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    if (!Array.isArray(sizes[index].media)) {
+      sizes[index].media = [];
+    }
+
+    let loadedCount = 0;
+    let skipped = 0;
+    const totalFiles = files.length;
+    
+    Array.from(files).forEach(file => {
+      if (file.size > 20 * 1024 * 1024) {
+        skipped++;
+        loadedCount++;
+        checkComplete();
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        sizes[index].media.push({ type: 'image', src: e.target.result });
+        loadedCount++;
+        renderMediaPreview(index);
+        checkComplete();
+      };
+      reader.readAsDataURL(file);
+    });
+    
+    function checkComplete() {
+      if (loadedCount === totalFiles) {
+        let msg = `${totalFiles - skipped} gambar ditambahkan`;
+        if (skipped > 0) msg += `, ${skipped} dilewati (>20MB)`;
+        showToast(`✅ ${msg}!`, 'success');
+        if (skipped > 0) {
+          setTimeout(() => showToast(`⚠️ ${skipped} gambar dilewati karena > 20MB`, 'error'), 500);
+        }
+        event.target.value = '';
+      }
+    }
+  }
+
+  function handleVideoSelect(event, index) {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    if (!Array.isArray(sizes[index].media)) {
+      sizes[index].media = [];
+    }
+
+    let loadedCount = 0;
+    let skipped = 0;
+    const totalFiles = files.length;
+    
+    Array.from(files).forEach(file => {
+      if (file.size > 20 * 1024 * 1024) {
+        skipped++;
+        loadedCount++;
+        checkComplete();
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        sizes[index].media.push({ type: 'video', src: e.target.result });
+        loadedCount++;
+        renderMediaPreview(index);
+        checkComplete();
+      };
+      reader.readAsDataURL(file);
+    });
+    
+    function checkComplete() {
+      if (loadedCount === totalFiles) {
+        let msg = `${totalFiles - skipped} video ditambahkan`;
+        if (skipped > 0) msg += `, ${skipped} dilewati (>20MB)`;
+        showToast(`✅ ${msg}!`, 'success');
+        if (skipped > 0) {
+          setTimeout(() => showToast(`⚠️ ${skipped} video dilewati karena > 20MB`, 'error'), 500);
+        }
+        event.target.value = '';
+      }
+    }
+  }
+
+  window.removeMedia = function(index, mIndex) {
+    sizes[index].media.splice(mIndex, 1);
+    renderMediaPreview(index);
+    showToast('🗑️ Media dihapus, jangan lupa klik Simpan', 'info');
+  }
+
+  window.clearAllMedia = function(index) {
+    sizes[index].media = [];
+    renderMediaPreview(index);
+    showToast('🗑️ Semua media dihapus, jangan lupa klik Simpan', 'info');
   }
 
   window.updateItem = function(index, field, value) {
     sizes[index][field] = value;
   };
 
-  window.saveChanges = function() {
-    saveData();
+  window.saveChanges = async function() {
+    await saveData();
     renderSizes(currentFilter);
     showToast('✅ Perubahan berhasil disimpan!', 'success');
   };
@@ -843,7 +1212,7 @@
     toast._timeout = setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', async function() {
     AOS.init({ duration: 600, once: true, offset: 60 });
 
     window.addEventListener('scroll', function() {
@@ -862,7 +1231,7 @@
       menuIcon.className = open ? 'fas fa-bars text-dark text-lg' : 'fas fa-xmark text-dark text-lg';
     });
 
-    loadData();
+    await loadData();
     renderSizes();
   });
 
@@ -870,6 +1239,8 @@
   window.closePasswordPopup = closePasswordPopup;
   window.verifyPassword = verifyPassword;
   window.closeAdminPanel = closeAdminPanel;
+  window.handleImageSelect = handleImageSelect;
+  window.handleVideoSelect = handleVideoSelect;
   </script>
 </body>
 </html>
