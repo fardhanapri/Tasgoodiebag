@@ -697,7 +697,7 @@
                 <div><span class="text-muted text-xs uppercase tracking-wider block">GSM</span><span class="font-semibold text-dark flex gap-1.5 mt-0.5"><span class="gsm-badge" id="specGsmBadge">70 GSM</span></span></div>
                 <div><span class="text-muted text-xs uppercase tracking-wider block">Area Sablon</span><span class="font-semibold text-dark">24 × 32 cm</span></div>
                 <div><span class="text-muted text-xs uppercase tracking-wider block">Min. Order</span><span class="font-semibold text-dark">10 pcs</span></div>
-                <div><span class="text-muted text-xs uppercase tracking-wider block">Estimasi Produksi</span><span class="font-semibold text-dark">1 - 2 Hari Kerja</span></div>
+                <!-- Estimasi Produksi Dihapus -->
                 <div class="sm:col-span-2">
                   <span class="text-muted text-xs uppercase tracking-wider block mb-2">Pilihan Warna</span>
                   <div class="color-grid" id="colorPalette">
@@ -777,10 +777,10 @@
                     <label class="block text-[11px] font-semibold text-muted uppercase tracking-wider mb-1">Jumlah Order</label>
                     <div class="qty-wrapper">
                       <button onclick="changeQty(-1)" class="qty-btn">−</button>
-                      <input type="number" id="qtyInput" value="10" min="10" class="form-input">
+                      <input type="number" id="qtyInput" value="1" min="1" class="form-input">
                       <button onclick="changeQty(1)" class="qty-btn">+</button>
                     </div>
-                    <p class="text-[10px] text-muted mt-1">Min. 10 pcs • Bebas berapa pun jumlahnya</p>
+                    <p class="text-[10px] text-muted mt-1">Bebas pesan berapa pun jumlahnya (mulai dari 1 pcs)</p>
                   </div>
                 </div>
 
@@ -791,11 +791,11 @@
                   </div>
                   <div class="flex justify-between text-xs">
                     <span class="text-muted">Jumlah</span>
-                    <span id="qtyDisplay" class="font-bold text-dark">10 pcs</span>
+                    <span id="qtyDisplay" class="font-bold text-dark">1 pcs</span>
                   </div>
                   <div class="border-t border-border-soft pt-2.5 flex justify-between items-center">
                     <span class="text-xs font-bold text-dark">Total Estimasi</span>
-                    <span id="totalPrice" class="text-xl font-extrabold text-primary">Rp 13.000</span>
+                    <span id="totalPrice" class="text-xl font-extrabold text-primary">Rp 1.300</span>
                   </div>
                 </div>
 
@@ -809,8 +809,7 @@
                 <h4 class="text-[11px] font-bold text-dark mb-2.5 flex items-center gap-2"><i class="fas fa-lightbulb text-accent"></i> Info Penting</h4>
                 <ul class="space-y-1.5 text-[11px] text-dark/70">
                   <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Harga sudah termasuk sablon 1 warna 1 sisi</li>
-                  <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Min. order 10 pcs per warna</li>
-                  <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Produksi 1-2 hari kerja</li>
+                  <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Min. order 10 pcs per warna (Bebas pesan berapa pun jumlahnya)</li>
                   <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Gratis konsultasi desain</li>
                   <li class="flex items-start gap-2"><i class="fas fa-check text-accent text-[8px] mt-1"></i> Untuk order > 100 pcs, hubungi WA untuk harga khusus</li>
                 </ul>
@@ -873,7 +872,7 @@
           <ul class="space-y-2 text-sm text-gray-400">
             <li class="flex items-start gap-2"><i class="fas fa-user text-accent text-xs mt-1"></i>Hendar Sulistiana</li>
             <li class="flex items-start gap-2"><i class="fas fa-phone text-accent text-xs mt-1"></i>+62 852-2169-2902</li>
-            <li class="flex items-start gap-2"><i class="fas fa-envelope text-accent text-xs mt-1"></i>fardanapriansyah10@gmail.com</li>
+            <li class="flex items-start gap-2"><i class="fas fa-envelope text-accent text-xs mt-1"></i>fardanrpl25@gmail.com</li>
           </ul>
         </div>
       </div>
@@ -1389,10 +1388,9 @@
     updateCalc();
   }
 
-  const MIN_ORDER = 10;
-
   function updateCalc() {
-    const qty = Math.max(MIN_ORDER, parseInt(document.getElementById('qtyInput').value) || MIN_ORDER);
+    let qty = parseInt(document.getElementById('qtyInput').value);
+    if (isNaN(qty) || qty < 1) qty = 1; // Minimal 1 pcs, bebas berapa pun
     const price = productData.price; 
     const total = price * qty;
     
@@ -1417,8 +1415,8 @@
 
   function changeQty(delta) {
     const inp = document.getElementById('qtyInput');
-    let v = (parseInt(inp.value) || MIN_ORDER) + delta;
-    if (v < MIN_ORDER) v = MIN_ORDER;
+    let v = (parseInt(inp.value) || 1) + delta;
+    if (v < 1) v = 1;
     inp.value = v;
     updateCalc();
   }
@@ -1492,8 +1490,6 @@
     });
 
     document.getElementById('qtyInput').addEventListener('input', function() {
-      let v = parseInt(this.value);
-      if (isNaN(v) || v < MIN_ORDER) this.value = MIN_ORDER;
       updateCalc();
     });
 
